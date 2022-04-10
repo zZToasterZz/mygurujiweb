@@ -1,0 +1,182 @@
+<div th:fragment="createtopics">
+<style>
+	.glowborder{ 
+	    outline:none;
+	    border-color:red;
+	    box-shadow:0 0 10px red;
+	}
+</style>
+<div class="w3-main" style="margin-left:300px;">
+	<div style="position: relative;">
+		<div class="w3-theme-d2" style="opacity: .8">
+		  <div class="w3-container">
+		  	<h3 style="font-weight: 600;">
+		  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;">
+		  		<img src="/images/icons/topics.png" style="width: 35px;">
+		  		&nbsp;&nbsp;Create Topics
+		  	</h3>
+		  </div>
+		</div>
+	</div>
+	<div class="w3-container" style="margin-top: 16px; opacity: .95">
+		<div class="w3-card w3-theme-l3 w3-padding ">
+			<div class="w3-row">
+				<div class="w3-bar">
+					<div class="w3-bar-item"><h3 style="margin-bottom: 0px; font-weight: bold;">Create Topics</h3></div>
+					<div class="buttonbarpadding w3-bar-item w3-right" onclick="createtopics();"><a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-save" style="font-size:15px; color: white"></i>&nbsp;&nbsp;Save</a></div>
+				</div>
+				<hr class="hrline">
+			</div>
+			<div class="w3-row w3-round-large w3-white">
+				<div class="w3-row">
+					<div class="w3-threequarter" style="margin-left:20px;">
+						<label style="font-weight: bold;">Course</label>
+						<div class="w3-row">
+							<div class="w3-half">
+								<input readonly id="courseid" data-id="0" class="w3-input w3-light-grey w3-border" style="margin-bottom:8px;" type="text">
+							</div>
+							<div class="w3-half">
+								<i onclick="opencoursemodal();" class="fa fa-search fa-lg w3-margin" style="cursor:pointer;" aria-hidden="true"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="w3-row">
+					<hr class="hrline">
+				</div>
+				<div class="w3-row">
+					<label class="w3-margin-left" style="font-weight: bold;">Topics</label>
+					<table id="topictable" class="w3-table w3-bordered">
+						<colgroup>
+							<col span="1" style="width: 35%;">
+							<col span="1" style="width: 5%;">
+							<col span="1" style="width: 35%;">
+							<col span="1" style="width: 5%;">
+							<col span="1" style="width: 10%;">
+							<col span="1" style="width: 5%;">
+						</colgroup>
+						<thead>
+							<tr class="w3-theme-d5">
+						      	<th>Topic Title</th>
+						      	<th>CLO</th>
+						      	<th>CLO Description</th>
+						      	<th></th>
+						      	<th>Status</th>
+						      	<th></th>
+						    </tr>
+						</thead>
+						<tbody id="topicrows">
+						    
+					    </tbody>
+					</table>
+				</div>
+				<div class="w3-row">
+					<div class="w3-right w3-button w3-hover-green" onclick="addrow();">
+						<i class="fa fa-plus fa-2x"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="clomodal" class="w3-modal">
+	<div class="w3-modal-content" style="width:80%">
+		<header class="w3-container w3-theme-d4">
+			<h4>Course Learning Outcomes</h4>
+		</header>
+		<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+			<table id="clotable" class="w3-table w3-striped w3-bordered">
+				<colgroup>
+			       	<col span="1" style="width: 20%;">
+			       	<col span="1" style="width: 60%;">
+			 		<col span="1" style="width: 20%;">
+			    </colgroup>
+				<thead>
+					<tr>
+						<th>
+							Title
+						</th>
+						<th>
+							Description
+						</th>
+						<th>
+							Select
+						</th>
+					</tr>
+				</thead>
+				<tbody id="fillclo">
+				</tbody>
+			</table>
+		</div>
+		<footer class="w3-container w3-theme-d4">
+			<div class="w3-row">
+				<div class="w3-col" style="width: 50%;">
+					<input class="w3-button w3-green" type="button" id="save" value="Select &checkmark;" style="width:100%;"/>
+				</div>
+				<div class="w3-col" style="width: 50%;">
+					<input class="w3-button w3-red" type="button" id="close" value="Close &times;" style="width:100%;"/>
+				</div>
+			</div>
+		</footer>
+	</div>
+</div>
+
+<div id="coursemodal" class="w3-modal">
+	<div class="w3-modal-content" style="width:80%">
+		<header class="w3-container w3-theme-d4">
+			<h4>Courses</h4>
+		</header>
+		<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+			<table id="coursetable" class="w3-table w3-striped w3-bordered">
+				<colgroup>
+			       	<col span="1" style="width: 15%;">
+			       	<col span="1" style="width: 40%;">
+			 		<col span="1" style="width: 40%;">
+			 		<col span="1" style="width: 5%;">
+			    </colgroup>
+				<thead>
+					<tr>
+						<th>
+							Course Code
+						</th>
+						<th>
+							Course Title
+						</th>
+						<th>
+							Description
+						</th>
+						<th>
+							Select
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<th:block th:each="course : ${courses}">
+						<tr>
+							<td th:text="${course.coursecode}"></td>
+							<td th:text="${course.coursetitle}"></td>
+							<td th:text="${course.coursedescr}"></td>
+							<td>
+								<i class="fa fa-reply-all w3-text-red" aria-hidden="true" onclick="pickcourse(this,'M');" th:data-title="${course.coursetitle}" th:data-id="${course.courseid}" style="cursor:pointer;">
+								</i>
+							</td>
+						</tr>
+					</th:block>
+				</tbody>
+			</table>
+		</div>
+		<footer class="w3-container w3-theme-d4">
+			<div class="w3-row">
+				<div class="w3-col" style="width: 100%;">
+					<input class="w3-button w3-red" type="button" id="cross" value="Close &times;" style="width:100%;"/>
+				</div>
+			</div>
+		</footer>
+	</div>
+</div>
+
+<input type="hidden" id="createdby" th:value="${createdby}">
+
+<script src="/js/topics/createtopics.js"></script>
+</div>

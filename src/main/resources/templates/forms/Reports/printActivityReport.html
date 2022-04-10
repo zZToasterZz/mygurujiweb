@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>myGuruji</title>
+	
+	<link rel="icon" type="image/ico" href="/images/icons/favicon.ico">
+	
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/css/w3.css" />
+	<link rel="stylesheet" type="text/css" href="/css/datatables.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/fixedColumns.dataTables.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/icon.css" />
+	<link rel="stylesheet" type="text/css" href="/css/calendar/main.min.css" />
+	<link rel="stylesheet" type="text/css" th:href="${theme}" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+	<link rel="stylesheet" href="/webjars/font-awesome/5.14.0/css/all.css">
+	<link rel="stylesheet" type="text/css" href="/css/circle-menu.css" />
+	<link rel="stylesheet" type="text/css" href="/css/_customStyle.css" />
+	<link rel="stylesheet" type="text/css" href="/css/buttons.dataTables.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/buttons.bootstrap.min.css"/>
+	<!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+	<script type="text/javascript" src="/webjars/MathJax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+	<body>
+		 <div id="content">
+			<div class="w3-container w3-center">
+				<img src="/images/icons/srmuLogo1.png"></button>
+			</div>
+			<hr class="hrline"><br>
+			<div class="w3-container">
+				<div class="w3-container">
+					<div class="w3-half w3-container">
+						<strong><label>Name of Faculty Member:&nbsp;&nbsp;</label></strong>
+						<span th:text="${jsons.full_name}"></span>
+					</div>
+					<div class="w3-half w3-container">
+						<strong><label>ERP Id:&nbsp;&nbsp;</label></strong>
+						<span th:text="${jsons.faculty_code}"></span>
+					</div>
+				</div>
+				<div class="w3-container">
+					<div class="w3-half w3-container">
+						<strong><label>Course Description:&nbsp;&nbsp;</label></strong>
+						<span th:text="${jsons.crse_descr}"></span>
+					</div>
+					<div class="w3-half w3-container">
+						<strong><label>Course Ctalog:&nbsp;&nbsp;</label></strong>
+						<span th:text="${jsons.crse_title}"></span>
+					</div>
+				</div>
+				<div class="w3-container">
+					<div class="w3-half w3-container">
+						<strong><label>Class No.:&nbsp;&nbsp;</label></strong>
+						<span th:text="${jsons.batch_codes}"></span>
+					</div>
+					<div class="w3-half w3-container">
+						<strong><label>Batch Type:&nbsp;&nbsp;</label></strong>
+						<span th:text="${jsons.batch_types	}"></span>
+					</div>
+				</div>
+				<div class="w3-container">
+					<div class="w3-half w3-container">
+						<strong><label>Student Count:&nbsp;&nbsp;</label></strong>
+						<span th:text="${jsons.student_count}"></span>
+					</div>				
+				</div>
+			</div>		
+			<hr class="hrline"><br>
+			<table style="width:100%" class="w3-table-all">	
+				<tr>
+					<th class="w3-border-right w3-border-left"></th>
+					<th class="w3-border-right">Class Nbr.</th>
+					<th class="w3-border-right">Unit No.</th>
+					<th class="w3-border-right">Unit Title</th>
+					<th class="w3-border-right">Documents</th>
+					<th class="w3-border-right">Recorded Videos</th>
+					<th class="w3-border-right">Useful Links</th>
+					<th class="w3-border-right ">Total</th>
+				</tr>
+				<th:block th:each="j,stats : ${json}">
+				    <tr>
+				        <td class="w3-border-right w3-border-left" th:text="${stats.index+1}"></td>
+				        <td class="w3-border-right" th:text="${j.batch_code}"></td>
+				        <td class="w3-border-right" th:text="'Unit-'+${j.rn}"></td>
+				        <td class="w3-border-right" th:text="${j.unit_title}"></td>
+				        <td class="w3-border-right" th:text="${j.docs_count}"></td>
+				        <td class="w3-border-right" th:text="${j.vids_count}"></td>
+				        <td class="w3-border-right" th:text="${j.links_count}"></td>
+				        <td class="w3-border-right" th:text="${j.total}"></td>
+				    </tr>
+				</th:block>
+			</table>
+		</div>
+		<script src="/js/jquery-3.5.1.min.js"></script>
+		<script src="/js/datatables.min.js"></script>
+		<script src="/js/dataTables.fixedColumns.min.js"></script>
+		<script src="/js/dataTables.buttons.min.js"></script>
+		<script src="/js/buttons.print.min.js"></script>
+		<script src="/js/jszip.min.js"></script>
+		<script src="/js/buttons.bootstrap.min.js"></script>
+		<script src="/js/buttons.html5.min.js"></script>
+		<script src="/js/pdfmake.min.js"></script>
+		<script src="/js/vfs_fonts.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/bootbox.min.js"></script>
+		<script src="/js/calendar/main.min.js"></script>
+
+	</body>
+</html>
+
+<!-- <div th:fragment="printActivityReport" style="margin-bottom:5%">
+	
+	
+</div> -->

@@ -1,0 +1,884 @@
+<div th:fragment="courseDetails">
+	<!-- Sidebar -->
+	
+	<!-- Page Content -->
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div class="w3-theme-d2" style="opacity: .8">
+		  <div class="w3-container">			
+		  	<div class="w3-threequarter">
+		  		<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+			  		<img src="/images/icons/course.png" style="width: 35px;">
+			  		&nbsp;&nbsp;<span th:text="${plan.courseplantitle}"></span>
+			  	</h3>
+		  	</div>		  	
+		  	<div class="w3-rest">
+		  		<button id="printbtn" class="w3-btn w3-theme-d5 w3-round-large w3-right w3-border w3-border-black" 
+		  			type="button" onclick="printCP()" style="margin-top: 8px;">
+						<img src="/images/icons/print.png" style="width: 20px;">&nbsp;&nbsp;Print</button>
+		  	</div>
+		  </div>
+		</div>
+		
+		<div class="w3-row">
+			<div class="w3-container w3-padding-16">
+				<div class="w3-card w3-theme-l3 w3-padding" style="opacity: .95">
+					<div class="w3-border w3-white w3-round-large">
+						<div class="w3-row">
+							<div class="w3-bar">
+								<div class="w3-bar-item"><h3 style="color: cadetblue;">About Course</h3></div>
+							</div>
+							<div class="w3-container">
+								<input type="hidden" id="courseid" th:value="${plan.courseid}">
+								<input type="hidden" id="courseplanid" th:value="${plan.courseplanid}">
+								<input type="hidden" id="createdby" th:value="${plan.createdby}">
+								<input type="hidden" id="loginid" th:value="${loginid}">
+								<input type="hidden" id="batchid" th:value="${plan.batchid}">
+								<input type="hidden" id="batchcode" th:value="${plan.batchcode}">
+								<input type="hidden" id="crseplantitle" th:value="${plan.courseplantitle}">
+								<p th:text="${plan.courseplandescr}"></p>
+							</div>
+						</div>
+						<div class="w3-row">
+							<div class="w3-container">
+								<div class="w3-half" style="border-right: 2px solid black">
+									<div class="w3-container">
+										<h5 style="text-decoration: underline; color: chocolate;">Text Books:</h5>
+										<div class="w3-responsive">
+											<table class="w3-table w3-striped">
+												<thead>
+													<tr class="w3-black" style="border-top: 4px solid #FBD70B;">
+														<th>Book Name</th>
+														<th>Author</th>
+													</tr>
+												</thead>
+												<tbody>
+													<th:block th:each="book : ${plan.books}" th:if="${book.booktype} == 'txt'">
+														<tr>
+															<td th:text="${book.booktitle}">Some Book Name</td>
+															<td th:text="${book.bookauthor}">Some Author</td>
+														</tr>
+													</th:block>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="w3-half">
+									<div class="w3-container">
+										<h5 style="text-decoration: underline; color: chocolate;">Reference Books:</h5>
+										<div class="w3-responsive">
+											<table class="w3-table w3-striped">
+												<thead>
+												<tr class="w3-black" style="border-top: 4px solid #FBD70B;">
+													<th>Book Name</th>
+													<th>Author</th>
+												</tr>
+												</thead>
+												<tbody>
+												<th:block th:each="book : ${plan.books}" th:if="${book.booktype} == 'refer'">
+													<tr>
+														<td th:text="${book.booktitle}">Some Book Name</td>
+														<td th:text="${book.bookauthor}">Some Author</td>
+													</tr>
+												</th:block>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="w3-row">
+							<div class="w3-container" style="padding-bottom: 16px;">
+								<div class="w3-quarter">
+									&nbsp;
+								</div>
+								<div class="w3-half">
+									<h5 style="text-decoration: underline; color: chocolate; margin-bottom: 0px;">Course Level Curricular Activities</h5>
+									<div class="w3-responsive">
+										<table class="w3-table-all">
+											<tr style="border-top: 4px solid chocolate">
+												<td>
+													<span class="fa-stack fa-lg">
+														<i class="fa fa-circle fa-stack-2x" style="color: green;"></i>
+														<i class="fa fa-newspaper fa-stack-1x fa-inverse"></i>
+													</span>
+													Assignments
+												</td>
+												<td>
+													<div class="w3-bar-item w3-button w3-blue w3-round-xxlarge" onclick="openassignmentlist('C',this)"><b><span th:text="${plan.assignmentCount}" id="assignmentCount"></span></b></div>
+												</td>
+												<td sec:authorize="hasRole('ROLE_Faculty')">
+													<!-- <div onclick="openUploadModal(this);"> -->
+													<div onclick="openassignmentlist('C',this);">
+														<i class="fa fa-calendar-check" style="font-size:18px; margin-top: 9px; cursor: pointer;"></i>
+														<input type="hidden" class="lvl" value="CRSE">
+														<input type="hidden" class="typ" value="assgn">
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<span class="fa-stack fa-lg">
+														<i class="fa fa-circle fa-stack-2x" style="color: sandybrown"></i>
+														<i class="fa fa-list-alt fa-stack-1x fa-inverse"></i>
+													</span>
+													Scheduled Assessments
+												</td>
+												<td>
+													<div class="w3-bar-item w3-button w3-blue w3-round-xxlarge"><b>0</b></div>
+												</td>
+												<td sec:authorize="hasRole('ROLE_Faculty')">
+													<div>
+														<i class="fa fa-calendar-plus" style="font-size:18px; margin-top: 9px; cursor: pointer"></i>
+														<input type="hidden" class="lvl" value="course">
+														<input type="hidden" class="typ" value="assess">
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<span class="fa-stack fa-lg">
+														<i class="fa fa-circle fa-stack-2x" style="color: cadetblue"></i>
+														<i class="fa fa-calendar-alt fa-stack-1x fa-inverse"></i>
+													</span>
+													Scheduled Online Classes
+												</td>
+												<td>
+													<div class="w3-bar-item w3-button w3-blue w3-round-xxlarge"><b>0</b></div>
+												</td>
+												<td sec:authorize="hasRole('ROLE_Faculty')">
+													<div>
+														<i class="far fa-calendar-alt" style="font-size:18px; margin-top: 9px; cursor: pointer;"></i>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+								<div class="w3-quarter">
+									&nbsp;
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		<th:block th:each="unit : ${plan.units}">
+			<input type="hidden" class="unitIdParent" th:value="${unit.unitid}">
+			<div class="w3-row" style="margin-bottom:9px;">
+				<div class="w3-container">
+					<div class="w3-card-4 w3-theme-l3 w3-padding" style="opacity: .95">
+						<div class="w3-border w3-white w3-round-large">
+							<div class="w3-bar w3-black" style="margin-top: 16px; border-top: 4px solid #FBD70B;">
+								<h4 class="w3-bar-item" th:text="${'Unit '+(unitStat.index+1)+' : '+unit.unittitle}"></h4>
+							</div>
+							<div class="w3-container">
+								<p th:text="${unit.unitdescr}">---</p>
+							</div>
+							<div class="w3-container">
+								<div class="w3-border w3-round-large" style="margin-bottom: 1rem;">
+									<div class="w3-container">
+										<h5 style="text-decoration: underline; color: chocolate;">Topics Covered in this unit</h5>
+										<ul>
+											<th:block th:each="tpcs : ${#strings.arraySplit( unit.topics , ',#' )}">
+												<li th:text="${tpcs}"></li>
+											</th:block>
+										</ul>
+									</div>
+								</div>
+
+								<div class="w3-border w3-round-large">
+									<div class="w3-container">
+										<h5 style="text-decoration: underline; color: chocolate;">CLO Derived</h5>
+										<ul>
+											<th:block th:each="objc : ${#strings.arraySplit( unit.objectives , ',#' )}">
+												<li th:text="${objc}"></li>
+											</th:block>
+										</ul>
+									</div>
+								</div>
+
+								<hr class="hrline">
+								<div class="w3-row" style="font-size: 13px;">
+									<div class="w3-container w3-padding">
+										<div class="w3-half">
+											<h5 style="text-decoration: underline; color: chocolate; margin-top: 0px; margin-bottom: 0px;">Unit Contents</h5>
+											<div class="w3-responsive">
+											
+												<select class="unitTopics" style="display:none;">
+													<th:block th:each="tpcs : ${#strings.arraySplit( unit.topics , ',#' )}">
+														<option th:text="${tpcs}"></option>
+													</th:block>
+												</select>
+											
+												<table class="w3-table-all contentTable">
+													<tr style="border-top: 4px solid chocolate" class="contRow">
+														<td>
+															<span class="fa-stack fa-lg">
+																<i class="fa fa-circle fa-stack-2x" style="color: teal;"></i>
+																<i class="far fa-file-alt fa-stack-1x fa-inverse"></i>
+															</span>
+															Class Notes
+														</td>
+														<td>
+															<div class="w3-bar-item w3-button w3-blue w3-round-xxlarge" onclick="contentDisplayModal(this)">
+																<b>
+																	<span class="unitNoteSpan contentCnt" th:text="${unit.docsCount}">0</span>
+																</b>
+																<input type="hidden" class="unitid" th:value="${unit.unitid}">
+																<input type="hidden" class="lvl" value="UNIT">
+																<input type="hidden" class="typ" value="notes">
+															</div>
+														</td>
+														<td sec:authorize="hasRole('ROLE_Faculty')">
+															<div onclick="openUploadModal(this);">
+																<i class="fa fa-upload" style="font-size:18px; margin-top: 9px; cursor: pointer;"></i>
+																<input type="hidden" class="unitid" th:value="${unit.unitid}">
+																<input type="hidden" class="lvl" value="UNIT">
+																<input type="hidden" class="typ" value="notes">
+															</div>
+														</td>
+													</tr>
+													<tr class="contRow">
+														<td>
+															<span class="fa-stack fa-lg">
+																<i class="fa fa-circle fa-stack-2x" style="color: slateblue"></i>
+																<i class="fa fa-film fa-stack-1x fa-inverse"></i>
+															</span>
+															Recorded Class Videos
+														</td>
+														<td>
+															<div class="w3-bar-item w3-button w3-blue w3-round-xxlarge" onclick="contentDisplayModal(this)">
+																<b>
+																	<span class="unitVideoSpan contentCnt" th:text="${unit.vidsCount}">0</span>
+																</b>
+																<input type="hidden" class="unitid" th:value="${unit.unitid}">
+																<input type="hidden" class="lvl" value="UNIT">
+																<input type="hidden" class="typ" value="vids">
+															</div>
+														</td>
+														<td sec:authorize="hasRole('ROLE_Faculty')">
+															<div onclick="openUploadModal(this);">
+																<i class="fa fa-upload" style="font-size:18px; margin-top: 9px; cursor: pointer"></i>
+																<input type="hidden" class="unitid" th:value="${unit.unitid}">
+																<input type="hidden" class="lvl" value="UNIT">
+																<input type="hidden" class="typ" value="vids">
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<span class="fa-stack fa-lg">
+																<i class="fa fa-circle fa-stack-2x" style="color: red"></i>
+																<i class="fas fa-link fa-stack-1x fa-inverse"></i>
+															</span>
+															Useful Links
+														</td>
+														<td>
+															<div class="w3-bar-item w3-button w3-blue w3-round-xxlarge" onclick="linksdisplaymodal(this);">
+																<b>
+																	<span class="unitLinkSpan contentCnt" th:text="${unit.linksCount}">0</span>
+																</b>
+																<input type="hidden" class="unitid" th:value="${unit.unitid}">
+																<input type="hidden" class="lvl" value="UNIT">
+																<input type="hidden" class="typ" value="link">
+															</div>
+														</td>
+														<td sec:authorize="hasRole('ROLE_Faculty')">
+															<div onclick="openLinksModal(this);">
+																<i class="fa fa-link" style="font-size:18px; margin-top: 9px; cursor: pointer;"></i>
+																<input type="hidden" class="unitid" th:value="${unit.unitid}">
+																<input type="hidden" class="lvl" value="UNIT">
+																<input type="hidden" class="typ" value="link">
+															</div>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+										<div class="w3-half">
+											<h5 style="text-decoration: underline; color: chocolate; margin-top: 0px; margin-bottom: 0px;">Unit Level Curricular Activities</h5>
+											<div class="w3-responsive">
+												<table class="w3-table-all">
+													<tr style="border-top: 4px solid chocolate">
+														<td>
+															<span class="fa-stack fa-lg">
+																<i class="fa fa-circle fa-stack-2x" style="color: green;"></i>
+																<i class="fa fa-newspaper fa-stack-1x fa-inverse"></i>
+															</span>
+															Assignments
+														</td>
+														<td>
+															<div class="w3-bar-item w3-button w3-blue w3-round-xxlarge" 
+																th:data-unitid="${unit.unitid}" onclick="openassignmentlist('U',this)"><b><span th:text="${unit.assignmentCount}" th:id="'assignmentCount_'+${unit.unitid}"></span></b></div>
+														</td>
+														<td sec:authorize="hasRole('ROLE_Faculty')">
+															<div onclick="openassignmentlist('U',this)" th:data-unitid="${unit.unitid}" >
+																<i class="fa fa-calendar-check" style="font-size:18px; margin-top: 9px; cursor: pointer;"></i>
+																<input type="hidden" class="unitid" th:value="${unit.unitid}">
+																<input type="hidden" class="lvl" value="UNIT">
+																<input type="hidden" class="typ" value="asgn">
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<span class="fa-stack fa-lg">
+																<i class="fa fa-circle fa-stack-2x" style="color: sandybrown"></i>
+																<i class="fa fa-list-alt fa-stack-1x fa-inverse"></i>
+															</span>
+															Scheduled Assessments
+														</td>
+														<td>
+															<div class="w3-bar-item w3-button w3-blue w3-round-xxlarge"><b>0</b></div>
+														</td>
+														<td sec:authorize="hasRole('ROLE_Faculty')">
+															<div>
+																<i class="fa fa-calendar-plus" style="font-size:18px; margin-top: 9px; cursor: pointer"></i>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<span class="fa-stack fa-lg">
+																<i class="fa fa-circle fa-stack-2x" style="color: cadetblue"></i>
+																<i class="fa fa-calendar-alt fa-stack-1x fa-inverse"></i>
+															</span>
+															Scheduled Online Classes
+														</td>
+														<td>
+															<div class="w3-bar-item w3-button w3-blue w3-round-xxlarge"><b>0</b></div>
+														</td>
+														<td sec:authorize="hasRole('ROLE_Faculty')">
+															<div onclick="openScheduleClass(this);">
+																<i class="far fa-calendar-alt" style="font-size:18px; margin-top: 9px; cursor: pointer;"></i>
+																<input type="hidden" class="unitid" th:value="${unit.unitid}">
+																<input type="hidden" class="lvl" value="UNIT">
+																<input type="hidden" class="typ" value="onlcls">
+															</div>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr class="hrline">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</th:block>
+	
+	
+	
+<!-- Add Section Modal -->
+	<div th:replace="forms/addSection :: addSection"></div>
+<!-- End of Add Section Model -->
+
+<!-- Add Sub-Section Modal -->
+	<div th:replace="forms/addSubSection :: addSubSection"></div>
+<!-- End of Add Sub-Section Model -->
+
+
+<!-- Add Content Modal -->
+	<div th:replace="forms/addContent :: addContent"></div>
+<!-- End of Add Content Model -->
+
+<!-- Add Content Modal -->
+	<div th:replace="forms/courseCalendar :: courseCalendar"></div>
+<!-- End of Add Content Model -->
+	</div>
+
+<form id="scheduleOnlineClass" onsubmit="return false;" method="post">
+	<div id="scheduleClass" class="w3-modal">
+		<div class="w3-modal-content">
+			<header class="w3-container w3-theme-d4">
+				<h4><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;Schedule Online Class</h4>
+			</header>
+
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				<input type="hidden" name="level" id="contentLevelSC">  <!--STORES IF CONTENT IS OF COURSE OR UNIT LEVEL -->
+				<input type="hidden" name="courseid" id="crseidSC"><!-- COURSE ID -->
+				<input type="hidden" name="courseplanid" id="plnidSC">
+				<input type="hidden" name="unitid" id="untidSC">
+				<div class="w3-row-padding" style="margin-bottom:8px;">
+					<div class="w3-half">
+						<div id="contentTypeDivSC">
+							<p>
+								<label>Content Type</label>
+								<select class="w3-input w3-border" name="typeid">
+									<option value="1">Documents</option>
+								</select>
+							</p>
+						</div>
+					</div>
+					<div class="w3-half">
+						<div id="loader" style="text-align: center; margin-top: 10px; display: none;">
+							<i class='fa fa-cog fa-spin' style="font-size: 24px; color: black;"></i>
+							<p>Scheduling Your Class ....</p>
+						</div>
+					</div>
+				</div>
+				<hr class="hrline">
+				<div class="w3-row-padding">
+					<div class="w3-half">
+						<p>
+							<label>Class Title</label>
+							<input required type="text" name="titleSC" id="titleSC" class="w3-input w3-border">
+						</p>
+						<div class="w3-row" style="margin-top: 24px;">
+							<div class="w3-half">
+								<p>
+									<label>Class Date & Time</label>
+									<input required type="datetime-local" name="dateTimeSC" id="dateTimeSC" class="w3-input w3-border">
+								</p>
+							</div>
+							<div class="w3-half">
+								<p>
+									<label>Duration in Minutes</label>
+									<input required type="number" min="15" step="15" name="durationSC" id="durationSC" class="w3-input w3-border" style="padding-top: 10px;">
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="w3-half">
+						<p>
+							<label>Class Agenda</label>
+							<textarea rows="5" id="descrSC" name="descr" class="w3-input w3-border"></textarea>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<footer class="w3-container w3-theme-d4">
+				<div class="w3-row">
+					<div class="w3-col" style="width: 50%">
+						<input class="w3-button w3-green" type="submit" id="checkSC" value="Save &checkmark;" style="width:100%;"/>
+					</div>
+					<div class="w3-col" style="width: 50%">
+						<input class="w3-button w3-red" type="button" id="crossSC" value="Cancel &times;" style="width:100%;"/>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+</form>
+
+
+<form id="uploadContentForm" method="POST" enctype="multipart/form-data">
+<div id="uploadModal" class="w3-modal">
+	<div class="w3-modal-content">
+		<header class="w3-container w3-theme-d4">
+			<h4><i class="fa fa-upload"></i>&nbsp;&nbsp;File Upload</h4>
+		</header>
+		
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				
+				<input type="hidden" name="level" id="contentLevel">  <!--STORES IF CONTENT IS OF COURSE OR UNIT LEVEL -->
+				<input type="hidden" name="location" id="location">	<!-- COURSE ID -->
+				<input type="hidden" name="courseid" id="crseid">
+				<input type="hidden" name="courseplanid" id="plnid">
+				<input type="hidden" name="unitid" id="untid">
+				
+				<div class="w3-row" style="margin-bottom:8px;">
+					<div class="w3-col" style="width: 50%">
+						<p>
+							<label>Content Type</label>
+							<div id="contentTypeDiv">
+								<select class="w3-input w3-border" name="typeid">
+									<option value="1">Documents</option>
+								</select>
+							</div>
+						</p>
+					</div>
+					<div class="w3-col" style="width: 50%">
+						<p>
+							<label style="color:red;">Total File(s) Size Allowed : 1024 MB</label>
+						</p>
+					</div>
+				</div>
+				<div class="w3-row" style="margin-bottom: 16px;">
+					<div class="w3-col progressBarContainer" style="width: 100%" id="progressBarContainer">
+						<div id="progressBarFill" class="progressBarFill">
+							<span id="progressPercent" class="progressPercent">0%</span>
+						</div>
+					</div>
+				</div>
+				<hr class="hrline">
+				<div class="w3-row" id="uploadContentDiv">
+				
+					<div class="filesRow">
+						<div class="w3-row">
+							<div class="w3-col" style="width: 50%">
+								<p>
+									<label>Title</label>
+									<input required type="text" name="title" id="title" class="w3-input w3-border" style="width:95%">
+								</p>
+								<p>
+									<input required type="file" name="files" id="files">
+								</p>
+							</div>
+							<div class="w3-col" style="width: 50%">
+								<p>
+									<label>Description</label>
+									<textarea rows="6" cols="45" id="descr" name="descr" class="w3-input w3-border"></textarea>
+								</p>
+							</div>
+						</div>
+						<div class="w3-row">
+							<div class="w3-right" style="margin-left:30px;">
+								<i class="fa fa-trash" style="font-size: 18px; padding-top: 10px; cursor: pointer;" id="deleteFileRowBtn" onclick="deleteRowFile(this);"></i>
+							</div>
+							<div class="w3-right">
+								<i class="fa fa-plus" style="font-size: 18px; padding-top: 10px; cursor: pointer;" id="addFileRowBtn" onclick="appendRowFile();"></i>
+							</div>
+						</div>
+						<hr class="hrline">
+					</div>
+					
+				</div>
+				
+			</div>
+		
+		
+		<footer class="w3-container w3-theme-d4">
+			<div class="w3-row">
+				<div class="w3-col" style="width: 50%">
+					<input class="w3-button w3-green" type="submit" id="check" value="Save &checkmark;" style="width:100%;"/>
+				</div>
+				<div class="w3-col" style="width: 50%">
+					<input class="w3-button w3-red" type="button" id="cross" value="Cancel &times;" style="width:100%;"/>
+				</div>
+			</div>
+		</footer>
+	</div>
+</div>
+</form>
+
+
+<form id="linksform" onsubmit="return false;" method="post">
+<div id="linksmodal" class="w3-modal">
+	<div class="w3-modal-content">
+		<header class="w3-container w3-theme-d4">
+			<h4><i class="fa fa-link"></i>&nbsp;&nbsp;Useful Links</h4>
+		</header>
+		
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				<div class="w3-row" style="margin-bottom:8px;">
+					<div class="w3-col" style="width: 50%">
+						<p>
+							<label>Content Type</label>
+							<div id="contentTypeDiv">
+								<select class="w3-input w3-border" id="linktypeid">
+									<option value="3">Links</option>
+								</select>
+							</div>
+						</p>
+					</div>
+				</div>
+				<hr class="hrline">
+				<div class="w3-row" id="linkdiv">
+					
+				</div>
+			</div>
+		
+		
+		<footer class="w3-container w3-theme-d4">
+			<div class="w3-row">
+				<div class="w3-col" style="width: 50%">
+					<input class="w3-button w3-green" type="submit" id="linkcheck" value="Save &checkmark;" style="width:100%;"/>
+				</div>
+				<div class="w3-col" style="width: 50%">
+					<input class="w3-button w3-red" type="button" id="linkcross" value="Cancel &times;" style="width:100%;"/>
+				</div>
+			</div>
+		</footer>
+	</div>
+</div>
+</form>
+
+
+<div id="contentDisplayModal" class="w3-modal">
+	<div class="w3-modal-content">
+		<header class="w3-container w3-theme-d4">
+			<h4><i class="fa fa-download"></i>&nbsp;&nbsp;Content Viewer</h4>
+		</header>
+		
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				<div class="w3-row" style="margin-bottom:8px;">
+					<div class="w3-col" style="width: 20%">
+						<label>Title</label>
+					</div>
+					<div class="w3-col" style="width: 70%">
+						<label>Description</label>
+					</div>
+					<div class="w3-col" style="width: 10%">
+						<label>Download</label>
+					</div>
+				</div>
+				<hr class="hrline">
+				<div id="contentList" style="max-height:200px; overflow-x:hidden; overflow-y:auto;">
+					
+				</div>
+				<hr class="hrline">
+			</div>
+		
+		<footer class="w3-container w3-theme-d4">
+			<div class="w3-row">
+				<div class="w3-col" style="width: 100%">
+					<input class="w3-button w3-red" type="button" id="viewerClose" value="Close &times;" style="width:100%;"/>
+				</div>
+			</div>
+		</footer>
+	</div>
+</div>
+
+<div id="linkdisplaymodal" class="w3-modal">
+	<div class="w3-modal-content">
+		<header class="w3-container w3-theme-d4">
+			<h4><i class="fa fa-link"></i>&nbsp;&nbsp;Useful Links</h4>
+		</header>
+		
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				<div class="w3-row" style="margin-bottom:8px;">
+					<div class="w3-col" style="width: 20%">
+						<label>Title</label>
+					</div>
+					<div class="w3-col" style="width: 70%">
+						<label>Description</label>
+					</div>
+					<div class="w3-col" style="width: 10%">
+						<label>Link</label>
+					</div>
+				</div>
+				<hr class="hrline">
+				<div id="linkslist" style="max-height:200px; overflow-x:hidden; overflow-y:auto;">
+					
+				</div>
+				<hr class="hrline">
+			</div>
+		
+		<footer class="w3-container w3-theme-d4">
+			<div class="w3-row">
+				<div class="w3-col" style="width: 100%">
+					<input class="w3-button w3-red" type="button" id="linkViewerClose" value="Close &times;" style="width:100%;"/>
+				</div>
+			</div>
+		</footer>
+	</div>
+</div>
+
+<div id="assignmentDetails" class="w3-modal">
+	<div id="jsonLoaderMain" class="w3-modal"  style="display: none">
+		<div class="w3-modal-content w3-transparent w3-center w3-padding">
+			<i class='fa fa-cog fa-spin' style='font-size: 50px; color: white;'></i>
+			<p style="color: white;">&nbsp;Loading....</p>
+		</div>
+	</div>
+	<div class="w3-modal-content w3-theme-d5" style="width:80%">
+		<input type="hidden" th:value="${role}" id="role" readonly>
+		<header class="w3-container w3-theme-d4">
+			<div class="w3-half">
+				<h3>Assignment Details</h3>
+			</div>
+			<div class="w3-half w3-right">
+				<div class="w3-right">
+					<div class="buttonbarpadding w3-bar-item w3-right" style="margin-left:8px;margin-right:5px" 
+						onClick="cancilAsignmentView()">		
+						<a class="w3-btn w3-red w3-round-large w3-border w3-border-black">
+							<i class="fa fa-times" style="font-size:15px;"></i>
+							&nbsp;&nbsp;Cancel
+						</a>
+					</div>
+				</div>
+				<div class="w3-right">					 
+					<div sec:authorize="hasRole('ROLE_Faculty')"
+						class="buttonbarpadding w3-bar-item w3-right" style="margin-left:8px" onclick="openAssignmentListGrid()">		
+						<a class="w3-btn w3-blue w3-round-large w3-border w3-border-black">
+							<i class="fa fa-plus" style="font-size:15px;"></i>
+							&nbsp;&nbsp;Create New Assignment
+						</a>				
+					</div>
+				</div>							
+			</div>
+		</header>
+		<div class="w3-row w3-theme-l3 w3-round-large">
+			<div class="w3-container" style="margin-top: 16px;">			
+				<div id="resultSec" class="w3-responsive" style="display: none">
+					<table id="assimentList" class="display compact cell-border" style="width: 100%;word-break: break-word;">
+						<thead>
+							<tr class="w3-theme-d3">
+					 			<th>Assignment ID</th>
+					 			<th>Assignment Title</th>
+					 			<th>Assignment Description</th>
+					 			<th>Assignment Type</th>
+					 			<th>Due Date</th>
+					 			<th>Max Marks</th>
+					 			<th sec:authorize="hasRole('ROLE_Faculty')">Create Question Paper</th>
+					 			<th sec:authorize="hasRole('ROLE_Faculty')">View Question Paper</th>				 			
+					 			<th sec:authorize="hasRole('ROLE_Faculty')">Assign Students</th>
+					 			<th sec:authorize="hasRole('ROLE_Faculty')">Publish Assignment</th>
+					 			<th sec:authorize="hasRole('ROLE_Student')">Status</th>				 			
+					 			<th sec:authorize="hasRole('ROLE_Student')">Attempt Assignment</th>
+					 			<th sec:authorize="hasRole('ROLE_Faculty')">View Submissions</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div  id="noData" class="w3-responsive" style="display: none">
+					<div>
+						<p>No record found...</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="w3-theme-d4" style="height:35px;margin-bottom:20px">			
+		</div>
+	</div>
+	
+	<div id="assignment" class="w3-modal">
+		<div class="w3-modal-content w3-theme-d5" style="width:80%">
+			<header class="w3-container w3-theme-d4">
+				<div class="w3-half">
+					<h3>Create New Assignment</h3>
+				</div>				
+			</header>
+			<div class="w3-theme-l3 w3-round-large" id="assignmentcreate"></div>
+			<footer class="w3-container w3-theme-d4">
+				<div class="w3-row w3-half w3-bar w3-right" style="margin-left:15px">
+					<div class="buttonbarpadding w3-bar-item w3-right" onClick="cancilAssessmentAdd()">
+						<a class="w3-btn w3-red w3-border w3-border-black w3-round-large">
+							<i class="fa fa-times" style="font-size:15px;"></i>
+							&nbsp;&nbsp;Cancel
+						</a>						
+					</div>
+					<div class="buttonbarpadding w3-bar-item w3-right" onclick="ajaxPost(this);">
+						<a class="w3-btn w3-round-large w3-right w3-green w3-border w3-border-black">
+							<i class="fa fa-save" style="font-size:15px; color: lime"></i>
+							&nbsp;&nbsp;Save
+						</a>
+					</div>					
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>
+
+<div id="questions" class="w3-modal">
+	<div class="w3-modal-content" style="width:80%">
+		<div id="createQuesPaper"></div>		
+	</div>
+</div>
+
+<div id="viewquestions" class="w3-modal">
+	<div class="w3-modal-content" style="width:80%">		
+		<div id="viewQuesPaper"></div>
+	</div>
+</div>
+
+<div id="studentPopulate" class="w3-modal">
+	<div class="w3-modal-content w3-theme-l3" style="width:80%">
+		<header class="w3-container w3-theme-d4">
+			<div class="w3-half">
+				<h3>Select Students</h3>
+			</div>
+		</header>		
+		<div id="assignStudents"></div>
+		<div id="viewAssignStudents"></div>
+		<footer class="w3-container w3-theme-d4 w3-padding">
+			<div class="w3-row w3-bar">
+				<div onclick="closeAssignStudents();" 
+					class="w3-button w3-red w3-border w3-border-black w3-round-large w3-right" 
+					style="float:left; width:100px;margin-right:5px;margin-left:7px" id="assignmentClose">
+					<i class="fa fa-times" aria-hidden="true"></i><span>&nbsp;Cancel</span>
+				</div>
+				<div onclick="ajaxPostAssignStudents();" 
+					class="w3-button w3-green w3-border w3-border-black w3-round-large w3-right" 
+					style="float:left; width:100px;" id="saveAssignment">
+					<i class="fa fa-save" aria-hidden="true" style="color:lime"></i><span>&nbsp;Save</span>
+				</div>
+			</div>
+		</footer>
+	</div>
+</div>
+
+<div id="viewAssignmentStudent" class="w3-modal">
+	<div class="w3-modal-content w3-theme-l3" style="width:80%">
+		<header class="w3-container w3-theme-d4">
+			<div class="w3-half">
+				<h3>Assigned Students</h3>
+			</div>
+		</header>
+		<div id="viewAssignedStudents"></div>
+		<footer class="w3-container w3-theme-d4 w3-padding">
+			<div class="w3-row w3-bar">
+				<div id="viewStudentClose" onclick="closeViewStudents();" class="w3-button w3-red w3-border w3-border-black w3-round-large w3-right" style="float:left; width:100px;margin-right:5px;margin-left:7px">
+					<i class="fa fa-times" aria-hidden="true"></i><span>&nbsp;Close</span>
+				</div>
+				<!-- <div id="viewStudentSave" class="w3-button w3-green w3-border w3-border-black w3-round-large w3-right" style="float:left; width:100px;">
+					<i class="fa fa-save" aria-hidden="true" style="color:lime"></i><span>&nbsp;Save</span>
+				</div> -->
+			</div>
+		</footer>
+	</div>
+</div>
+
+<div id="assignmentAttempt" class="w3-modal">
+	<div class="w3-modal-content" style="width:80%">
+		<header class="w3-container w3-theme-d4">
+			<div class="w3-row">
+				<div class="w3-half">
+					<h4>
+						<img src="/images/icons/assignment.png" style="width: 22px">&nbsp;&nbsp;Assignment
+					</h4>
+				</div>
+				<div class="w3-half">
+					
+				</div>
+			</div>
+		</header>
+		
+		<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+			<div id="assignmentQuestions_replace">
+				
+			</div>
+		</div>
+		
+		<footer class="w3-container w3-theme-d4 w3-padding">
+			<div class="w3-row w3-bar">
+				<div onclick="closeAssignmentQuestionPaper();" class="w3-button w3-red w3-border w3-border-black w3-round-large w3-right" style="float:left; width:100px;" id="assignmentClose">
+					<i class="fa fa-ban" aria-hidden="true"></i><span>&nbsp;Cancel</span>
+				</div>
+				<div onclick="saveAssignment('S');" class="w3-button w3-green w3-border w3-border-black w3-round-large w3-right w3-margin-right" style="width:100px;" id="submitAssignment">
+					<i class="fa fa-save" aria-hidden="true"></i><span>&nbsp;Submit</span>
+				</div>
+				<div onclick="saveAssignment('T');" class="w3-button w3-green w3-border w3-border-black w3-round-large w3-right" style="float:left; width:100px;" id="saveAssignment">
+					<i class="fa fa-save" aria-hidden="true"></i><span>&nbsp;Save</span>
+				</div>
+			</div>
+		</footer>		
+	</div>
+</div>
+
+<script type="text/javascript">
+function myFunction(id){
+	var x = document.getElementById(id);
+	if(x.className.indexOf("w3-show") == -1){
+		x.className += " w3-show";
+	} else {
+		x.className = x.className.replace(" w3-show", "");
+	}
+}
+</script>
+
+<script type="text/javascript" src="/js/courseDetails.js"></script>
+<script type="text/javascript" src="/js/assignment/assignment.js"></script>
+
+</div>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en-US">
+<head>
+<meta charset="ISO-8859-1">
+</head>
+<body>
+	<h1>Reset Password</h1>
+	<br>
+	<h3><span th:text="${emplid}"></span></h3>
+	<hr>
+	<form action="/resetresult">
+		<table>
+			<tr>
+				<td>
+					New Password:
+				</td>
+				<td>
+					<input type="password" name="newpass" id="newpass" onkeyup="matchPass()">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Confirm Password:
+				</td>
+				<td>
+					<input type="password" id="confpass" onkeyup="matchPass()">
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" th:value="${emplid}" name="emplid">
+		<input type="submit" id="submitbtn" disabled>
+	</form>
+</body>
+<script>
+	function matchPass()
+	{
+		var newpass = document.getElementById("newpass").value;
+		var conpass = document.getElementById("confpass").value;
+		
+		console.log(newpass+" : "+conpass);
+		
+		if(newpass.length >= 3)
+		{
+			if(newpass == conpass)
+			{
+				document.getElementById("submitbtn").disabled = false;
+			}
+			else
+			{
+				document.getElementById("submitbtn").disabled = true;
+			}
+		}
+		else
+		{
+			document.getElementById("submitbtn").disabled = true;
+		}
+	}
+</script>
+</html>

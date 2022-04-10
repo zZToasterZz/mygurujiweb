@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>myGuruji</title>
+		
+		<style>
+			.bodyDiv{
+				background-image: url(https://image.freepik.com/free-vector/background-white-elegant-texture_23-2148438404.jpg);
+				background-position: center;
+				background-size: cover;
+				height: auto;
+				border: 4px solid;
+				border-color: #ff6a00 #334f7e #334f7e #ff6a00;
+				width: 500px;
+				padding: 20px 20px;
+				position:relative;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="bodyDiv">
+			<div>
+		        <div style="float:left"><img src="http://myguruji.srmu.ac.in/images/myGurujiLogo.png" width="100" /></div>
+		        <div style="float:right"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Sriramswaroop.png/280px-Sriramswaroop.png" width="200" /></div>
+		    </div>
+		    <br />
+		    <br />
+		    <br />
+		    <br />
+		    <h3 style="color:#ff0000;">Hello&nbsp;&nbsp;<span th:text="${name}"></span></h3>
+		    <p style="color: #506890;"><b> Welcome to my-Guruji Learning Management System !</b></p>
+		    <p style="color: #506890;">
+		        We're sending you this mail because you requested to reset your password.
+		        If you've not made this request please ignore this mail and your password will not be changed.
+		    </p>
+		    <p style="color: #506890;">
+		        <b>Do not share this mail or the link below with anyone.</b>
+		    </p>
+		    <p style="color: #334f7e">
+		    	<a style="color: #506890;" th:href="${link}">CLICK HERE TO RESET PASSWORD</a><br/>
+		    </p>
+		    <br>
+	       	<p style="color: #506890;font-size:14px!important;">
+		        In case of any queries feel free to contact us at: <span style="color:#ff0000;">myguruji@srdt.co.in</span><br />
+		        To read more about my-Guruji visit our website <span style="color:#ff0000;">http://elearning-myguruji.com/</span>
+		    </p>
+		</div>
+	</body>
+</html>

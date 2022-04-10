@@ -1,0 +1,246 @@
+<div th:fragment="editCoursePlan">
+<form method="post" id="testcourse" enctype="application/x-www-form-urlencoded">
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;">
+			  		<img src="/images/icons/createcourseplan.png" style="width: 35px;">
+			  		&nbsp;&nbsp;Edit Course Plan
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-row">
+					<div class="divTable">
+						<div class="divTr">
+							<div class="d1">
+								<h5 style="margin-right: 10px;margin-bottom: 0px; margin-bottom: 0px; font-weight: bold; float:left;">Course Plan ID : </h5>
+								<input style="width:100px" readonly class="w3-input w3-border" th:value="${courseplan.courseplanid}" id="courseplanid" name="courseplanid" type="text"></input>
+							</div>
+							<div class="d2">
+								<!-- <button class="w3-button w3-square w3-theme-d5 w3-large" type="submit">Create</button> -->
+								<button class="w3-btn w3-theme-d5" onclick="ajaxPost();return false;"><i class="fa fa-save" style="width: 18px;"></i>&nbsp;&nbsp;Save</button>
+								<button class="w3-btn w3-theme-d5" onclick="cancel();return false;"><i class="fa fa-times" style="width: 18px;"></i>&nbsp;&nbsp;Cancel</button>
+								<button class="w3-btn w3-theme-d5" onclick="createSubUnit();return false;" id="createsubunit"><i class="fa fa-sitemap" style="width: 18px;"></i>&nbsp;&nbsp;Add Sub Units</button>
+							</div>
+						</div>
+					</div>
+					<hr class="hrline">
+					<div class="w3-row-padding">
+						<div class="w3-half">
+							<p>
+								<label>Course</label>
+								<input readonly class="w3-input w3-border" th:value="${courseplan.courseid}" name="courseid" type="text">
+							</p>
+							<p>
+								<label>Plan Title</label>
+								<input class="w3-input w3-border" th:value="${courseplan.courseplantitle}" name="courseplantitle" type="text">
+							</p>
+							<p>
+								<label>Plan Description</label>
+								<input onclick="openDescrModal(this);return false;" class="w3-input w3-border" th:value="${courseplan.courseplandescr}" id="courseplandescr" name="courseplandescr" type="text">
+							</p>
+						</div>
+						<div class="w3-half">
+							<p>
+								<label>Batch</label>
+								<input readonly class="w3-input w3-border" th:value="${courseplan.batchid}" name="batchid" type="text">
+							</p>
+							<p>
+								<label>Plan Code</label>
+								<input readonly class="w3-input w3-border" th:value="${courseplan.courseplancode}" name="plancode" type="text">
+								<input style="display:none;" th:value="${createdby}" name="createdby" type="hidden"/>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+							
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-row">	
+					<div class="d1"><h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Books</h5></div>
+					<hr class="hrline">
+					<div class="w3-row">
+						<div class="w3-col" style="width: 92%">
+							<div class="w3-row">
+								<div class="w3-col" style="width: 25%">
+									<label>Title</label>
+								</div>
+								<div class="w3-col" style="width: 25%">
+									<label>Description</label>
+								</div>
+								<div class="w3-col" style="width: 25%">
+									<label>Author</label>
+								</div>
+								<div class="w3-col" style="width: 25%">
+									<label>Type</label>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col" style="width: 8%">
+							<div class="w3-col" style="width: 50%">
+							
+							</div>
+							<div class="w3-col" style="width: 50%">
+							
+							</div>
+						</div>
+					</div>
+					<th:block th:each="book : ${courseplan.books}">
+						<div class="w3-row" style="margin-bottom:8px;">
+							<div class="w3-col" style="width: 92%">
+								<div class="w3-row" >
+									<div class="w3-col" style="width: 25%">
+										<input class="w3-input w3-border" type="text" th:value="${book.booktitle}" name="books[0].booktitle"/>
+									</div>
+									<div class="w3-col" style="width: 25%">
+										<input class="w3-input w3-border" id="bookdescr" onclick="openDescrModal(this);return false;" type="text" th:value="${book.bookdescr}" name="books[0].bookdescr"/>
+									</div>
+									<div class="w3-col" style="width: 25%">
+										<input class="w3-input w3-border" type="text" th:value="${book.bookauthor}" name="books[0].bookauthor"/>
+										<input type="hidden" th:value="${courseplan.courseplanid}" name="books[0].courseplanid"/>
+										<input type="hidden" th:value="${book.bookid}" name="books[0].bookid"/>
+									</div>
+									<div class="w3-col" style="width: 25%">
+										<select class="w3-select w3-border" name="books[0].booktype">
+											<option value="txt" th:selected="${book.booktype == 'txt'}">txt</option>
+											<option value="refer" th:selected="${book.booktype == 'refer'}">refer</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="w3-col" style="width: 8%">
+								<div class="w3-col" style="width: 50%">
+									<i class="fa fa-plus" style="font-size: 20px; padding-top: 10px; cursor: pointer;" onclick="addRowNowBOOK();"></i>
+								</div>
+								<div class="w3-col" style="width: 50%">
+									<i class="fa fa-trash" style="font-size: 20px; padding-top: 10px; cursor: pointer;" onclick="delThisRowBOOK();"></i>
+								</div>
+							</div>
+						</div>
+					</th:block>
+					
+					
+					<table id="bookTable">
+						<thead>
+							<th>Title</th>
+							<th>Description</th>
+							<th>Author</th>
+							<th>Type</th>
+							<th></th>
+							<th></th>
+							<th style="display:none;"></th>
+							<th style="display:none;"></th>
+						</thead>
+						<tbody>
+							<th:block th:each="book : ${courseplan.books}">
+									<tr>
+										<td>
+											<input type="text" th:value="${book.booktitle}" name="books[0].booktitle"/>
+										</td>
+										<td>
+											<input id="bookdescr" onclick="openDescrModal(this);return false;" type="text" th:value="${book.bookdescr}" name="books[0].bookdescr"/>
+										</td>
+										<td>
+											<input type="text" th:value="${book.bookauthor}" name="books[0].bookauthor"/>
+										</td>
+										<td>
+											<!-- <input type="text" th:value="${book.booktype}" name="books[0].booktype"/> -->
+											<select name="books[0].booktype" style="height:28px">
+												<option value="txt" th:selected="${book.booktype == 'txt'}">txt</option>
+												<option value="refer" th:selected="${book.booktype == 'refer'}">refer</option>
+											</select>
+										</td>
+										<td>
+											<input type="button" value="+" onclick="addRowNowBOOK();"/>
+										</td>
+										<td>
+											<input type="button" value="-" onclick="delThisRowBOOK();"/>
+										</td>
+										<td style="display:none;">
+											<input type="text" th:value="${courseplan.courseplanid}" name="books[0].courseplanid"/>
+										</td>
+										<td style="display:none;">
+											<input type="text" th:value="${book.bookid}" name="books[0].bookid"/>
+										</td>
+									</tr>
+								</th:block>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>	
+							
+							
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-row">	
+					<div style="float:left;">
+						<div class="d1"><h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Units</h5></div>
+						<hr class="hrline">
+						<table id="unitTable">
+							<thead>
+								<th>Title</th>
+								<th>Description</th>
+								<th></th>
+								<th></th>
+								<th style="display:none;"></th>
+								<th style="display:none;"></th>
+							</thead>
+							<tbody>
+								<th:block th:each="unit : ${courseplan.units}">
+									<tr>
+										<td>
+											<input type="text" th:value="${unit.unittitle}" name="units[0].unittitle"/>
+										</td>
+										<td>
+											<input onclick="openDescrModal(this);return false;" type="text" th:value="${unit.unitdescr}" name="units[0].unitdescr"/>
+										</td>
+										<td>
+											<input type="button" value="+" onclick="addRowNowUNIT();"/>
+										</td>
+										<td>
+											<input th:disabled="${not #lists.isEmpty(unit.subUnits)}" type="button" value="-" onclick="delThisRowUNIT();"/>
+										</td>
+										<td style="display:none;">
+											<input type="text" th:value="${courseplan.courseplanid}" name="units[0].courseplanid"/>
+										</td>
+										<td style="display:none;">
+											<input type="text" th:value="${unit.unitid}" name="units[0].courseplanid"/>
+										</td>
+									</tr>
+								</th:block>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+	</div>
+	<div id="myModal" class="w3-modal">
+		<div class="w3-modal-content">
+			<header class="w3-container w3-theme-d4">
+				<span class="w3-button w3-display-topright close">&times;</span>
+				<h4>Description</h4>
+			</header>
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				<textarea id="modalText" rows="5" style="width: 100%; background-color:#e8e9f9;"></textarea>
+			</div>
+			<footer class="w3-container w3-theme-d4"></footer>
+		</div>
+	</div>
+</form>
+<script src="/js/coursePlan/editCoursePlan.js"></script>
+</div>
+			

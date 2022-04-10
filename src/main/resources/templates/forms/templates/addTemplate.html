@@ -1,0 +1,153 @@
+<div th:fragment="addTemplate">
+<form autocomplete="off" onsubmit="return false;" method="post" id="createTemplate" enctype="application/x-www-form-urlencoded">
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+			  		<img src="/images/icons/paperTemplate.svg" style="width: 35px;">
+			  		&nbsp;&nbsp;Create Template
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-row">
+					<div>
+						<div class="divTable">
+							<div class="divTr">
+								<div class="d1"><h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Template Details</h5></div>
+								<div class="d2">
+									<!-- <button class="w3-button w3-square w3-theme-d5 w3-large" type="submit">Create</button> -->
+									<button class="w3-btn w3-theme-d5 w3-round-large" onclick="ajaxPost();return false;"><span class="fa fa-save" style="font-size: 18px; color: lime"></span>&nbsp;&nbsp;Save Template</button>
+								</div>
+							</div>
+						</div>
+						<hr class="hrline">
+						<div class="w3-row-padding">
+							<div class="w3-half">
+								<p>
+									<label>Template Title</label>
+									<input class="w3-input w3-border" name="title" type="text">
+								</p>
+								<p>
+									<label>No. of Sections</label>
+									<input readonly class="w3-input w3-border" id="noofsection" name="noofsection" type="number" value="1"/>
+									<!-- <i onclick="plusSection();return false;" class="fa fa-chevron-circle-up fa-2x" aria-hidden="true"></i>
+									<i onclick="minusSection();return false;" class="fa fa-chevron-circle-down fa-2x" aria-hidden="true"></i> -->
+								</p>
+							</div>
+							<div class="w3-half">
+								<p>
+									<label>Template Description</label>
+									<input id="templateDescr" onclick="openDescrModal(this);return false;" class="w3-input w3-border" name="descr" type="text">
+									<input style="display:none;" th:value="${createdby}" name="createdby" type="text"/>
+									<input style="display:none;" value="dummy" name="templatecode" type="text"/>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-row">					
+					<div class="d1"><h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Section Details</h5></div>
+					<hr class="hrline">
+					<div id="sectionRow">
+						<div class="w3-white" style="border: 2px solid #e8e9f9; border-radius: 8px;">
+							<div class="w3-row" style="padding-left: 8px;">
+								<div class="w3-half" style="padding-right: 8px;">
+									<p>
+										<label>Section Title</label>
+										<input id="sectiontitle" style="background: beige;" class="w3-input w3-border" type="text" name="sectiondetails[0].title"/>
+									</p>
+								</div>
+							</div>
+							<div class="w3-row" style="padding-left: 8px;">
+								<div class="w3-half" style="padding-right: 8px;">
+									<p>
+										<label>Section Description <i style="color: blue;">(For your future reference)</i></label>
+										<textarea style="resize: none;" rows="4" id="descr" class="w3-input w3-border _sidebar" type="text" name="sectiondetails[0].descr"></textarea>
+									</p>
+								</div>
+								<div class="w3-half" style="padding-right: 8px;">
+									<p>
+										<label>Section Note <i style="color: blue;">(Will be visible to student)</i></label>
+										<textarea style="resize: none;" rows="4" id="sectionnote" class="w3-input w3-border _sidebar" type="text" name="sectiondetails[0].sectionnote"></textarea>
+									</p>
+								</div>
+							</div>
+
+
+							<div class="w3-row">
+								<div class="w3-container w3-twothird">
+									<label style="color: blue;">Number of Questions and Marks details of the section</label>
+									<table class="w3-table w3-bordered" style="border: 1px solid black;">
+										<tr style="border: 1px solid black;">
+											<td style="vertical-align: middle;">Total Number of Question in this section</td>
+											<td style="vertical-align: middle;"><input type="number" min="1" style="width: 80px;" id="totalquestion" onchange="dropDownValueHandler(this)" class="w3-input w3-border" name="sectiondetails[0].totalquestion"/></td>
+										</tr>
+										<tr style="border: 1px solid black;">
+											<td style="vertical-align: middle;">Number of Questions required to be Attempted</td>
+											<td style="vertical-align: middle;"><input type="number" min="1" style="width: 80px;" id="attemptquestion" class="w3-input w3-border" name="sectiondetails[0].attemptquestion"/></td>
+										</tr>
+										<tr style="border: 1px solid black;">
+											<td style="vertical-align: middle;">Section Marks</td>
+											<td style="vertical-align: middle;"><input id="sectionmarks" class="w3-input w3-border" style="width: 80px;" value="1" type="number" min="1" step=".5" name="sectiondetails[0].sectionmarks"/></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+
+							<div class="w3-row">
+								<div class="w3-right" style="width: 40px;">
+									<i title="Add more section." class="fa fa-plus" style="font-size: 20px; cursor: pointer;" onclick="appendRowSection();"></i>
+								</div>
+								<div class="w3-right" style="width: 40px;">
+									<i title="Delete this section." class="fa fa-trash" style="font-size: 20px; cursor: pointer; color: red;" onclick="deleteRowSection(this);"></i>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="myModal" class="w3-modal">
+		<div class="w3-modal-content">
+			<header class="w3-container w3-theme-d4">
+				<h4>Description</h4>
+			</header>
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				<textarea id="modalText" rows="5" style="width: 100%; background-color:#e8e9f9;"></textarea>
+			</div>
+			<footer class="w3-container w3-theme-d4">
+				<div class="w3-row">
+					<div class="w3-right" style="width: 100px; padding: 8px 8px;">
+						<input class="w3-button w3-green" type="button" id="check" value="&checkmark;" style="width:100%;"/>
+					</div>
+					<div class="w3-right" style="width: 100px; padding: 8px 8px;">
+						<input class="w3-button w3-red" type="button" id="cross" value="&times;" style="width:100%;"/>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	
+	</form>
+	<script src="/js/templates/addTemplate.js"></script>
+	<script>
+		$(function(){
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
+</div>

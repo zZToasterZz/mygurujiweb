@@ -1,0 +1,694 @@
+<div th:fragment="courseDetails">
+	<!-- Sidebar -->
+	<div class="w3-sidebar w3-bar-block w3-theme-l5 w3-card w3-animate-left" style="display:none; margin-top: 17px;" id="mySidebar">
+	  	<button style="text-align: right;" onclick="w3_close()" class="w3-bar-item w3-large"><i class="fa fa-times-circle-o"></i></button>
+		<a href="#" class="w3-bar-item w3-button" style="font-size: 18px;"><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;Show Attendance</a>
+		<a href="#" class="w3-bar-item w3-button" style="font-size: 18px;"><i class="fa fa-tasks"></i>&nbsp;&nbsp;View Assignments</a>
+		<a href="#" class="w3-bar-item w3-button" style="font-size: 18px;"><i class="fa fa-external-link"></i>&nbsp;&nbsp;Goto Unit</a>
+		<a href="#" class="w3-bar-item w3-button" style="padding-left: 50px;"><i class="fa fa-share"></i>&nbsp;Introductory Concepts</a>
+		<a href="#" class="w3-bar-item w3-button" style="padding-left: 50px;"><i class="fa fa-share"></i>&nbsp;C Fundamentals</a>
+		<a href="#" class="w3-bar-item w3-button" style="padding-left: 50px;"><i class="fa fa-share"></i>&nbsp;Operators and Expressions</a>
+		<a href="#" class="w3-bar-item w3-button" style="padding-left: 50px;"><i class="fa fa-share"></i>&nbsp;Data Input and output statements</a>
+		<a href="#" class="w3-bar-item w3-button" style="padding-left: 50px;"><i class="fa fa-share"></i>&nbsp;Control Statements</a>
+		<a href="#" class="w3-bar-item w3-button" style="padding-left: 50px;"><i class="fa fa-share"></i>&nbsp;Functions</a>
+		<a href="#" class="w3-bar-item w3-button" style="padding-left: 50px;"><i class="fa fa-share"></i>&nbsp;Arrays</a>
+		<a href="#" class="w3-bar-item w3-button" style="padding-left: 50px;"><i class="fa fa-share"></i>&nbsp;Pointers</a>
+		<a href="#" class="w3-bar-item w3-button" style="padding-left: 50px;"><i class="fa fa-share"></i>&nbsp;Structures and unions</a>
+		<a href="#" class="w3-bar-item w3-button" style="padding-left: 50px;"><i class="fa fa-share"></i>&nbsp;Files</a>
+		<a href="#" class="w3-bar-item w3-button" style="padding-left: 50px;"><i class="fa fa-share"></i>&nbsp;C Preprocessor</a>
+		<a href="#" class="w3-bar-item w3-button" style="padding-left: 50px;"><i class="fa fa-share"></i>&nbsp;Graphics using C</a>
+	</div>
+	
+	<!-- Page Content -->
+	<div class="w3-theme-l1">
+	  <div class="w3-container">
+<!-- 	  	<button class="w3-button w3-large" style="padding-bottom: 0px;" onclick="w3_open()"><i class="material-icons">reorder</i><h3 style="margin-top: 0px; margin-bottom: 0px;">Programming Fundamentals</h3></button> -->
+	  	<h2><img src="/images/icons/hide-grader-panel.png" style="padding-bottom: 6px; cursor: pointer;"  onclick="w3_open()">&nbsp;&nbsp;Programming Fundamentals</h2>
+	  </div>
+	</div>
+	
+	<div class="w3-container">
+		<div class="w3-container">
+			<div class="w3-row">
+				<div class="w3-bar">
+					<div class="w3-bar-item"><h4>About Course</h4></div>
+					<div class="w3-bar-item w3-right"><button onclick="document.getElementById('addSection').style.display='block'" class="w3-button w3-blue">Add Section</button></div>
+				</div>
+				<div class="w3-container">
+					<p>C is a powerful general-purpose programming language. It can be used to develop software like operating systems, databases, compilers, and so on. C programming is an excellent language to learn to program for beginners.</p>
+					<p>This course of C will guide you to learn C programming one step at a time.</p>
+				</div>
+			</div>
+			<div class="w3-row">
+				<div class="w3-container">
+					<div class="w3-third" style="border-right: 2px solid black">
+						<div class="w3-container">
+							<h5><u>Text Books:</u></h5>
+							<div class="w3-half">
+								<p>Programming with C : </p>
+								<p>Let us C : </p>
+								<p>&nbsp;</p>
+								<p>&nbsp;</p>
+							</div>
+							<div class="w3-half">
+								<p>Bryon Gottfried</p>
+								<p>Yashwant Kanetkar</p>
+							</div>
+						</div>
+					</div>
+					<div class="w3-third">
+						<div class="w3-container">
+							<h5><u>Reference Books:</u></h5>
+							<div class="w3-half">
+								<p>C Programming :</p>
+								<p>Programming in ANCI C :</p>
+								<p>Graphics under C :</p>
+								<p>Pointers in C :</p>
+							</div>
+							<div class="w3-half">
+								<p>Dennis Ritche</p>
+								<p>Balgurusamy</p>
+								<p>Yashwant Kanetkar</p>
+								<p>Yashwant Kanetkar</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="w3-row">
+				<div class="w3-container w3-padding">
+					<div class="w3-card-4 w3-theme-l3">
+						<div class="w3-bar w3-black">
+							<a class="w3-bar-item">Unit 1: Introductory Concepts</a>
+							<a onclick="document.getElementById('addSubSection').style.display='block'" class="w3-bar-item w3-button w3-right w3-blue">Add Sub-Sections</a>
+						</div>
+						<div class="w3-container">
+							<p>In this chapter, you will learn about keywords; reserved words in C programming that are part of the syntax. Also, you will learn about identifiers and how to name them. A character set is a set of alphabets, letters and some special characters that are valid in C language.</p>
+						</div>
+						
+						<div class="w3-container">
+							<div class="w3-row">
+								<div class="w3-bar w3-grey">
+									<a class="w3-bar-item">Unit 1.1: Overview of programming and programming languages</a>
+									<a onclick="document.getElementById('addContent').style.display='block'" class="w3-bar-item w3-button w3-right w3-blue">Add Content</a>
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-container w3-threequarter">
+									<p>Programming Language is one kind of language. It is intermediate between human and system. Programming is one type of Language. There are different typs of   programming Languages we are using. Each programming language has some different syntax. Syntax is a some set of rules and regulations.</p>
+								</div>
+								<div class="w3-container w3-quarter">
+									<h3 style="text-align: center;">2</h3>
+									<h4 style="text-align: center;">Number of Lectures</h4>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row">
+								<div class="w3-container w3-third">
+									
+								</div>
+								<div class="w3-container w3-third">
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;Class Notes</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">3</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-file-video-o"></i>&nbsp;&nbsp;&nbsp;Recorded Class Videos</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">0</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-youtube-play"></i>&nbsp;&nbsp;&nbsp;Youtube Videos Links</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">4</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;Scheduled Live Classes</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">2</a>
+										</div>
+									</div>
+									<br>
+								</div>
+								<div class="w3-container w3-third">
+								
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="w3-container">
+							<div class="w3-row">
+								<div class="w3-bar w3-grey">
+									<a class="w3-bar-item">Unit 1.2: Types of programming languages</a>
+									<a class="w3-bar-item w3-button w3-right w3-blue">Add Content</a>
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-container w3-threequarter">
+									<p>Programming Language is one kind of language. It is intermediate between human and system. Programming is one type of Language. There are different typs of   programming Languages we are using. Each programming language has some different syntax. Syntax is a some set of rules and regulations.</p>
+								</div>
+								<div class="w3-container w3-quarter">
+									<h3 style="text-align: center;">3</h3>
+									<h4 style="text-align: center;">Number of Lectures</h4>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row">
+								<div class="w3-container w3-third">
+									
+								</div>
+								<div class="w3-container w3-third">
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;Class Notes</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">4</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-file-video-o"></i>&nbsp;&nbsp;&nbsp;Recorded Class Videos</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">2</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-youtube-play"></i>&nbsp;&nbsp;&nbsp;Youtube Videos Links</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">3</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;Scheduled Live Classes</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">1</a>
+										</div>
+									</div>
+									<br>
+								</div>
+								<div class="w3-container w3-third">
+								
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						<div class="w3-container">
+							<div class="w3-row">
+								<div class="w3-bar w3-grey">
+									<a class="w3-bar-item">Unit 1.3: Introduction to C</a>
+									<a class="w3-bar-item w3-button w3-right w3-blue">Add Content</a>
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-container w3-threequarter">
+									<p>Programming Language is one kind of language. It is intermediate between human and system. Programming is one type of Language. There are different typs of   programming Languages we are using. Each programming language has some different syntax. Syntax is a some set of rules and regulations.</p>
+								</div>
+								<div class="w3-container w3-quarter">
+									<h3 style="text-align: center;">2</h3>
+									<h4 style="text-align: center;">Number of Lectures</h4>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row">
+								<div class="w3-container w3-third">
+									
+								</div>
+								<div class="w3-container w3-third">
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;Class Notes</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">3</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-file-video-o"></i>&nbsp;&nbsp;&nbsp;Recorded Class Videos</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">1</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-youtube-play"></i>&nbsp;&nbsp;&nbsp;Youtube Videos Links</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">5</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;Scheduled Live Classes</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">0</a>
+										</div>
+									</div>
+									<br>
+								</div>
+								<div class="w3-container w3-third">
+								
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	<div class="w3-container">
+		<div class="w3-container">
+			<div class="w3-row">
+				<div class="w3-row">
+					<div class="w3-container w3-padding">
+						<div class="w3-card-4 w3-theme-l3">
+							<div class="w3-bar w3-teal">
+								<a class="w3-bar-item">Assignment 1</a>
+								<a class="w3-bar-item w3-button w3-right">View Assignment</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	<div class="w3-container">
+		<div class="w3-container">
+			<div class="w3-row">
+				<div class="w3-container w3-padding">
+					<div class="w3-card-4 w3-theme-l3">
+						<div class="w3-bar w3-black">
+							<a class="w3-bar-item">Unit 2: C Fundamentals</a>
+							<a class="w3-bar-item w3-button w3-right w3-blue">Add Sub-Sections</a>
+						</div>
+						<div class="w3-container">
+							<p>In this chapter, you will learn about keywords; reserved words in C programming that are part of the syntax. Also, you will learn about identifiers and how to name them. A character set is a set of alphabets, letters and some special characters that are valid in C language.</p>
+						</div>
+						
+						<div class="w3-container">
+							<div class="w3-row">
+								<div class="w3-bar w3-grey">
+									<a class="w3-bar-item">Unit 2.1: C Keywords and Identifiers</a>
+									<a class="w3-bar-item w3-button w3-right w3-blue">Add Content</a>
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-container w3-threequarter">
+									<p>Programming Language is one kind of language. It is intermediate between human and system. Programming is one type of Language. There are different typs of   programming Languages we are using. Each programming language has some different syntax. Syntax is a some set of rules and regulations.</p>
+								</div>
+								<div class="w3-container w3-quarter">
+									<h3 style="text-align: center;">4</h3>
+									<h4 style="text-align: center;">Number of Lectures</h4>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row">
+								<div class="w3-container w3-third">
+									
+								</div>
+								<div class="w3-container w3-third">
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;Class Notes</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">3</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-file-video-o"></i>&nbsp;&nbsp;&nbsp;Recorded Class Videos</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">0</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-youtube-play"></i>&nbsp;&nbsp;&nbsp;Youtube Videos Links</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">4</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;Scheduled Live Classes</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">2</a>
+										</div>
+									</div>
+									<br>
+								</div>
+								<div class="w3-container w3-third">
+								
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="w3-container">
+							<div class="w3-row">
+								<div class="w3-bar w3-grey">
+									<a class="w3-bar-item">Unit 2.2: Variables, Constants and Literals</a>
+									<a class="w3-bar-item w3-button w3-right w3-blue">Add Content</a>
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-container w3-threequarter">
+									<p>Programming Language is one kind of language. It is intermediate between human and system. Programming is one type of Language. There are different typs of   programming Languages we are using. Each programming language has some different syntax. Syntax is a some set of rules and regulations.</p>
+								</div>
+								<div class="w3-container w3-quarter">
+									<h3 style="text-align: center;">3</h3>
+									<h4 style="text-align: center;">Number of Lectures</h4>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row">
+								<div class="w3-container w3-third">
+									
+								</div>
+								<div class="w3-container w3-third">
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;Class Notes</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">4</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-file-video-o"></i>&nbsp;&nbsp;&nbsp;Recorded Class Videos</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">2</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-youtube-play"></i>&nbsp;&nbsp;&nbsp;Youtube Videos Links</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">3</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;Scheduled Live Classes</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">1</a>
+										</div>
+									</div>
+									<br>
+								</div>
+								<div class="w3-container w3-third">
+								
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						<div class="w3-container">
+							<div class="w3-row">
+								<div class="w3-bar w3-grey">
+									<a class="w3-bar-item">Unit 2.3: C Data Types</a>
+									<a class="w3-bar-item w3-button w3-right w3-blue">Add Content</a>
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-container w3-threequarter">
+									<p>Programming Language is one kind of language. It is intermediate between human and system. Programming is one type of Language. There are different typs of   programming Languages we are using. Each programming language has some different syntax. Syntax is a some set of rules and regulations.</p>
+								</div>
+								<div class="w3-container w3-quarter">
+									<h3 style="text-align: center;">2</h3>
+									<h4 style="text-align: center;">Number of Lectures</h4>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row">
+								<div class="w3-container w3-third">
+									
+								</div>
+								<div class="w3-container w3-third">
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;Class Notes</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">3</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-file-video-o"></i>&nbsp;&nbsp;&nbsp;Recorded Class Videos</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">1</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-youtube-play"></i>&nbsp;&nbsp;&nbsp;Youtube Videos Links</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">5</a>
+										</div>
+									</div>
+									<br>
+									<div class="w3-row">
+										<div class="w3-bar">
+											<a class="w3-bar-item"><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;Scheduled Live Classes</a>
+											<a class="w3-bar-item w3-button w3-right w3-blue w3-round-xxlarge">0</a>
+										</div>
+									</div>
+									<br>
+								</div>
+								<div class="w3-container w3-third">
+								
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+<!-- Add Section Modal -->
+	
+	<div id="addSection" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px">
+		
+			<header class="w3-container w3-teal">
+				<span onclick="document.getElementById('addSection').style.display='none'" class="w3-button w3-large w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+				<h4>Add Section</h4>
+			</header><br>
+	
+			<div class="w3-row">
+				<div class="w3-container w3-half">
+					<select id="selectSectionType" class="w3-select" name="addSectionType">
+						<option value="0" disabled selected>Select type of section to be added</option>
+						<option value="courseIntro">Course Introduction</option>
+						<option value="unitSection">Unit Section</option>
+						<option value="assignmentSection">Assignment Section</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="w3-container w3-section courseIntro box">
+				<div class="w3-row">
+				    <label>Course Introduction</label>
+				    <textarea class="w3-input w3-border" style="resize: none" rows="5"></textarea>
+				</div>
+				<div class="w3-row">
+					<div class="w3-container w3-half">
+						<h5>Add Text Books:</h5>
+						<p><label>Book Title</label>
+				    	<input class="w3-input w3-border" type="text"></input></p>
+				    	<p><label>Author Name</label>
+				    	<input class="w3-input w3-border" type="text"></input></p>
+					</div>
+					<div class="w3-container w3-half">
+						<h4>Add Reference Books:</h4>
+						<p><label>Book Title</label>
+				    	<input class="w3-input w3-border" type="text"></input></p>
+				    	<p><label>Author Name</label>
+				    	<input class="w3-input w3-border" type="text"></input></p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="w3-container w3-section unitSection box">
+				<div class="w3-row">
+				    <p><label>Unit Title</label>
+				    <input class="w3-input w3-border" type="text"></input></p>
+				    <p><label>Unit Introduction</label>
+				    <textarea class="w3-input w3-border" style="resize: none" rows="5"></textarea></p>
+				</div>
+			</div>
+			
+			<div class="w3-container w3-section assignmentSection box">
+				<div class="w3-row">
+				    <p><label>Assignment Title</label>
+				    <input class="w3-input w3-border" type="text"></input></p>
+				    <p><label>Assignment Description</label>
+				    <textarea class="w3-input w3-border" style="resize: none" rows="5"></textarea></p>
+				</div>
+			</div>
+			
+			<div class="w3-container">
+				<button class="w3-button w3-green w3-section w3-padding" type="submit">Save</button>
+				<button class="w3-button w3-red" onclick="document.getElementById('addSection').style.display='none'" type="button">Cancel</button>
+			</div>
+		</div>
+		<script>
+		$(document).ready(function(){
+		    $("#selectSectionType").change(function(){
+		        $(this).find("option:selected").each(function(){
+		            var optionValue = $(this).attr("value");
+		            if(optionValue){
+		                $(".box").not("." + optionValue).hide();
+		                $("." + optionValue).show();
+		            } else{
+		                $(".box").hide();
+		            }
+		        });
+		    }).change();
+		});
+		</script>
+	</div>
+<!-- End of Add Section Model -->
+
+<!-- Add Sub-Section Modal -->
+	
+	<div id="addSubSection" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px">
+		
+			<header class="w3-container w3-teal">
+				<span onclick="document.getElementById('addSubSection').style.display='none'" class="w3-button w3-large w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+				<h4>Add Sub-Section</h4>
+			</header><br>
+	
+			<div class="w3-container">
+				<div class="w3-row">
+				    <p><label>Sub-Section Title</label>
+				    <input class="w3-input w3-border" type="text"></input></p>
+				    <p><label>Sub-Section Introduction</label>
+				    <textarea class="w3-input w3-border" style="resize: none" rows="5"></textarea></p>
+				    <p><label>Number of Lectures Required to Complete This Sub-Section</label>
+				    <input class="w3-input w3-border" type="text"></input></p>
+				</div>
+			</div>
+			
+			<div class="w3-container">
+				<button class="w3-button w3-green w3-section w3-padding" type="submit">Save</button>
+				<button class="w3-button w3-red" onclick="document.getElementById('addSubSection').style.display='none'" type="button">Cancel</button>
+			</div>
+		</div>
+	</div>
+<!-- End of Add Sub-Section Model -->
+
+
+<!-- Add Content Modal -->
+	
+	<div id="addContent" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px">
+		
+			<header class="w3-container w3-teal">
+				<span onclick="document.getElementById('addContent').style.display='none'" class="w3-button w3-large w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+				<h4>Add Content to Unit 1</h4>
+			</header><br>
+	
+			<div class="w3-row">
+				<div class="w3-container w3-half">
+					<select id="selectSectionType" class="w3-select" name="addSectionType">
+						<option value="0" disabled selected>Select type of content to be added</option>
+						<option value="classNote">Class Notes</option>
+						<option value="recordedClassVideos">Recorded Class Videos</option>
+						<option value="youtubeVideoLink">Youtube Videos Link</option>
+						<option value="scheduleLiveClass">Schedule Live Class</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="w3-container w3-section courseIntro box">
+				<div class="w3-row">
+				    <label>Course Introduction</label>
+				    <textarea class="w3-input w3-border" style="resize: none" rows="5"></textarea>
+				</div>
+				<div class="w3-row">
+					<div class="w3-container w3-half">
+						<h5>Add Text Books:</h5>
+						<p><label>Book Title</label>
+				    	<input class="w3-input w3-border" type="text"></input></p>
+				    	<p><label>Author Name</label>
+				    	<input class="w3-input w3-border" type="text"></input></p>
+					</div>
+					<div class="w3-container w3-half">
+						<h4>Add Reference Books:</h4>
+						<p><label>Book Title</label>
+				    	<input class="w3-input w3-border" type="text"></input></p>
+				    	<p><label>Author Name</label>
+				    	<input class="w3-input w3-border" type="text"></input></p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="w3-container w3-section unitSection box">
+				<div class="w3-row">
+				    <p><label>Unit Title</label>
+				    <input class="w3-input w3-border" type="text"></input></p>
+				    <p><label>Unit Introduction</label>
+				    <textarea class="w3-input w3-border" style="resize: none" rows="5"></textarea></p>
+				</div>
+			</div>
+			
+			<div class="w3-container w3-section assignmentSection box">
+				<div class="w3-row">
+				    <p><label>Assignment Title</label>
+				    <input class="w3-input w3-border" type="text"></input></p>
+				    <p><label>Assignment Description</label>
+				    <textarea class="w3-input w3-border" style="resize: none" rows="5"></textarea></p>
+				</div>
+			</div>
+			
+			<div class="w3-container">
+				<button class="w3-button w3-green w3-section w3-padding" type="submit">Save</button>
+				<button class="w3-button w3-red" onclick="document.getElementById('addContent').style.display='none'" type="button">Cancel</button>
+			</div>
+		</div>
+		<script>
+		$(document).ready(function(){
+		    $("#selectContentType").change(function(){
+		        $(this).find("option:selected").each(function(){
+		            var optionValue = $(this).attr("value");
+		            if(optionValue){
+		                $(".box").not("." + optionValue).hide();
+		                $("." + optionValue).show();
+		            } else{
+		                $(".box").hide();
+		            }
+		        });
+		    }).change();
+		});
+		</script>
+	</div>
+<!-- End of Add Content Model -->
+	
+	
+	
+	
+	
+</div>

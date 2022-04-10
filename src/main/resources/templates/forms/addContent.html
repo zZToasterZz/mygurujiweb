@@ -1,0 +1,136 @@
+<div th:fragment="addContent">
+	<div id="addContent" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px">
+		
+			<header class="w3-container w3-teal">
+				<span onclick="document.getElementById('addContent').style.display='none'" class="w3-button w3-large w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+				<h4><img src="/images/icons/add-content32.png">&nbsp;&nbsp;Add Content</h4>
+			</header><br>
+			
+			<div class="w3-row">
+				<div class="w3-container w3-half">
+					<p>
+						<select id="contentAddPos" class="w3-select" name="sectionAfter">
+							<option value="0" disabled selected>Select Where to Add Content</option>
+							<option value="1">At Course Level</option>
+							<option value="2">At Unit Level</option>
+							<option value="3">At Sub-Unit Level</option>
+						</select>
+					</p>
+					<p>
+						<select style="display: none" id="atUnit" class="w3-select" name="sectionAfter">
+							<option value="0" disabled selected>Select Unit</option>
+							<option value="1">Unit1: Introductory Concepts</option>
+							<option value="2">Unit2: C Fundamentals</option>
+						</select>
+					</p>
+					<p>
+						<select style="display: none" id="atSubUnit" class="w3-select" name="sectionAfter">
+							<option value="0" disabled selected>Select Sub-Unit</option>
+							<option value="1">Unit 1.1 Overview of Programming and Programming Languages</option>
+							<option value="2">Unit 1.2 Types of Programming Languages</option>
+							<option value="3">Unit 1.3 Introduction to C</option>
+						</select>
+					</p>
+					<p>
+						<select style="display: none" id="selectContentType" class="w3-select" name="selectContentType">
+							<option value="0" disabled selected>Select type of content to be added</option>
+							<option value="1">Class Notes</option>
+							<option value="2">Recorded Class Videos</option>
+							<option value="3">Youtube Videos Link</option>
+						</select>
+					</p>
+					
+				</div>
+			</div>
+			<div id="selectDoc" class="w3-container" style="display: none">
+				<fieldset>
+					<legend>Select Document</legend>
+					<p><label>Name</label>
+					<input class="w3-input w3-border" type="text"></p>
+					<p>Select document to be uploaded</p>
+					<button class="w3-button"><img src="/images/icons/folder-documents.png">&nbsp;&nbsp;Select File</button>
+				</fieldset>
+			</div>
+			<div id="selectVideo" class="w3-container" style="display: none">
+				<fieldset>
+					<legend>Select Video File</legend>
+					<p><label>Name</label>
+					<input class="w3-input w3-border" type="text"></p>
+					<p>Select File to be uploaded</p>
+					<button class="w3-button"><img src="/images/icons/folder-documents.png">&nbsp;&nbsp;Select File</button>
+				</fieldset>
+			</div>
+			<div id="videoLink" class="w3-container" style="display: none">
+				<fieldset>
+					<legend>Provide Video Link</legend>
+					<p><label>Give the link of Video</label>
+					<input class="w3-input w3-border" type="text"></p>
+				</fieldset>
+			</div>
+			
+			
+			
+			
+			<div class="w3-container">
+				<button class="w3-button w3-green w3-section w3-padding" type="submit">Save</button>
+				<button class="w3-button w3-red" onclick="document.getElementById('addContent').style.display='none'" type="button">Cancel</button>
+			</div>
+		</div>
+		<script>
+		$(document).ready(function(){
+		    $("#selectContentType").change(function(){
+		        $(this).find("option:selected").each(function(){
+		            var optionValue = $(this).attr("value");
+		            if(optionValue){
+		                $(".box").not("." + optionValue).hide();
+		                $("." + optionValue).show();
+		            } else{
+		                $(".box").hide();
+		            }
+		        });
+		    }).change();
+		    
+		    $('#contentAddPos').on('change', function(){
+		    	if(this.value == '1'){
+		    		$('#selectContentType').show();
+		    		$('#atUnit').hide();
+		    		$('#atSubUnit').hide();
+		    	} else if(this.value == '2') {
+		    		$('#atUnit').show();
+		    		$('#atSubUnit').hide();
+		    		$('#selectContentType').show();
+		    	} else if(this.value == '3') {
+		    		$('#atUnit').show();
+		    		$('#atSubUnit').show();
+		    		$('#selectContentType').show();
+		    	} else {
+		    		$('#atUnit').hide();
+		    		$('#atSubUnit').hide();
+		    		$('#selectContentType').hide();
+		    	}
+		    });
+		    
+		    $('#selectContentType').on('change', function(){
+		    	if(this.value == '1'){
+		    		$('#selectDoc').show();
+		    		$('#selectVideo').hide();
+		    		$('#videoLink').hide();
+		    	} else if(this.value == '2') {
+		    		$('#selectDoc').hide();
+		    		$('#selectVideo').show();
+		    		$('#videoLink').hide();
+		    	} else if(this.value == '3') {
+		    		$('#selectDoc').hide();
+		    		$('#selectVideo').hide();
+		    		$('#videoLink').show();
+		    	} else {
+		    		$('#selectDoc').hide();
+		    		$('#selectVideo').hide();
+		    		$('#videoLink').hide();
+		    	}
+		    });
+		});
+		</script>
+	</div>
+</div>

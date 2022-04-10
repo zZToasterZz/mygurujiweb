@@ -1,0 +1,101 @@
+<div th:fragment="createSubUnits">
+<form method="post" id="subunitform" enctype="application/x-www-form-urlencoded">
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;">
+			  		<img src="/images/icons/createcourseplan.png" style="width: 35px;">
+			  		&nbsp;&nbsp;Create Sub Units
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-row">
+					<div>
+							<div class="divTable">
+								<div class="divTr">
+									<div class="d1">
+										<h5 style="margin-bottom: 0px; font-weight: bold; float:left;">Plan ID:&nbsp;</h5>
+										<input readonly class="w3-input w3-border" id="planid" th:value="${planid}" type="text" style="margin-bottom: 0px;width:60px;">
+										<input readonly th:value="${createdby}" id="createdby" type="text" style="display:none;">
+									</div>
+									<div class="d2">
+										<!-- <button class="w3-button w3-square w3-theme-d5 w3-large" type="submit">Create</button> -->
+										<button onclick="ajaxPost();return false;">Save</button>
+									</div>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row-padding">
+								<div class="w3-half">
+									<p>
+										<label>Unit</label>
+										<select onchange="unitChange();return false;" id="unitid" class="w3-input w3-border">
+											<option value="" disabled selected style="display:none;"></option>
+											<th:block th:each="unit : ${units}">
+												<option th:value="${unit.id}">
+													<column th:text="${unit.id}"></column>
+													:
+													<column th:text="${unit.title}"></column>
+												</option>
+											</th:block>
+										</select>
+									</p>
+								</div>
+							</div>
+							<div>
+							<div style="float:left; margin-right:60px;">
+								<div class="d1"><h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Sub Units</h5></div>
+								<hr class="hrline">
+								<table id="subUnitTable">
+									<thead>
+										<th>Title</th>
+										<th>Description</th>
+										<th style="display:none;">Created by</th>
+										<th style="display:none;">Unit ID</th>
+										<th></th>
+										<th></th>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<input type="text" name="subunit[0].subunittitle"/>
+											</td>
+											<td> 
+												<input onclick="openDescrModal(this);return false;" type="text" name="subunit[0].subunitdescr"/>
+											</td>
+											<td>
+												<input style="display:none;" type="text" name="subunit[0].createdby"/>
+											</td>
+											<td>
+												<input style="display:none;" type="text" name="subunit[0].unitid"/>
+											</td>
+											<td>
+												<input type="button" value="+" onclick="addRowNowSubUnit();"/>
+											</td>
+											<td>
+												<input type="button" value="-" onclick="delThisRowSubUnit();"/>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="myModal" class="modal">
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<textarea id="modalText" rows="5" cols="60" style="background-color:#e8e9f9;"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+		<script src="/js/coursePlan/createSubUnits.js"></script>
+	</form>
+</div>

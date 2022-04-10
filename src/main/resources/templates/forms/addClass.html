@@ -1,0 +1,68 @@
+<div th:fragment="addCourse">
+<form id="addCourseForm" action="#" th:object="${courseCreate}" th:action="@{/administration/managecourses/submitCourse}" method="post">
+	<div th:if="${courseCreate.coursecode != null}">
+		<div id="addCourse" class="w3-modal 11" style="display: block">
+			
+			<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px">
+			
+				<header class="w3-container w3-theme-d5">
+					<span onclick="document.getElementById('addCourse').style.display='none'" class="w3-button w3-large w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+					<h4><img src="/images/icons/course.png" style="width: 32px">&nbsp;&nbsp;Edit Course Details</h4>
+				</header><br>
+		
+				<div class="w3-row">
+					<div class="w3-container w3-half">
+						<p><label>Course Code</label>
+				    	<input th:field="*{coursecode}" id="saveCourseCode" class="w3-input w3-border" type="text"></input></p>
+				    	<p><label>Course Title</label>
+				    	<input th:field="*{coursetitle}" id="saveCourseTitle" class="w3-input w3-border" type="text"></input></p>
+					</div>
+					<div class="w3-container w3-half">
+						<p><label>Course Summary</label>
+					    <textarea th:field="*{coursedescr}" id="saveCourseDescr" class="w3-input w3-border" style="resize: none" rows="5"></textarea></p>
+					</div>
+				</div>
+				
+				<div class="w3-container">
+					<button class="w3-btn w3-theme-d5" type="submit"><img src="/images/icons/save.png" style="width: 18px;">&nbsp;&nbsp;Save</button>
+					<button class="w3-btn w3-red" onclick="document.getElementById('addCourse').style.display='none'" type="button">Cancel</button>
+				</div>
+			</div>
+			<input type="hidden" th:field="*{courseid}">
+			<input type="hidden" th:field="*{createdby}">
+		</div>
+	</div>
+	<div th:unless="${courseCreate.coursecode != null}">
+		<div id="addCourse" class="w3-modal 22">
+			
+			<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px">
+			
+				<header class="w3-container w3-theme-d5">
+					<span onclick="document.getElementById('addCourse').style.display='none'" class="w3-button w3-large w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+					<h4><img src="/images/icons/course.png" style="width: 32px">&nbsp;&nbsp;Add Course</h4>
+				</header><br>
+		
+				<div class="w3-row">
+					<div class="w3-container w3-half">
+						<p><label>Course Code</label>
+				    	<input th:field="*{coursecode}" id="saveCourseCode" class="w3-input w3-border" type="text"></input></p>
+				    	<p><label>Course Title</label>
+				    	<input th:field="*{coursetitle}" id="saveCourseTitle" class="w3-input w3-border" type="text"></input></p>
+					</div>
+					<div class="w3-container w3-half">
+						<p><label>Course Summary</label>
+					    <textarea th:field="*{coursedescr}" id="saveCourseDescr" class="w3-input w3-border" style="resize: none" rows="5"></textarea></p>
+					</div>
+				</div>
+				
+				<div class="w3-container">
+					<button class="w3-btn w3-theme-d5" type="submit"><img src="/images/icons/save.png" style="width: 18px;">&nbsp;&nbsp;Save</button>
+					<button class="w3-btn w3-red" onclick="document.getElementById('addCourse').style.display='none'" type="button">Cancel</button>
+				</div>
+			</div>
+			<input type="hidden" th:field="*{courseid}">
+			<input type="hidden" th:field="*{createdby}">
+		</div>
+	</div>
+</form>
+</div>

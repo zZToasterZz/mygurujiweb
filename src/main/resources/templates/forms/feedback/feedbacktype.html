@@ -1,0 +1,132 @@
+<div th:fragment="feedbacktype">
+<style>
+ul, #myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);  
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+</style>
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+			  		<img src="/images/icons/feedbacktype.png" style="width: 40px;">
+			  		&nbsp;&nbsp;Feedback Types
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-border w3-round-large w3-white" style="padding-bottom: 16px;">
+					<div class="w3-row">
+					    <a href="javascript:void(0)" onclick="opentab(event, 'create');">
+					    	<div class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red"><h5>Create Feedback Type</h5></div>
+					    </a>
+					    <a href="javascript:void(0)" onclick="opentab(event, 'view');">
+					    	<div class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding"><h5>View Feedback Types</h5></div>
+					    </a>
+					</div>
+					<div class="tab" id="create">
+						<div class="w3-row w3-padding">
+							<div class="w3-row">
+								<div class="w3-half">
+									<label style="font-weight: bolder;">Type Name</label>
+									<input id="typename" class="w3-input w3-border" style="width:95%">
+								</div>
+								<div class="w3-half">
+									<label style="font-weight: bolder;">Parent Type</label>
+									<select id="parenttype" onchange="parentchange(event);" onload="parentchange(event);" class="w3-input w3-border" style="width:95%">
+										<option value="0">None</option>
+									</select>
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-half">
+									<br>
+									<div class="w3-button w3-black" onclick="createtype();">
+										<i class="fa fa-save"></i>
+										<span>Add Type</span>
+									</div>
+								</div>
+								<div class="w3-half">
+									<span style="color:red"><i>(Select a parent type to add the feedback as a child of the selected type.)</i></span>
+								</div>
+							</div>
+						</div>
+						<div class="w3-row w3-padding">
+							<div class="w3-row">
+								<label style="font-weight: bolder;">Structure Path</label>
+								<hr class="hrline">
+								<div id="path">
+									<!-- FEEDBACK PATH GENERATED HERE -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab" id="view" style="display:none;">
+						<div class="w3-row w3-padding">
+							<div class="w3-row">
+								<div class="w3-half">
+									<label style="font-weight: bolder;">Feedback Type</label>
+									<select id="parentnodes" class="w3-input w3-border" style="width:95%">
+									</select>
+								</div>
+								<div class="w3-half">
+									<br>
+									<div class="w3-button w3-black" onclick="viewstructure();">
+										<span>View Structure</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-row w3-padding">
+							<div class="w3-row">
+								<label style="font-weight: bolder;">Feedback Structure</label>
+								<hr class="hrline">
+								<div id="structure">
+									<!-- FEEDBACK STRUCTURE GENERATED HERE -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/js/feedback/feedbacktype.js"></script>
+</div>

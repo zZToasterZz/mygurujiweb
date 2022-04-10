@@ -1,0 +1,36 @@
+<div th:fragment="assignStudents">
+	<div style="margin-top: 16px; opacity: .95;padding-bottom:16px" class="w3-theme-l3">
+		<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+			<div class="w3-row" style="margin-top:20px;">
+				<div class="w3-row">
+					<div id="studResultSec" class="w3-responsive" style="display: none">
+						<table id="studList" class="display compact cell-border" style="width: 100%;">
+							<thead style="width: 100%;">
+								<tr class="w3-theme-d3">
+									<!-- <th>StudentID</th> -->
+									<th>Name</th>
+									<th>CampusID</th>
+									<th>Select&nbsp;&nbsp;<input type='checkbox' class='w3-check' onclick="checkAllStudents(this)" >
+									</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<div  id="studNoData" class="w3-responsive" style="display: none">
+						<div>
+							<p>No record found...</p>
+						</div>
+					</div>			
+				</div>
+				<hr class="hrline">			
+			</div>
+		</div>			
+		<input id="createdby" type="hidden" th:value="${createdby}"/>
+		<input id="assignmentID" type="hidden" th:value="${assignmentid}"/>
+		<input id="batchid" type="hidden" th:value="${batchid}"/>
+		<input id="courseid" type="hidden" th:value="${courseid}"/>
+		<input id="courseplanid" type="hidden" th:value="${courseplanid}"/>
+	</div>	
+
+<script src="/js/assignment/assignStudents.js"></script>	
+</div>

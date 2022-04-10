@@ -1,0 +1,232 @@
+<div th:fragment="printQuestionPaper">
+   <style>
+      .myMargin{
+      margin-top:6px;
+      }
+   </style>
+   <div class="w3-main" style="margin-left:20px;margin-right:20px;">
+      <!--<div style="position: relative;">
+         <div class="w3-theme-d2" style="opacity: .8">
+           <div class="w3-container">
+           	<h3 style="font-weight: 600;">
+           		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;" onclick="w3_open()">
+           		<img src="/images/icons/mapQuestions.svg" style="width: 35px;">
+           		&nbsp;&nbsp;View Question Paper
+           	</h3>
+           </div>
+         </div>
+         </div>-->
+      <div class="w3-container" style="margin-top: 16px; opacity: .95">
+         <div class="w3-card w3-theme-l3 w3-padding">
+            <div class="w3-row">
+               <div>
+                  <div class="w3-bar" style="z-index: 1">
+					<img src="/images/SRMU-Logo-New.png" width="100%" height="20%"/>
+                   <!-- <h2 class="w3-bar-item" style="text-align: center;margin-bottom: 20px; font-weight: bold;">Question Paper</h2>-->							
+                  </div>
+                     
+                     <hr class="hrline">
+                     <br/>
+					 <!--<h2 class="w3-bar-item" style="text-align: center;margin-bottom: 20px; font-weight: bold;text-decoration: underline;">END SEMESTER EXAMINATION</h2>-->
+                  <div class="w3-row-padding">
+                     <table border="1" cellpadding="10" style="border-collapse: collapse;width: 100%;">
+						<tr>
+							<td colspan="2" style="text-align: center;">
+								<p>
+									<label style="font-weight: bold; padding-top: 12px;">______ Semester (Session 2020-21) :</label><br>
+								</p>
+								
+							</td>
+						</tr>
+                        <tr>
+                           <td style="width: 45%;">
+                              <p>
+                                 <label style="font-weight: bold;">Course Title :</label> &nbsp;
+                                 <label th:text="${questionpaper.coursedescr}"></label>
+                              </p>
+                              
+                           </td>
+                           
+                           <td style="width: 45%;">
+                              <p>
+                                 <label style="font-weight: bold; padding-top: 12px;">Course Code :</label> &nbsp;
+                                 <label th:text="${questionpaper.courseid}"></label>
+                              </p>
+                              
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="width: 45%;">
+                              <p>
+                                 <label style="font-weight: bold;">Time : ____ Hours</label><br>                                 
+                              </p>
+                              
+                           </td>
+                           
+                           <td style="width: 45%;">
+                               <p>
+                                 <label style="font-weight: bold;">Maximum Marks :</label>
+                                 <label th:text="${maxmarks}"></label>
+                              </p>
+                              
+                           </td>
+                        </tr>                       
+                     </table>                     
+                  </div>
+                  <hr class="hrline">
+               </div>
+            </div>
+         </div>
+      </div>
+      <th:block th:each="section : ${questionpaper.sectiondetails}">
+         <div class='w3-container' style='margin-top: 16px; opacity: .95'>
+            <div class='w3-card w3-theme-d3 w3-padding'>
+               <div class='w3-row'>
+                  <div class='w3-container w3-round-large w3-white'>
+                     <div class='w3-row'>
+                        <div class='w3-threequarter' style='border:2px solid black;padding-left:10px;padding-bottom:10px;'>
+                           <h2 style='color: blue;'><span th:text="${section.title}"></span></h2>
+                           <h3 style='margin-bottom: 0px; margin-top: 0px;'>Section Details</h3>
+                           <label style='font-style: italic;' th:text="${section.descr}"></label><br>
+                           <hr class='hrline'>
+                           <label style='font-weight: bold;'>Total number of questions in this section :&nbsp;&nbsp;</label><label th:text="${section.totalquestion}"></label><br>
+                           <label style='font-weight: bold;'>Number of questions required to be attempted by students :&nbsp;&nbsp;</label><label th:text="${section.attemptquestion}"></label><br>
+                           <label style='font-weight: bold;'>Section Note for Students :&nbsp;&nbsp;</label><label th:text="${section.sectionnote}"></label><br>
+                        </div>
+                        <div class='w3-quarter w3-center'>
+                           <!--<div class='center1'>
+                              <h3 style='margin-bottom: 0px; margin-top: 0px; color: blue;'><span th:text="${section.sectionmarks}"></span></h3>
+                              </div>-->
+                           <div class='center'>
+                              <h4>
+                                 <label style='font-weight: bold;'>Section Total Marks : </label>&nbsp;
+                                 <span style='font-weight: bold;' th:text="${section.sectionmarks}"></span>
+                              </h4>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class='w3-container w3-round-large w3-white' style='margin-top: -8px;'>
+                     <h3 style='margin-bottom: 0px; margin-top: 0px;'>Questions</h3>
+                     <hr class='hrline'>
+                     <th:block th:each="question : ${section.questions}">
+                        <div th:switch="${question.questionid}">
+                           <div th:case="'0'">
+                              <!-- WHEN THERE ARE SUBQUESTIONS -->
+                              <div class="w3-row">
+                                 <div class="w3-bar">
+                                    <h5 class="w3-bar-item" style='color: green; margin-bottom: 0; margin-top:0;' th:text="'Question '+${questionStat.index + 1}"></h5>
+                                    <label class="w3-bar-item" th:text="'('+${question.questext}+')'" style="color: #001480;"></label>
+                                 </div>
+                              </div>
+                              <div class="w3-container">
+                                 <th:block th:each="subques : ${question.subquestions}">
+                                    <div class="w3-container">
+                                       <div class="w3-bar">
+                                          <h6 class="w3-bar-item" style='color: #001480; margin-bottom: 0; margin-top:0;' th:text="'Question '+${questionStat.index + 1}+'.'+${subquesStat.index + 1}"></h6>
+                                          <h6 class="w3-bar-item" style='margin-bottom: 0; margin-top:0;' th:text="'('+${subques.qtype}+')'"></h6>
+                                          <label class="w3-bar-item w3-right" th:text="${subques.marks}"></label>
+                                       </div>
+                                       <div class="w3-container">
+                                          <label><span th:utext="${subques.questext}"></span></label>
+                                       </div>
+                                    </div>
+                                 </th:block>
+                              </div>
+                              <hr class="hrqline">
+                           </div>
+                           <div th:case="*">
+                              <!-- WHEN THERE ARE NO SUBQUESTIONS -->
+                              <div class="w3-row w3-bordered">
+                                 <div class="w3-bar">
+                                    <h5 class="w3-bar-item" style='color: green; margin-bottom: 0; margin-top:0;'><span th:text="'Question '+${questionStat.index + 1}">Question 1 :&nbsp;</span></h5>
+                                    <div class="w3-row w3-right">
+                                       <b><span class="w3-bar-item w3-left" th:text="'Marks : '+${question.marks}"></span></b>
+                                    </div>
+                                 </div>
+                                 <div class="w3-container">
+                                    <div class="w3-container">
+                                       <div class="w3-padding">
+                                          <table border="0" cellpadding="10" style="border-collapse: collapse;background-color: antiquewhite;margin-top: 10px;width: 100%;">
+                                             <tr>
+                                                <td><label>Type :</label> <label class="w3-left" style="margin-bottom: 0; margin-top:0;" th:text="${question.qtype}"></label></td>
+                                                <td><label>Bloom's Level :</label> <label class="w3-bar-item w3-left" th:text="${question.blmtaxonomy}"></label></td>
+                                                <td><label>Difficulty :</label> <label style='margin-bottom: 0; margin-top:0;' th:text="${question.difficulty}"></label></td>
+                                                <!-- <td><label>Correct Answer : </label> <label class="w3-bar-item w3-left" th:text="${question.correctresponse}"></label></td> -->
+                                             </tr>
+                                          </table>
+                                       </div>
+                                       <label><span th:utext="${question.questext}"></span></label>
+                                       <th:block th:if="${question.qtype == 'MCQ'}">
+                                          <div style="background-color: white" class="w3-padding">
+                                             <div class="w3-row">
+                                                <div class="w3-row">
+                                                   <input onclick="return false;" type="checkbox" class="w3-check" style="width:15px; float:left;margin-right:5px;">
+                                                   <label th:utext="${question.opt1}" class="myMargin"></label>
+                                                </div>
+                                                <div class="w3-row">
+                                                   <input onclick="return false;" type="checkbox" class="w3-check" style="width:15px; float:left;margin-right:5px;">
+                                                   <label th:utext="${question.opt2}" class="myMargin" style="margin-top:6px;"></label>
+                                                </div>
+                                                <div class="w3-row">
+                                                   <input onclick="return false;" type="checkbox" class="w3-check" style="width:15px; float:left;margin-right:5px;">
+                                                   <label th:utext="${question.opt3}" class="myMargin"></label>
+                                                </div>
+                                                <div class="w3-row">
+                                                   <input onclick="return false;" type="checkbox" class="w3-check" style="width:15px; float:left;margin-right:5px;">
+                                                   <label th:utext="${question.opt4}" class="myMargin"></label>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </th:block>
+                                       <th:block th:if="${question.qtype == 'SCQ'}">
+                                          <div style="background-color: white" class="w3-padding">
+                                             <div class="w3-row">
+                                                <div class="w3-row">
+                                                   <input onclick="return false;" type="radio" class="w3-check" style="width:15px; float:left;margin-right:5px;">
+                                                   <label th:utext="${question.opt1}" class="myMargin"></label>
+                                                </div>
+                                                <div class="w3-row">
+                                                   <input onclick="return false;" type="radio" class="w3-check" style="width:15px; float:left;margin-right:5px;">
+                                                   <label th:utext="${question.opt2}" class="myMargin"></label>
+                                                </div>
+                                                <div class="w3-row">
+                                                   <input onclick="return false;" type="radio" class="w3-check" style="width:15px; float:left;margin-right:5px;">
+                                                   <label th:utext="${question.opt3}" class="myMargin"></label>
+                                                </div>
+                                                <div class="w3-row">
+                                                   <input onclick="return false;" type="radio" class="w3-check" style="width:15px; float:left;margin-right:5px;">
+                                                   <label th:utext="${question.opt4}" class="myMargin"></label>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </th:block>
+                                       <th:block th:if="${question.qtype == 'TNF'}">
+                                          <div style="background-color: white" class="w3-padding">
+                                             <div class="w3-row">
+                                                <div class="w3-row">
+                                                   <input onclick="return false;" type="radio" class="w3-check" style="width:15px; float:left;margin-right:5px;">
+                                                   <label th:utext="${question.opt1}" class="myMargin"></label>
+                                                </div>
+                                                <div class="w3-row">
+                                                   <input onclick="return false;" type="radio" class="w3-check" style="width:15px; float:left;margin-right:5px;">
+                                                   <label th:utext="${question.opt2}" class="myMargin"></label>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </th:block>
+                                    </div>
+                                 </div>
+                                 <hr class="hrqline">
+                              </div>
+                           </div>
+                        </div>
+                     </th:block>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </th:block>
+   </div>
+   <script src="/js/questionPaper/viewQuestionPaper.js"></script>
+</div>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title th:text="${title}">myGuruji</title>
+	<link rel="icon" type="image/ico" href="/images/icons/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="/css/w3.css" />
+</head>
+<body style="background-attachment: fixed; background-repeat: no-repeat; background-size: cover; background-position: center center;">
+<div class="w3-container">
+	<div id="id01" class="w3-modal">
+	  	<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+	
+			<div class="w3-center"><br>
+				<!-- <span class="w3-button w3-xlarge w3-hover-red w3-display-topleft"><img src="/images/myGurujiLogo.png" height="45px"></img></span> -->
+				<!-- <img src="images/icons/img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> -->
+				<img src="/images/myGurujiLogo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+			</div>
+	  		<div class="w3-container">
+	    		<label style="color: red"><b th:text="${errorTitle}">Error Title</b></label><br>
+	    		<p th:utext="${errorMessage}">Error Message</p>
+	    		<p><a href="/home">or, Click here to go home</a></p>
+	    	</div>
+			
+	    </div>
+  	</div>
+</div>
+<script type="text/javascript">
+	document.getElementById('id01').style.display='block'
+</script>
+<script type="text/javascript">
+	var background = new Array();
+	background[0] = "/images/courseThumbnails/background.jpg";
+	background[1] = "/images/courseThumbnails/background1.jpg";
+	background[2] = "/images/courseThumbnails/background2.jpg";
+	background[3] = "/images/courseThumbnails/background3.jpg";
+	background[4] = "/images/courseThumbnails/background4.jpg";
+	background[5] = "/images/courseThumbnails/background5.jpg";
+	background[6] = "/images/courseThumbnails/background6.jpg";
+	background[7] = "/images/courseThumbnails/background7.jpg";
+	background[8] = "/images/courseThumbnails/background8.jpg";
+	
+	var numberGen = Math.floor(Math.random() * 9);
+	document.body.style.backgroundImage='url('+background[numberGen]+')';
+</script>
+            
+</body>
+
+<!-- Mirrored from www.w3schools.com/w3css/tryit.asp?filename=tryw3css_modal_login by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Jul 2018 01:53:22 GMT -->
+</html>

@@ -1,0 +1,139 @@
+<div th:fragment="viewProfile">
+<link rel="stylesheet" type="text/css" href="/css/hover_button.css"/>
+<form autocomplete="off" onsubmit="return false;" method="post" id="profileForm" enctype="application/x-www-form-urlencoded">
+	<input type="hidden" th:value="${role}"/>
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;">
+			  		<i class="fa fa-user" aria-hidden="true"></i><!--<img src="/images/icons/createcourseplan.png" style="width: 35px;">-->
+			  		&nbsp;&nbsp;My Profile
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-row">
+					<div class="w3-bar">
+						
+						<!-- <div class="buttonbarpadding w3-bar-item w3-right" th:if="${role eq 'Faculty'}" id="saveFaculty" onclick="updateProfile('profileForm','Faculty');" style="font-weight:bold;"><a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-save" style="font-size:15px; color: lime"></i>&nbsp;&nbsp;Update Profile</a></div>
+                     	<div class="buttonbarpadding w3-bar-item w3-right" th:if="${role eq 'Student'}" id="saveStudent" onclick="updateProfile('profileForm','Student');" style="font-weight:bold;"><a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-save" style="font-size:15px; color: lime"></i>&nbsp;&nbsp;Update Profile</a></div>
+
+						<div class="buttonbarpadding w3-bar-item w3-right" th:if="${role eq 'Student'}" onclick="edit('lemail','lcn','semail','p_cntct','saveStudent');"><a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-pen" style="font-size:15px;"></i>&nbsp;&nbsp;Edit</a></div>
+						<div class="buttonbarpadding w3-bar-item w3-right" th:if="${role eq 'Faculty'}" onclick="edit('femail','fp_cntct','fs_cntct','saveFaculty');"><a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-pen" style="font-size:15px;"></i>&nbsp;&nbsp;Edit</a></div>
+						 -->
+						
+					</div>
+					<div class="w3-row-padding" sec:authorize="hasRole('ROLE_Student')">
+						<div class="w3-full w3-border w3-round-large w3-white w3-padding-large" th:each="stu : ${student_data}">
+							<div class="w3-row">
+									<div class="w3-third">
+										<div class="imgcontainer w3-container">
+											<img src="/images/icons/img_avatar4.png" class="profileimg w3-image"/>
+											
+											<div class="overlay"></div>
+  											<!-- <div class="w3-button button" onclick="document.getElementById('uploadFileModal').style.display='block'">EDIT</div> -->
+										</div>
+									</div>
+									<div class="w3-twothird w3-container">
+										<input type="text" hidden="hidden" name="emplid" th:value="${stu.getEmplid()}" readonly/>
+										<p>
+											<label style="font-weight:bold;">Student ID/Campus ID : </label>
+											<label th:text="${stu.getCampusid()}"></label>
+		                                    <input type="text" hidden="hidden" id="campusid" name="campusid" th:value="${stu.getCampusid()}" class="w3-input w3-round w3-border" readonly/>
+										</p>
+										<p>
+											<label style="font-weight:bold;">Student Name : </label>
+											<label th:text="${stu.getFirstname()}+'__'+${stu.getLastname()}"></label>
+		                                    <input type="text" hidden="hidden" name="fullname" th:value="${stu.getFullname()}" class="w3-input w3-round w3-border" readonly />
+										</p>
+										<p>
+											<label style="font-weight:bold;">Date of Birth : </label>
+											<label th:text="${stu.getDob()}"></label>
+		                                    <input type="text" hidden="hidden" name="dob" th:value="${stu.getDob()}" class="w3-input w3-round w3-border" readonly/>
+										</p>
+										<p>
+											<label style="font-weight:bold;">Email ID : </label>
+											<label id="lemail" th:text="${stu.getEmailaddr()}"></label>
+		                                    <input type="text" hidden="hidden" id="semail" name="emailaddr" th:value="${stu.getEmailaddr()}" class="w3-input w3-round w3-border" readonly style="height:26px;"/>
+										</p>
+										<p>
+											<label style="font-weight:bold;">Contact Number : </label>
+											<label id="lcn" th:text="${stu.getPrimarycontact()}"></label>
+		                                    <input type="text" hidden="hidden" id="p_cntct" name="primarycontact" th:value="${stu.getPrimarycontact()}" class="w3-input w3-round w3-border" readonly style="height:26px;"/>
+										</p>
+									</div>
+							</div>
+							
+						</div>
+					</div>
+					
+					<div class="w3-row-padding" sec:authorize="hasRole('ROLE_Faculty')">
+						<div class="w3-full w3-border w3-round-large w3-white w3-padding-large" th:each="fac : ${faculty_data}">
+							<div class="w3-row">
+									<div class="w3-third">
+										<div class="imgcontainer w3-container">
+											<img src="/images/icons/img_avatar4.png" class="profileimg w3-image"/>
+											
+											<div class="overlay"></div>
+  											<!-- <div class="w3-button button" onclick="document.getElementById('uploadFileModal').style.display='block'">EDIT</div> -->
+										</div>
+									</div>
+									<div class="w3-twothird w3-container">
+										<p>
+											<label style="font-weight:bold;">Employee ID : </label>
+											<label th:text="${fac.getEmplid()}"></label>		                                    
+										</p>
+										<p>
+											<label style="font-weight:bold;">Employee Name : </label>
+											<label th:text="${fac.getFirstname()}+' '+${fac.getLastname()}"></label>		                                    
+										</p>
+										<p>
+											<label style="font-weight:bold;">Designation : </label>
+											<label th:text="${fac.getDesignation()}"></label>		                                  
+										</p>
+										<p>
+											<label style="font-weight:bold;">Email ID : </label>
+											<label id="lfemail" th:text="${fac.getEmailaddr()}"></label>
+											<input type="text" hidden="hidden" id="femail" name="emailaddr" th:value="${fac.getEmailaddr()}" class="w3-input w3-round w3-border" readonly style="height:26px;"/>                                  
+										</p>
+										<p>
+											<label style="font-weight:bold;">Contact Number : </label>
+											<label id="lfcn" th:text="${fac.getPrimarycontact()}"></label>
+		                                    <input type="text" hidden="hidden" id="fp_cntct" name="primarycontact" th:value="${fac.getPrimarycontact()}" class="w3-input w3-round w3-border" readonly style="height:26px;"/>
+										</p>								
+									</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</form>
+	
+	<div id="uploadFileModal" class="w3-modal">
+		<div class="w3-modal-content" style="width:50%;">
+			<header class="w3-container w3-theme-d4">
+				<span onclick="document.getElementById('uploadFileModal').style.display='none'" class="w3-button w3-display-topright" style="color:white;">&times;</span>
+				<h4>Upload Photo</h4>
+			</header>
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				<input type="file" name="profile_pic" id="profile_pic">
+			</div>
+			<footer class="w3-container w3-theme-d4">
+				<div class="w3-row">
+					<div class="w3-full">
+						<input class="w3-button w3-right" value="Save" type="button" id="save"/>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="/js/login/viewProfile.js"></script>
+</div>

@@ -1,0 +1,175 @@
+<div th:fragment="gradingscale">
+<style>
+	.bgclr{
+		background-color: #D3D3D3;
+	}
+</style>
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;" onclick="w3_open()">
+			  		<img src="/images/icons/gradingscale.png" style="width: 40px;">
+			  		&nbsp;&nbsp;Grading Scale
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-border w3-round-large w3-white" style="padding-bottom: 16px;">
+					<div class="w3-row">
+						<div class="tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red"><h5>Create Grading Scale</h5></div>
+					</div>
+					<div class="tab" id="create">
+						<div class="w3-row w3-padding">
+							<div class="w3-row">
+								<div class="w3-half">
+									<label style="font-weight: bolder;">Title</label>
+									<input id="title" class="w3-input w3-border" style="width:95%">
+								</div>
+								<div class="w3-half">
+									<br>
+									<button class="w3-btn w3-theme-d5 w3-round-large w3-right" onclick="createscale()" type="button" style="width: 100px;">
+										<i class="fa fa-save" style="font-size: 18px; color: lime"></i>
+										&nbsp;&nbsp;Save
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="w3-row w3-padding">
+							<div class="w3-row">
+								<label style="font-weight: bolder;">Grading Scale</label>
+								<hr class="hrline">
+								<div class="w3-row">
+									<div class="w3-col" style="width:100px;">
+										<span><strong>Attribute</strong></span>
+									</div>
+									<div class="w3-col" style="width:60px;">
+										<span><strong>Weight</strong></span>
+									</div>
+									<div class="w3-col" style="width:300px;">
+										<span><strong>Name</strong></span>
+									</div>
+									<div class="w3-col" style="width:50px;">
+										<span><strong>Select</strong></span>
+									</div>
+								</div>
+								<div class="w3-row" style="margin-top:2px;">
+									<div class="w3-col" style="width:100px;">
+										<span>Lowest</span>
+									</div>
+									<div class="w3-col" style="width:60px; padding-left:15px;">
+										<span><strong>1</strong></span>
+									</div>
+									<div class="w3-col" style="width:300px;">
+										<input readonly id="t_1" type="text" class="w3-input w3-border bgclr" style="height:30px;">
+									</div>
+									<div class="w3-col" style="width:50px; padding-left:8px;">
+										<input data-val="1" type="checkbox" class="w3-check chk" style="width:15px; margin-left:5px;" onclick="toggleField(this);">
+									</div>
+								</div>
+								<div class="w3-row" style="margin-top:2px;">
+									<div class="w3-col" style="width:100px;">
+										<span>Low</span>
+									</div>
+									<div class="w3-col" style="width:60px; padding-left:15px;">
+										<span><strong>2</strong></span>
+									</div>
+									<div class="w3-col" style="width:300px;">
+										<input readonly id="t_2" type="text" class="w3-input w3-border bgclr" style="height:30px;">
+									</div>
+									<div class="w3-col" style="width:50px; padding-left:8px;">
+										<input data-val="2" type="checkbox" class="w3-check chk" style="width:15px; margin-left:5px;" onclick="toggleField(this);">
+									</div>
+								</div>
+								<div class="w3-row" style="margin-top:2px;">
+									<div class="w3-col" style="width:100px;">
+										<span>Normal</span>
+									</div>
+									<div class="w3-col" style="width:60px; padding-left:15px;">
+										<span><strong>3</strong></span>
+									</div>
+									<div class="w3-col" style="width:300px;">
+										<input readonly id="t_3" type="text" class="w3-input w3-border bgclr" style="height:30px;">
+									</div>
+									<div class="w3-col" style="width:50px; padding-left:8px;">
+										<input data-val="3" type="checkbox" class="w3-check chk" style="width:15px; margin-left:5px;" onclick="toggleField(this);">
+									</div>
+								</div>
+								<div class="w3-row" style="margin-top:2px;">
+									<div class="w3-col" style="width:100px;">
+										<span>High</span>
+									</div>
+									<div class="w3-col" style="width:60px; padding-left:15px;">
+										<span><strong>4</strong></span>
+									</div>
+									<div class="w3-col" style="width:300px;">
+										<input readonly id="t_4" type="text" class="w3-input w3-border bgclr" style="height:30px;">
+									</div>
+									<div class="w3-col" style="width:50px; padding-left:8px;">
+										<input data-val="4" type="checkbox" class="w3-check chk" style="width:15px; margin-left:5px;" onclick="toggleField(this);">
+									</div>
+								</div>
+								<div class="w3-row" style="margin-top:2px;">
+									<div class="w3-col" style="width:100px;">
+										<span>Highest</span>
+									</div>
+									<div class="w3-col" style="width:60px; padding-left:15px;">
+										<span><strong>5</strong></span>
+									</div>
+									<div class="w3-col" style="width:300px;">
+										<input readonly id="t_5" type="text" class="w3-input w3-border bgclr" style="height:30px;">
+									</div>
+									<div class="w3-col" style="width:50px; padding-left:8px;">
+										<input data-val="5" type="checkbox" class="w3-check chk" style="width:15px; margin-left:5px;" onclick="toggleField(this);">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<strong>Existing Grading Scales</strong>
+				<hr class="hrline">
+				<div id="resultSec" class="w3-responsive" style="display: none">
+					<table id="scaleTable" class="display compact cell-border" style="width: 100%;">
+						<thead class="w3-theme-d3">
+							<tr>
+								<th>
+									Name
+								</th>
+								<th>
+									Lowest (1)
+								</th>
+								<th>
+									Low (2)
+								</th>
+								<th>
+									Normal (3)
+								</th>
+								<th>
+									High (4)
+								</th>
+								<th>
+									Highest (5)
+								</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div  id="noData" class="w3-responsive" style="display: none">
+					<div>
+						<p>No record found...</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" id="createdby" th:value="${createdby}">
+	<script src="/js/feedback/gradingscale.js"></script>
+</div>

@@ -1,0 +1,116 @@
+<div th:fragment="manageQuestionPaper">
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+					<h3 style="font-weight: 600;">
+				  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+				  		<img src="/images/icons/mapQuestions.svg" style="width: 35px;">
+				  		&nbsp;&nbsp;Manage Question Papers
+					</h3>
+				</div>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<p style="margin-top: 0px;">
+					Select "Course" and click search to get the list of all question papers existing for the course.
+				</p>
+				<p sec:authorize="hasRole('ROLE_Faculty')">
+					To add a new question paper you will have to select "Assessment" also.
+				</p>
+				<input type="hidden" th:value="${role}" id="role">
+				<div class="w3-row">
+					<div>
+						<form>
+							<div class="divTable">
+								<div class="divTr">
+									<div class="d1"><h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Find an existing value</h5></div>
+									<!-- <div class="d2">
+										<a class="w3-button w3-circle w3-theme-d5 w3-large" onclick="createQuestionPaper()">+</a>
+									</div> -->
+								</div>
+							</div>
+							<hr class="hrline">
+							<h6 style="font-style: italic;">Search Criteria</h6>
+							
+							<div class="w3-row-padding">
+								<div class="w3-half">
+									<p>
+										<label>**Select Course</label>
+										<select class="w3-select w3-border" id="courseSelect" name="courseSelect">
+											<option value="" selected>--Select Course--</option>
+											<option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.code}+' : '+${course.title}"/>
+										</select>
+									</p>
+								</div>
+								<div class="w3-half">
+									<div sec:authorize="hasRole('ROLE_Faculty')">
+										<p>
+											<label>Select Assessment&nbsp;&nbsp;<i id="loader" class="fa fa-gear fa-spin fa-fw" style="color: white; font-size: 20px; display: none;"></i></label>
+											<select class="w3-select w3-border" id="assessmentSelect" name="assessmentSelect">
+												<option value="">
+													<column>--Select Assessment--</column>
+												</option>
+											</select>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="w3-bar" style="z-index: 1">
+								<div class="buttonbarpadding w3-bar-item" id="searchAssessment"><a class="w3-btn w3-theme-d5 w3-round-large"><img src="/images/icons/xmag.png" style="width: 20px;">&nbsp;&nbsp;Search Paper</a></div>
+								<div sec:authorize="hasRole('ROLE_Faculty')" class="buttonbarpadding w3-bar-item" id="createQuestionPaper"><a class="w3-btn w3-theme-d5 w3-round-large"><img src="/images/icons/schedule-class-assignment.png" style="width: 20px;">&nbsp;&nbsp;Create Paper</a></div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="w3-row">
+					<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Search Results</h5>
+					<hr class="hrline">
+					<div id="resultSec" class="w3-responsive" style="display: none">						
+						<table id="assessmentList" class="w3-responsive display compact cell-border" style="width: 100%;word-break: break-word;">
+							<thead>
+								<tr class="w3-theme-d3">
+									<th>Assessment ID</th>
+									<th>Template</th>
+									<th>Assessment Title</th>
+									<th>Course</th>
+									<th>Schedule Status</th>
+									<th>Type</th>
+									<th>Created By</th>
+									<th>Date</th>
+							        <th></th>
+							        <!-- <th th:if="${role=='Faculty'}"></th> -->
+								</tr>
+							</thead>
+							<tbody>
+					        </tbody>
+						</table>
+					</div>
+					<div  id="noData" class="w3-responsive" style="display: none">
+						<div>
+							<p>No record found...</p>
+						</div>
+					</div>
+					<div  id="jsonLoader" class="w3-responsive" style="display: none">
+						<div>
+							<div class='w3-container' style='width: 100%; text-align: center'>
+								<i class='fa fa-cog fa-spin' style='font-size: 30px; color: white;'></i>
+								<p style="color: white;">Loading......</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="">
+			
+			</div>
+		</div>
+	</div>
+	<div id="pagedata" th:data-role="${user_role_qpaper}"></div>
+	<script src="/js/questionPaper/manageQuestionPaper.js"></script>
+</div>

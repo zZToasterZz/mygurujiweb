@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>myGuruji</title>
+
+<link rel="icon" type="image/ico" href="/images/icons/favicon.ico">
+
+<link rel="stylesheet" type="text/css" href="/css/w3.css" />
+<link rel="stylesheet" type="text/css" href="/css/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/icon.css" />
+<link rel="stylesheet" type="text/css" th:href="${theme}" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/css/circle-menu.css" />
+<link rel="stylesheet" type="text/css" href="/css/_customStyle.css" />
+
+<!-- <link rel="stylesheet" type="text/css" href="/css/jquery.notebook.css" />
+<link rel="stylesheet" type="text/css" href="/css/richtextstyle.css"> -->
+
+<script src="/js/RadialBar.js"></script>
+
+
+</head>
+<body style="background-attachment: fixed; background-repeat: no-repeat; background-size: cover; background-position: center center;">
+<!-- background-image:url(/images/background/background1.jpg);  -->
+<!-- Navbar -->
+<div th:replace="fragments/topNavbar :: navbar"></div>
+
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+<div class="w3-main">
+	<div class="w3-row w3-padding-64">
+  		<div id="replace_div">
+  			<!-- <div th:replace="forms/dashboard :: dashboard">
+  			
+  			</div> -->
+		</div>
+  	</div>
+ 
+<!-- Footer -->
+	<div th:replace="fragments/footer :: footer"></div>
+
+<!-- END MAIN -->
+</div>
+
+<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+<script src="webjars/momentjs/2.24.0/min/moment.min.js"></script>
+<script src="webjars/fullcalendar/2.0.0/fullcalendar.min.js"></script>
+
+<script src="/js/loaddashboard.js"></script>
+
+<!-- <script src="/js/navBar.js"></script> -->
+
+<script src="/js/jQuery.circleMenu.js"></script>
+
+
+
+<!-- Charts JS-->
+
+<!-- <script src="/js/Chart.min.js"></script> -->
+<!-- <script src="/js/chartJsHelper.js"></script> -->
+
+<!-- ------------------------------- -->
+
+<script src="/js/datatables.min.js"></script>
+<script src="/js/manageCourses.js"></script>
+</body>
+</html>

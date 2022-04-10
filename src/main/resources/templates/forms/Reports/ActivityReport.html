@@ -1,0 +1,102 @@
+<div th:fragment="activityreport" style="margin-bottom:5%">
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;" onclick="w3_open()">
+			  		<img src="/images/icons/report.png" style="width: 35px;">
+			  		&nbsp;&nbsp;Activity Report
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95;height:500px">
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="divTable">
+					<div class="divTr">
+						<div class="d1"><h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Find an existing value</h5></div>						
+					</div>
+				</div>
+				<hr class="hrline">
+				<h6 style="font-style: italic;">Search Criteria</h6>
+				<div class="w3-row-padding">
+				<div class="w3-half w3-container">
+					<label style="font-weight: bolder">Course</label>
+					<select onload="getBatch1();return false;" onchange="getBatch1();return false;" id="courseid" name="courseid" class="w3-input w3-border">
+						<option value="" disabled selected style="display:none;"></option>
+						<th:block th:each="course : ${course}">
+							<option th:value="${course.id}">
+								<column th:text="${course.id}+'&nbsp;'"></column>:<column th:text="'&nbsp;'+${course.descr}"></column>
+							</option>
+						</th:block>
+					</select>						
+				</div>
+				<div class="w3-half w3-container">
+					<br>
+					<div class="w3-quarter w3-dropdown-hover" style="padding: 0px 0px !important;">
+						<button class="w3-button w3-black" style="width: 100%">Batches</button>
+						<div class="w3-dropdown-content w3-bar-block w3-border" style="width:350px;">
+							<ul class="w3-ul" id="batchUl">
+								<li><input type="checkbox" class="w3-check" disabled/><label style="margin-left:8px;">Select Course first</label></li>
+							</ul>
+						</div>
+					</div>
+					<div class="w3-threequarter" style="padding: 0px 0px !important;">
+						<input readonly class="w3-input w3-border" id="selectedBatches" type="hidden" style="padding: 7px !important;"/>
+						<input readonly class="w3-input w3-border" id="selectedBatch" type="text" style="padding: 7px !important;"/>
+					</div>
+				</div>
+				</div><br>
+				<div class="w3-row-padding">
+					<p>
+						<button id="getSchedules" class="w3-btn w3-theme-d5 w3-round-large" type="button"><img src="/images/icons/xmag.png" style="width: 20px;">&nbsp;&nbsp;Search</button>						
+					</p>
+				</div>				
+				<input type="hidden" th:value="${createdby}" id="createdby"/>				
+			</div>
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="w3-row">
+					<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Search Results</h5>
+					<!-- <div id="printbtn" type="button" class="w3-right w3-btn w3-theme-d5 w3-round-large" 
+						onclick="window.print()" style="margin-top:-30px;display:none">
+						<img src="/images/icons/print.png" style="width: 20px;">
+						&nbsp;&nbsp;Print
+					</div> -->
+					<button id="printbtn" class="w3-btn w3-theme-d5 w3-round-large w3-right" type="button"
+						onclick="print()" style="margin-top:-30px;display:none">
+						<img src="/images/icons/print.png" style="width: 20px;">&nbsp;&nbsp;Print</button>
+					<hr class="hrline" style="margin-top:10px">
+				</div>
+				<div id="resultSec" style="display:none;">
+					<table id="activitylist" class="display compact cell-border" style="width: 100%;">
+						<thead>
+							<tr class="w3-theme-d3">					
+								<th></th>
+								<th>Class Nbr.</th>
+								<th>Unit No.</th>
+								<th>Unit Title</th>
+								<th>Documents</th>
+								<th>Recorded Videos</th>
+								<th>Useful Links</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div id="loader" style="text-align: center; margin-top: 10px; display: none;">
+					<i class='fa fa-cog fa-spin' style="font-size: 24px; color: black;"></i>
+					<p>Loading ....</p>
+				</div>
+				<div  id="noData" class="w3-responsive" style="display: none">
+					<div>
+						<p>No record found...</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/js/moment/moment-with-locales.min.js"></script>
+	<script src="/js/reports/activityreport.js"></script>
+</div>

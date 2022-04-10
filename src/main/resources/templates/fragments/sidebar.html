@@ -1,0 +1,346 @@
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head></head> -->
+<body>
+<div th:fragment="sidebar">
+	<div class="w3-sidebar w3-bar-block w3-theme-l3 w3-collapse w3-animate-left _sidebar" style="width:300px; margin-top: 17px; opacity: .95" id="mySidebar">
+<!-- 	background-image:url(/images/icons/background_colour_blue.png); -->
+		<button style="text-align: right; background-color: #E28964;" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-hide-large"><i class="fa fa-times" style="color: red;"></i></button>
+		<div class="w3-container w3-margin-top w3-margin-bottom">
+		
+			<div sec:authorize="hasRole('ROLE_Super Admin')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible0" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Administration</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible0" class="collapse">
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="profilelock"><img src="/images/icons/profilelock.png" style="width: 26px">&nbsp;&nbsp;&nbsp;Lock Users</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="resetpwd"><img src="/images/icons/passwordreset.png" style="width: 26px">&nbsp;&nbsp;&nbsp;Password Reset</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="coursepln"><img src="/images/icons/createcourseplan.png" style="width: 26px">&nbsp;&nbsp;&nbsp;Check Course Plan</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="factag"><img src="/images/icons/faculty.png" style="width: 26px">&nbsp;&nbsp;&nbsp;Faculty Tag</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="stdntenrl"><img src="/images/icons/student.png" style="width: 26px">&nbsp;&nbsp;&nbsp;Student Enrollment Details</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="synchlogin"><img src="/images/icons/synch.png" style="width: 26px">&nbsp;&nbsp;&nbsp;Sync Login</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="deletegradebook"><img src="/images/icons/deletedoc.png" style="width: 26px">&nbsp;&nbsp;&nbsp;Delete Gradebook</li>
+					</div>
+				</ul>
+			</div>
+			
+			<div>
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible12" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Digital Library</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible12" class="collapse">
+						<a href="http://103.245.34.253:8999" target="_blank"><li onclick="w3_close()" class="w3-hover-theme my-hover"><img src="/images/icons/kohaicon.png" style="height: 25px">&nbsp;&nbsp;KOHA</li></a>
+					</div>
+				</ul>
+			</div>
+			
+			<!-- <div sec:authorize="hasRole('ROLE_Faculty')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5"><h5 style="margin-top: 0; margin-bottom: 0">Administration</h5></li>
+					<li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageCourse"><img src="/images/icons/course.png" style="width: 22px">&nbsp;&nbsp;&nbsp;View My Course Details</li>
+					<li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageBatch"><img src="/images/icons/manage_class.svg" style="width: 22px">&nbsp;&nbsp;&nbsp;View My Class Details</li>
+					<li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageStudents"><img src="/images/icons/manage-class-enrollment.png" style="width: 25px">&nbsp;&nbsp;View My Student Details</li>
+					<li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageFaculty"><img src="/images/icons/kuser.png" style="width: 22px">&nbsp;&nbsp;&nbsp;View My Profile</li>
+					<li onclick="w3_close()" class="w3-hover-theme my-hover"><img src="/images/icons/announcement.svg" style="width: 22px">&nbsp;&nbsp;&nbsp;Make an Announcement</li>
+				</ul>
+			</div> -->
+			
+			<div sec:authorize="hasRole('ROLE_Faculty')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible1" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Assessment Planning</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible1" class="collapse">
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageQuestionBank"><img src="/images/icons/file-manager.png" style="width: 22px">&nbsp;&nbsp;&nbsp;Manage Question Bank</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageAssessment"><img src="/images/icons/createAssessment.svg" style="width: 22px">&nbsp;&nbsp;&nbsp;Create/Manage Assessment</li>
+						<!-- <li onclick="w3_close()" class="w3-hover-theme my-hover" id="managePaperTemplate"><img src="/images/icons/paperTemplate.svg" style="width: 22px">&nbsp;&nbsp;&nbsp;Manage Paper Templates</li> -->
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageQuestionPapers"><img src="/images/icons/mapQuestions.svg" style="width: 22px">&nbsp;&nbsp;&nbsp;Manage Question Paper</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageAssessmentSchedule"><img src="/images/icons/schedule-assessment.png" style="width: 22px">&nbsp;&nbsp;&nbsp;Schedule an Assessment</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="assessmentOutcome"><img src="/images/icons/result.png" style="width: 25px">&nbsp;&nbsp;&nbsp;Assessment Result</li>
+					</div>
+				</ul>
+			</div>
+			
+			<div sec:authorize="hasRole('ROLE_Coe')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible2" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Assessment Planning</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible2" class="collapse">
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageQuestionPapers_coe"><img src="/images/icons/mapQuestions.svg" style="width: 22px">&nbsp;&nbsp;&nbsp;Manage Question Paper</li>
+						<!-- <li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageAssessmentSchedule_coe"><img src="/images/icons/schedule-assessment.png" style="width: 22px">&nbsp;&nbsp;&nbsp;Schedule an Assessment</li> -->
+					</div>
+				</ul>
+			</div>
+			
+			<div sec:authorize ="hasRole('ROLE_Iqac')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible3" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Assessment Planning</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible3" class="collapse">
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageQuestionPapers_iqac"><img src="/images/icons/mapQuestions.svg" style="width: 22px">&nbsp;&nbsp;&nbsp;Manage Question Paper</li>
+						<!-- <li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageAssessmentSchedule_coe"><img src="/images/icons/schedule-assessment.png" style="width: 22px">&nbsp;&nbsp;&nbsp;Schedule an Assessment</li> -->
+					</div>
+				</ul>
+			</div>
+			
+			<div sec:authorize ="hasRole('ROLE_Iqac')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible4" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Reports</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible4" class="collapse">
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="activityreportiqac"><img src="/images/icons/report.png" style="width: 22px">&nbsp;&nbsp;&nbsp;Activity Report</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="questionbankreportiqac"><img src="/images/icons/report.png" style="width: 22px">&nbsp;&nbsp;&nbsp;Question Bank Report</li>
+					</div>
+				</ul>
+			</div>
+			
+			<div sec:authorize ="hasRole('ROLE_Iqac')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible5" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Feedback</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible5" class="collapse">
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="gradingscale"><img src="/images/icons/gradingscale.png" style="width: 27px">&nbsp;&nbsp;&nbsp;Grading Scale</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="feedbacktypes"><img src="/images/icons/feedbacktype.png" style="width: 27px">&nbsp;&nbsp;&nbsp;Feedback Types</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="feedbackparams"><img src="/images/icons/feedbackparams.png" style="width: 27px">&nbsp;&nbsp;&nbsp;Feedback Parameters</li>
+					</div>
+				</ul>
+			</div>
+			
+			<!-- <div th:if="${role}=='Faculty'">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5"><h5 style="margin-top: 0; margin-bottom: 0">Assignment Planning</h5></li>
+					<li onclick="w3_close()" class="w3-hover-theme my-hover" id="createAssignment"><img src="/images/icons/assignment.png" style="width: 25px">&nbsp;&nbsp;&nbsp;Create Assignment</li>					
+				</ul>
+			</div> -->
+			
+			<div sec:authorize="hasRole('ROLE_Faculty')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible6" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Manage Course</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible6" class="collapse">
+						<!-- <li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageCoursePlan"><img src="/images/icons/createcourseplan.png" style="width: 22px">&nbsp;&nbsp;&nbsp;Manage Course Plan</li> -->
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="manageCoursePlan"><img src="/images/icons/createcourseplan.png" style="width: 22px">&nbsp;&nbsp;&nbsp;Manage Course Plan</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="studentdetails"><img src="/images/icons/people.png" style="width: 28px">&nbsp;&nbsp;View Student Details</li>
+						<!--<li onclick="w3_close()" class="w3-hover-theme" onclick="document.getElementById('addContent').style.display='block'"><img src="/images/icons/add-content.png">&nbsp;&nbsp;Manage Content</li>
+						<li onclick="w3_close()" class="w3-hover-theme" onclick="document.getElementById('addContent').style.display='block'"><img src="/images/icons/schedule-lecture.png">&nbsp;&nbsp;Manage Lecture</li>
+						<li onclick="w3_close()" class="w3-hover-theme" onclick="document.getElementById('addContent').style.display='block'"><img src="/images/icons/schedule-class-assignment.png">&nbsp;&nbsp;Manage Assignments</li>
+						<li onclick="w3_close()" class="w3-hover-theme" onclick="document.getElementById('addContent').style.display='block'"><img src="/images/icons/schedule-assessment.png" style="width: 22px">&nbsp;&nbsp;Plan an Assessment</li>-->
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="announcement"><img src="/images/icons/announcement.svg" style="width: 22px">&nbsp;&nbsp;Make an Announcement</li>
+					</div>
+				</ul>
+			</div>
+			
+			<!--<div sec:authorize="hasRole('ROLE_Student')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5"><h5 style="margin-top: 0; margin-bottom: 0">Fork Course</h5></li>
+					<li class="w3-hover-theme"><img src="/images/icons/calendar.png">&nbsp;&nbsp;Show Attendance</li>
+					<li class="w3-hover-theme"><img src="/images/icons/documentation.png">&nbsp;&nbsp;View Assignments</li>                                                                                             
+					<li class="w3-hover-theme"><a href="/calendar/viewevents"><img src="/images/icons/view-calendar-upcoming-days.png">&nbsp;&nbsp;View Calendar</a></li>
+					
+				</ul>
+			</div>-->
+			
+			<!--<div sec:authorize="hasRole('ROLE_Student')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-card">
+					<li class="w3-theme-d5"><h5 style="margin-top: 0; margin-bottom: 0">Programming Fundamentals</h5></li>
+					<li class="w3-hover-theme"><img src="/images/icons/fork.png">&nbsp;&nbsp;Table of Content</li>
+					<li class="w3-hover-theme"><img style="padding-left: 16px;" src="/images/icons/go-next.png">&nbsp;&nbsp;Introductory Concepts</li>
+					<li class="w3-hover-theme"><img style="padding-left: 16px;" src="/images/icons/go-next.png">&nbsp;&nbsp;C Fundamentals</li>
+					<li class="w3-hover-theme"><img style="padding-left: 16px;" src="/images/icons/go-next.png">&nbsp;&nbsp;Operators and Expressions</li>
+					<li class="w3-hover-theme"><img style="padding-left: 16px;" src="/images/icons/go-next.png">&nbsp;&nbsp;Data Input and output</li>
+					<li class="w3-hover-theme"><img style="padding-left: 16px;" src="/images/icons/go-next.png">&nbsp;&nbsp;Control Statements</li>
+					<li class="w3-hover-theme"><img style="padding-left: 16px;" src="/images/icons/go-next.png">&nbsp;&nbsp;Functions</li>
+					<li class="w3-hover-theme"><img style="padding-left: 16px;" src="/images/icons/go-next.png">&nbsp;&nbsp;Arrays</li>
+					<li class="w3-hover-theme"><img style="padding-left: 16px;" src="/images/icons/go-next.png">&nbsp;&nbsp;Pointers</li>
+					<li class="w3-hover-theme"><img style="padding-left: 16px;" src="/images/icons/go-next.png">&nbsp;&nbsp;Structures and unions</li>
+					<li class="w3-hover-theme"><img style="padding-left: 16px;" src="/images/icons/go-next.png">&nbsp;&nbsp;Files</li>
+					<li class="w3-hover-theme"><img style="padding-left: 16px;" src="/images/icons/go-next.png">&nbsp;&nbsp;C Preprocessor</li>
+					<li class="w3-hover-theme"><img style="padding-left: 16px;" src="/images/icons/go-next.png">&nbsp;&nbsp;Graphics using C</li>
+				</ul>
+			</div>-->
+			
+			<div sec:authorize="hasRole('ROLE_Faculty')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible7" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Gradebook</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible7" class="collapse">
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="gradebook"><img src="/images/icons/gradebook.png" style="width: 22px">&nbsp;&nbsp;Gradebook</li>
+					</div>
+				</ul>
+			</div>
+
+			<div sec:authorize="hasRole('ROLE_Student')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible8" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">My En8rolled Subjects</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible8" class="collapse">
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="studentenrolled"><img src="/images/icons/student.png" style="width: 28px">&nbsp;&nbsp;Student Enrollment Details</li>
+					</div>
+				</ul>
+			</div>
+			
+			<div>
+				<div id="coursePlanNav">
+				</div>
+			</div>
+						
+			<div sec:authorize="hasRole('ROLE_Student')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible9" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Online Assessment Portal</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible9" class="collapse">
+						<a href="http://myassessment.srmu.ac.in"><li onclick="w3_close()" class="w3-hover-theme my-hover"><img src="/images/icons/logoMyAssessment.png" style="width: 50px">&nbsp;&nbsp;myAssessment</li></a>
+					</div>
+				</ul>
+			</div>
+			
+			<div sec:authorize="hasRole('ROLE_Faculty')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible10" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Course and Program attainments</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible10" class="collapse">
+						<a href="http://103.245.34.253:7502/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FCourseOutcome%2F_portal%2FConsolidate%20Course%20Outcome&Page=Course%20Outcome&Action=Navigate&col1=%22CO_Fact_Table%22.%22strm%22&val1=%221802%22&psa1=%22Course%20Outcome%22&col2=CASE%20WHEN(%22CO_Fact_Table%22.%22acad_year%22%7C%7C%27-%27%7C%7C(CAST(CAST(substring(%22CO_Fact_Table%22.%22acad_year%22%2C3%2C4)%20AS%20INTEGER)%2B1%20AS%20VARCHAR(100))))%20LIKE%20%2720%25%27%20THEN%20%22CO_Fact_Table%22.%22acad_year%22%7C%7C%27-%27%7C%7C(CAST(CAST(substring(%22CO_Fact_Table%22.%22acad_year%22%2C3%2C4)%20AS%20INTEGER)%2B1%20AS%20VARCHAR(100)))%20ELSE%20%27%27%20END&val2=%222018-19%22&psa2=%22Course%20Outcome%22&col3=%22CO_Fact_Table%22.%22acad_level_bot%22&val3=%2203%22&psa3=%22Course%20Outcome%22&formulaUse4=code&col4=%22CO_Fact_Table%22.%22acad_plan%22&val4=%22Computer%20Science%20%26%20Engineering%22&psa4=%22Course%20Outcome%22&col5=%22CO_Fact_Table%22.%22crse_grade_input%22&val5=%22O%22+%22A%2B%22+%22A%22+%22B%2B%22+%22B%22+%22C%22&psa5=%22Course%20Outcome%22&var6=dashboard.variables%5B%27A1%27%5D&val6=%2250%22&psa6=%22Course%20Outcome%22&var7=dashboard.variables%5B%27A2%27%5D&val7=%2260%22&psa7=%22Course%20Outcome%22&var8=dashboard.variables%5B%27A3%27%5D&val8=%2270%22&psa8=%22Course%20Outcome%22&var9=dashboard.variables%5B%27G%27%5D&cov9=%22CO_Fact_Table%22.%22crse_grade_input%22&val9=%22O%22+%22A%2B%22+%22A%22+%22B%2B%22+%22B%22+%22C%22&psa9=%22Course%20Outcome%22&var10=dashboard.variables%5B%27S%27%5D&cov10=CASE%20WHEN(%22CO_Fact_Table%22.%22acad_year%22%7C%7C%27-%27%7C%7C(CAST(CAST(substring(%22CO_Fact_Table%22.%22acad_year%22%2C3%2C4)%20AS%20INTEGER)%2B1%20AS%20VARCHAR(100))))%20LIKE%20%2720%25%27%20THEN%20%22CO_Fact_Table%22.%22acad_year%22%7C%7C%27-%27%7C%7C(CAST(CAST(substring(%22CO_Fact_Table%22.%22acad_year%22%2C3%2C4)%20AS%20INTEGER)%2B1%20AS%20VARCHAR(100)))%20ELSE%20%27%27%20END&val10=%222018-19%22&psa10=%22Course%20Outcome%22&var11=dashboard.variables%5B%27level%27%5D&cov11=%22CO_Fact_Table%22.%22acad_level_bot%22&val11=%2203%22&psa11=%22Course%20Outcome%22&var12=dashboard.variables%5B%27term%27%5D&cov12=%22CO_Fact_Table%22.%22strm%22&val12=%221802%22&psa12=%22Course%20Outcome%22" target="_blank"><li onclick="w3_close()" class="w3-hover-theme my-hover"><img src="/images/icons/outcome.png" style="width: 28px">&nbsp;&nbsp;Course Outcomes</li></a>
+						<a href="http://103.245.34.253:7502/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FProgram%20Outcome%20OLD%2FProgram%20Outcome%20Test%2FConsolidated%20Program%20Outcome.&Page=page%201&Action=Navigate&col1=%22PO_STDNT_CAR_TERM%22.%22ACAD_CAREER%22&val1=%22UG%22&psa1=%22PROGRAM%20OUTCOME%22&formulaUse2=code&col2=%22PO_ACAD_GROUP_TBL%22.%22ACAD_GROUP%22&val2=%22Institute%20of%20Technology%22&psa2=%22PROGRAM%20OUTCOME%22&col3=CAST(CAST(SUBSTRING(%22PO_STDNT_CAR_TERM%22.%22ACAD_YEAR%22%2C1%2C2)%20as%20INTEGER)%20AS%20VARCHAR(100))%7C%7CCAST(CAST(SUBSTRING(%22PO_STDNT_CAR_TERM%22.%22STRM%22%2C1%2C2)%20as%20INTEGER)%20AS%20VARCHAR(100))%7C%7C%27-%27%7C%7CCAST(CAST(SUBSTRING(%22PO_STDNT_CAR_TERM%22.%22STRM%22%2C1%2C2)%20as%20INTEGER)%2B1%20AS%20VARCHAR(100))&val3=%222018-19%22&psa3=%22PROGRAM%20OUTCOME%22&var4=dashboard.variables%5B%27A1%27%5D&val4=%2270%22&psa4=%22PROGRAM%20OUTCOME%22&var5=dashboard.variables%5B%27A2%27%5D&val5=%2260%22&psa5=%22PROGRAM%20OUTCOME%22&var6=dashboard.variables%5B%27A3%27%5D&val6=%2250%22&psa6=%22PROGRAM%20OUTCOME%22&var7=dashboard.variables%5B%27C1%27%5D&val7=%227%22&psa7=%22PROGRAM%20OUTCOME%22&var8=dashboard.variables%5B%27CAR%27%5D&cov8=%22PO_STDNT_CAR_TERM%22.%22ACAD_CAREER%22&val8=%22UG%22&psa8=%22PROGRAM%20OUTCOME%22" target="_blank"><li onclick="w3_close()" class="w3-hover-theme my-hover"><img src="/images/icons/outcome.png" style="width: 28px">&nbsp;&nbsp;Program Outcomes</li></a>
+						<a href="http://administration.srmu.ac.in:7502/bi-security-login/login.jsp?msi=false&redirect=L2FuYWx5dGljcy9zYXcuZGxsP0Rhc2hib2FyZCZQb3J0YWxQYXRoPSUyRnNoYXJlZCUyRkxlYXJuZXIlMkZfcG9ydGFsJTJGTGVhcm5lciZoYXNoPUxzdW5odm04Z1ZOREhaYm0wTFlZWkxac09Hd0Y0S0kyOWJ3Nm5IcF9SN1pjZmQ3ZVduRGg4LXZLT2NIOFRLUmY=" target="_blank"><li onclick="w3_close()" class="w3-hover-theme my-hover"><img src="/images/icons/outcome.png" style="width: 28px">&nbsp;&nbsp;Learner's Report</li></a>
+					</div>
+				</ul>
+			</div>
+			
+			<div sec:authorize="hasRole('ROLE_Iqac')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible13" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Setup</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible13" class="collapse">
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="cloSetup"><img src="/images/icons/learn.png" style="width: 22px">&nbsp;&nbsp;&nbsp;Course Learning Objective Setup</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="createtopics"><img src="/images/icons/topics.png" style="width: 22px">&nbsp;&nbsp;&nbsp;Create Topic</li>
+					</div>
+				</ul>
+			</div>
+			<div sec:authorize="hasRole('ROLE_Faculty')">
+				<ul class="w3-ul w3-border w3-theme-l5 w3-margin-bottom w3-card">
+					<li class="w3-theme-d5" data-target="#collapsible11" data-toggle="collapse">
+						<div class="w3-row">
+							<div class="w3-col" style="width:95%">
+								<h5 style="margin-top: 0; margin-bottom: 0">Reports</h5>
+							</div>
+							<div class="w3-col" style="width:5%">
+								<i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i>
+							</div>
+						</div>
+					</li>
+					<div id="collapsible11" class="collapse">
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="activityreport"><img src="/images/icons/report.png" style="width: 22px">&nbsp;&nbsp;&nbsp;Activity Report</li>
+						<li onclick="w3_close()" class="w3-hover-theme my-hover" id="questionbankreport"><img src="/images/icons/report.png" style="width: 22px">&nbsp;&nbsp;&nbsp;Question Bank Report</li>			
+					</div>
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	<script src="/js/coursePlan/loadPlanInSidebar.js"></script>
+</div>
+</body>

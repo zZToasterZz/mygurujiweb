@@ -1,0 +1,38 @@
+<div th:fragment="addSubSection">
+	<div id="addSubSection" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px">
+		
+			<header class="w3-container w3-teal">
+				<span onclick="document.getElementById('addSubSection').style.display='none'" class="w3-button w3-large w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+				<h4><img src="/images/icons/add-sub-section32.png">&nbsp;&nbsp;Add Sub-Section</h4>
+			</header><br>
+	
+			<div class="w3-container">
+				<div class="w3-row">
+					<p><select id="subSectionForUnit" class="w3-select" name="subSectionForUnit">
+						<option value="0" disabled selected>Add Sub-Section to Unit</option>
+						<option value="Unit1">Unit1: Introductory Concept</option>
+						<option value="Unit2">Unit2: C Fundamentals</option>
+					</select></p>
+					<p><select id="subSectionAfter" class="w3-select" name="subSectionAfter">
+						<option value="0" disabled selected>Add Sub-Section After</option>
+						<option value="Unit1">Unit1.1: Overview of Programming and Programming Languages</option>
+						<option value="Unit2">Unit1.2: Types of Programming Languages</option>
+						<option value="Unit2">Unit1.3: Introduction to C</option>
+					</select></p>
+				    <p><label>New Sub-Section Title</label>
+				    <input class="w3-input w3-border" type="text"></input></p>
+				    <p><label>Sub-Section Introduction</label>
+				    <textarea class="w3-input w3-border" style="resize: none" rows="5"></textarea></p>
+				    <p><label>Number of Lectures Required to Complete This Sub-Section</label>
+				    <input class="w3-input w3-border" type="text"></input></p>
+				</div>
+			</div>
+			
+			<div class="w3-container">
+				<button class="w3-button w3-green w3-section w3-padding" type="submit">Save</button>
+				<button class="w3-button w3-red" onclick="document.getElementById('addSubSection').style.display='none'" type="button">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>

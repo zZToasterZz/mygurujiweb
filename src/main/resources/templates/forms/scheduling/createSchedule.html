@@ -1,0 +1,340 @@
+<div th:fragment="createSchedule">
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;" onclick="w3_open()">
+			  		<img src="/images/icons/schedule-assessment.png" style="width: 35px;">
+			  		&nbsp;&nbsp;Schedule an Assessment
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+
+		<div class="w3-row-padding">
+			<div class="w3-half">
+				<div class="w3-container w3-card w3-theme-l3 w3-padding" style="margin-top: 16px; opacity: .95">
+					<div class="w3-container w3-border w3-white w3-round-large w3-padding">
+						<div class="w3-row">
+							<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Existing Schedules</h5>
+						</div>
+						<hr class="hrline">
+						<p>
+							<input type="hidden" th:value="${reschedule}" id="reschedule">
+							<label style="font-weight: bolder">Course</label>
+							<select onload="getBatch(this);getAssessment();return false;" onchange="getBatch('1');getAssessment();return false;" id="courseid" name="courseid" class="w3-input w3-border"
+								th:if="${reschedule!='yes'}">
+								<option value="" disabled selected style="display:none;"></option>
+								<th:block th:each="course : ${course}">
+									<option th:value="${course.id}"
+										th:selected="${course.id==cid}">
+										<column th:text="${course.id}+'&nbsp;'"></column>:<column th:text="'&nbsp;'+${course.descr}"></column>
+									</option>
+								</th:block>
+							</select>
+							<select id="courseid" name="courseid" class="w3-input w3-border"
+								th:if="${reschedule=='yes'}">
+								<th:block th:each="course : ${course}">
+									<option th:if=${course.id==cid}
+										th:value="${course.id}"
+										th:selected="${course.id==cid}">
+										<column th:text="${course.id}+'&nbsp;'"></column>:<column th:text="'&nbsp;'+${course.descr}"></column>
+									</option>
+								</th:block>
+							</select>
+						</p>
+						<div class="w3-row">
+							<div class="w3-quarter w3-dropdown-hover" style="padding: 0px 0px !important;">
+								<button class="w3-button w3-black" style="width: 100%">Batches</button>
+								<div th:if="${reschedule!='yes'}"  class="w3-dropdown-content w3-bar-block w3-border" style="width:350px;">
+									<ul class="w3-ul" id="batchUl">
+										<li><input type="checkbox" class="w3-check" disabled/><label style="margin-left:8px;">Select Course first</label></li>
+									</ul>
+								</div>
+							</div>
+							<!-- th:if="${reschedule!='yes'}" -->
+							<div  
+								class="w3-threequarter" style="padding: 0px 0px !important;">
+								<input readonly class="w3-input w3-border" id="selectedBatches" type="hidden" style="padding: 7px !important;"
+									th:value="${selbatches}"/>
+								<input readonly class="w3-input w3-border" id="selectedBatch" type="text" style="padding: 7px !important;"
+									th:value="${selclass}"/>
+							</div>
+							<!-- <div th:if="${reschedule=='yes'}" 
+								class="w3-threequarter" style="padding: 0px 0px !important;">
+								<input readonly class="w3-input w3-border" id="selectedBatches" type="hidden" style="padding: 7px !important;"
+									th:value="${batches}"/>
+								<input readonly class="w3-input w3-border" id="selectedBatch" type="text" style="padding: 7px !important;"
+									th:value="${classes}"/>
+							</div> -->
+						</div>
+
+						<div class="w3-bar">
+							<div class="w3-threequarter" style="padding-right:30px;margin-top:6px;">
+								<span class="w3-left" style="color:red; width:95%">Before scheduling an exam click on "Get Schedule" button to fetch upcoming schedules of batches selected</span>
+							</div>
+							<div class="w3-quarter">
+								<div class="buttonbarpadding w3-bar-item w3-right" id="getSchedule"><a class="w3-btn w3-theme-d5 w3-round-large"><img src="/images/icons/xmag.png" style="width: 20px;">&nbsp;&nbsp;Get Schedule</a></div>
+							</div>
+							<!--<div class="buttonbarpadding w3-bar-item w3-right" id="addNewSchedule"><a class="w3-btn w3-theme-d5 w3-round-large"><img src="/images/icons/add.png" style="width: 20px;">&nbsp;&nbsp;Add&nbsp;New Schedule&nbsp;&nbsp;</a></div>-->
+						</div>
+					</div>
+					
+					<!-- <div class="w3-container w3-border w3-white w3-round-large w3-padding" style="margin-top: 16px;">
+						<h4>My Schedule</h4>
+						<div id="mycalendar"></div>
+					</div> -->
+					<div class="w3-container w3-border w3-white w3-round-large w3-padding" style="margin-top: 16px;">
+						<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Batch Schedule</h5>
+						<hr class="hrline">
+						<div id="calendar"></div>
+					</div>
+				</div>				
+			</div>
+			
+			<div class="w3-half" id="createDiv">
+				<form onsubmit="return false;" style="display: block">
+					<div class="w3-container w3-card w3-theme-l3 w3-padding" style="margin-top: 16px; opacity: .95">
+						<div class="w3-container w3-border w3-white w3-round-large w3-padding">
+							<div class="w3-row">
+								<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Create New Schedule</h5>
+							</div>
+							<hr class="hrline">
+							<p>
+								<label style="font-weight: bolder">Course</label>
+								<input readonly id="selectedCourseid" class="w3-input w3-border w3-light-grey"
+									th:value="${cdescr}">
+							</p>
+							<p>
+								<label style="font-weight: bolder">Batches</label>
+								<input readonly class="w3-input w3-border w3-light-grey" id="selectedBatches1" 
+									th:value="${selbatches}" type="hidden"/>
+								<input readonly class="w3-input w3-border w3-light-grey" id="selectedBatch1" 
+									th:value="${selclass}" type="text"/>
+							</p>
+							<p>
+								<label style="font-weight: bolder">Total Student Strength:&nbsp;</label>
+								<span th:text="${stdnt}" id="stdnt"></span>
+							</p>
+							<p th:if="${reschedule!='yes'}" >
+								<label style="font-weight: bolder">Assessment</label>
+								<select id="assessmentsList" name="assessmentsList" class="w3-input w3-border">
+									<option value="" disabled selected style="display:none;">Select Assessment</option>
+								</select>								
+							</p>
+							<p th:if="${reschedule=='yes'}" >
+								<label style="font-weight: bolder">Assessment</label>
+								<select id="assessmentsList" name="assessmentsList" class="w3-input w3-border">
+									<option th:value="${assid}"
+										th:text="${assdes}" 
+										selected></option>
+								</select>
+							</p>							
+							<p>
+								<label style="font-weight: bolder">Schedule Description</label>
+								<input th:if="${reschedule}=='yes'" th:value="${descr}"
+									class="w3-input w3-border" id="descr" type="text" readonly>
+								<input th:if="${reschedule}!='yes'" th:value="${descr}"
+									class="w3-input w3-border" id="descr" type="text">
+							</p>
+							<p th:if="${reschedule}=='yes'">
+								<label style="font-weight: bolder">Comment</label>
+								<input class="w3-input w3-border" id="comment" type="text">
+							</p>
+							<div class="w3-row">
+								<div class="w3-half">
+									<p>
+										<label style="font-weight: bolder">Start Date-Time</label>
+										<input class="w3-input w3-border" id="startdate" onclick="setstartdate()" onfocus="setstartdate()" type="date" onblur="setEndDate()">
+									</p>
+								</div>
+								<div class="w3-half">
+									<p>
+										<label style="font-weight: bolder">&nbsp;</label>
+										<input class="w3-input w3-border" id="starttime" type="time">
+									</p>
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-half">
+									<p>
+										<label style="font-weight: bolder">End Date-Time</label>
+										<input readonly class="w3-input w3-border" id="enddate" type="date">
+									</p>
+								</div>
+								<div class="w3-half">
+									<p>
+										<label style="font-weight: bolder">&nbsp;</label>
+										<input class="w3-input w3-border" id="endtime" type="time">
+									</p>
+								</div>
+							</div>
+							
+							<div class="w3-row">
+								<div class="w3-col" style="width:70%">
+									<p>
+										<label style="font-weight: bolder">Duration in Minutes</label>
+										<input readonly class="w3-input w3-border w3-light-grey" id="duration" type="number" min="1">
+									</p>
+								</div>
+								<div class="w3-col" style="width:30%">
+									<p style="margin-bottom: 0 !important;">&nbsp;</p>
+									<div class="w3-btn w3-input w3-border" id="getDuration" style="color: blue"><i class="fa fa-clock" style="font-size: 15px;"></i>&nbsp;&nbsp;Get Duration<span class="w3-text-red">&#42;</span></div>
+
+								</div>
+							</div>
+
+							<!--<p>
+								<label style="font-weight: bolder">Duration in Minutes</label>
+								<input class="w3-input w3-border" id="duration" type="number" min="1">
+							</p>-->
+							
+							<div class="w3-bar">
+								<buutton class="buttonbarpadding w3-bar-item w3-right" onclick="confirmAjaxPost();return false;"><a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-save" style="font-size: 18px; color: lime"></i>&nbsp;&nbsp;Save Schedule</a></buutton>
+								<input type="hidden" th:value="${createdby}" id="createdby"/>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>			
+		</div>		
+		<div id="changeassignment" class="w3-modal">
+		  <div class="w3-modal-content" 
+		  	style="margin-top:18%;margin-left:35%;margin-right:35%;width:500px">
+		    <div class="w3-container">
+		    	<i onclick="document.getElementById('changeassignment').style.display='none'"
+		      		class="w3-display-topright fa fa-window-close fa-2x" 
+		      		style="cursor: pointer;color:red;text-shadow: 0 0 10px black;"></i>
+		      	<br><br>
+		      	<div class="w3-row">
+					<div class="w3-half">
+						<p>
+							<label style="font-weight: bolder">Start Date-Time</label>
+							<input class="w3-input w3-border" id="restartdate" type="date" onblur="setEndDate(1)">
+						</p>
+					</div>
+					<div class="w3-half">
+						<p>
+							<label style="font-weight: bolder">&nbsp;</label>
+							<input class="w3-input w3-border" id="restarttime" type="time">
+						</p>
+					</div>
+				</div>
+				<div class="w3-row">
+					<div class="w3-half">
+						<p>
+							<label style="font-weight: bolder">End Date-Time</label>
+							<input readonly class="w3-input w3-border" id="reenddate" type="date">
+						</p>
+					</div>
+					<div class="w3-half">
+						<p>
+							<label style="font-weight: bolder">&nbsp;</label>
+							<input class="w3-input w3-border" id="reendtime" type="time">
+						</p>
+					</div>
+				</div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div id="pagedata" th:data-role="${user_role_scdl}"></div>
+	<script src="/js/moment/moment-with-locales.min.js"></script>
+	<script src="/js/scheduling/createSchedule.js"></script>
+</div>
+
+<div th:fragment='createSchedulesearch'>
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;" onclick="w3_open()">
+			  		<img src="/images/icons/schedule-assessment.png" style="width: 35px;">
+			  		&nbsp;&nbsp;Search a Scheduled Assessment
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95;height:500px">
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="divTable">
+					<div class="divTr">
+						<div class="d1"><h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Find an existing value</h5></div>						
+					</div>
+				</div>
+				<hr class="hrline">
+				<h6 style="font-style: italic;">Search Criteria</h6>
+				<div class="w3-row-padding">
+				<div class="w3-half w3-container">
+					<label style="font-weight: bolder">Course</label>
+					<select onload="getBatch1();getAssessment1();return false;" onchange="getBatch1();getAssessment1();return false;" id="courseid" name="courseid" class="w3-input w3-border">
+						<option value="" disabled selected style="display:none;"></option>
+						<th:block th:each="course : ${course}">
+							<option th:value="${course.id}">
+								<column th:text="${course.id}+'&nbsp;'"></column>:<column th:text="'&nbsp;'+${course.descr}"></column>
+							</option>
+						</th:block>
+					</select>						
+				</div>
+				<div class="w3-half w3-container">
+					<br>
+					<div class="w3-quarter w3-dropdown-hover" style="padding: 0px 0px !important;">
+						<button class="w3-button w3-black" style="width: 100%">Batches</button>
+						<div class="w3-dropdown-content w3-bar-block w3-border" style="width:350px;">
+							<ul class="w3-ul" id="batchUl">
+								<li><input type="checkbox" class="w3-check" disabled/><label style="margin-left:8px;">Select Course first</label></li>
+							</ul>
+						</div>
+					</div>
+					<div class="w3-threequarter" style="padding: 0px 0px !important;">
+						<input readonly class="w3-input w3-border" id="selectedBatches" type="hidden" style="padding: 7px !important;"/>
+						<input readonly class="w3-input w3-border" id="selectedBatch" type="text" style="padding: 7px !important;"/>
+					</div>
+				</div>
+				</div><br>
+				<div class="w3-row-padding">
+					<p>
+						<button id="getSchedules" class="w3-btn w3-theme-d5 w3-round-large" type="button"><img src="/images/icons/xmag.png" style="width: 20px;">&nbsp;&nbsp;Search</button>
+						<button id="addSchedule" class="w3-btn w3-theme-d5 w3-round-large" type="button"><img src="/images/icons/add.png" style="width: 23px;">&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;</button>
+					</p>
+				</div>				
+				<input type="hidden" th:value="${createdby}" id="createdby"/>				
+			</div>
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="w3-row">
+					<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Search Results</h5>
+					<hr class="hrline">
+				</div>
+				<div id="resultSec" class="w3-responsive" style="display:none">
+					<table id="myList" class="display compact cell-border" style="width: 100%;">
+						<thead>
+							<tr class="w3-theme-d3">
+								<th>Course Title</th>
+								<th>Batch Title</th>
+								<th>Class No.</th>
+								<th>Assessment ID</th>
+								<th>Date</th>
+								<th>Start Time</th>
+								<th>End Time</th>
+								<th>Duration</th>
+								<th>Status</th>
+								<th></th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div  id="noData" class="w3-responsive" style="display: none">
+					<div>
+						<p>No record found...</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="pagedata" th:data-role="${user_role_scdl}"></div>
+	<script src="/js/moment/moment-with-locales.min.js"></script>
+	<script src="/js/scheduling/createSchedule.js"></script>
+</div>

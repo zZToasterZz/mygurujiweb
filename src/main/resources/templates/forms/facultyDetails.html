@@ -1,0 +1,148 @@
+<div th:fragment="facultyDetails">
+	<div class="w3-main w3-animate-zoom" style="margin-left: 300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+					<!-- <button class="w3-button w3-large" style="padding-bottom: 0px;" onclick="w3_open()"><i class="material-icons">reorder</i><h3 style="margin-top: 0px; margin-bottom: 0px;">Programming Fundamentals</h3></button> -->
+					<h3 style="font-weight: 600;">
+						<img class="w3-hide-large"
+							src="/images/icons/hide-grader-panel.png"
+							style="cursor: pointer;" onclick="w3_open()"> <img
+							src="/images/icons/kuser.png" style="width: 35px;">
+						&nbsp;&nbsp;Faculty Details
+					</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-container" style="margin-top: 16px;">
+		<div class="w3-card w3-theme-l3 w3-padding">
+			<hr class="hrline">
+			<div class="w3-row">
+				<div class="w3-container w3-half">
+					<div class="w3-row">
+						<div class="w3-third">
+							<label>Emplid : </label>
+						</div>
+						<div class="w3-twothird">
+							<label id="emplid" th:text="${facultyDetail.emplid}"></label>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-third">
+							<label>Faculty Code : </label>
+						</div>
+						<div class="w3-twothird">
+							<label id="facultycode" th:text="${facultyDetail.facultycode}"></label>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container w3-half">
+					<div class="w3-row">
+						<div class="w3-third">
+							<label>Name : </label>
+						</div>
+						<div class="w3-twothird">
+							<label id="facultyName" th:text="${facultyDetail.fullname}"></label>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-third">
+							<label>Designation : </label>
+						</div>
+						<div class="w3-twothird">
+							<label id="Designation" th:text="${facultyDetail.designation}"></label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr class="hrline">
+		</div>
+		</div>
+
+		<div class="w3-container w3-margin w3-padding w3-theme-l3" style="margin-top: 16px;">
+			<div class="w3-row">
+				<a href="javascript:void(0)" onclick="openTab(event, 'General');">
+					<div class="w3-col tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-blue-grey w3-theme-l3"	style="width: 33%">General</div>
+				</a> 
+				<a href="javascript:void(0)" onclick="openTab(event, 'Roles');">
+					<div class="w3-col tablink w3-bottombar w3-hover-light-grey w3-padding"	style="width: 33%">Courses Info</div>
+				</a> 
+				<a href="javascript:void(0)" onclick="openTab(event, 'Audit');">
+					<div class="w3-col tablink w3-bottombar w3-hover-light-grey w3-padding"	style="width: 33%">Faculty Courses</div>
+				</a>
+			</div>
+		
+
+			<!-- Begin of General Tab -->
+			<div id="General" class="optTab">
+				<div class="w3-row w3-padding">
+					<button onClick="showHodeContent('general_logon')"
+						class="w3-button w3-block w3-theme w3-left-align">Faculty
+						Information</button>
+					<div id="general_logon" class="w3-show">
+						<div class="w3-container">
+							<div class="w3-row w3-padding">
+								<div class="w3-row divborderbottom">
+									<div class="w3-quarter">
+										<label>Email : </label>
+									</div>
+									<div class="w3-threequarter">
+										<label id="email" th:text="${facultyDetail.emailaddr}"></label>
+									</div>
+								</div>
+								<div class="w3-row divborderbottom">
+									<div class="w3-quarter">
+										<label>Contact Number : </label>
+									</div>
+									<div class="w3-threequarter">
+										<label id="ContactNo" th:text="${facultyDetail.primarycontact}"></label>
+									</div>
+								</div>
+								<div class="w3-row divborderbottom">
+									<div class="w3-quarter">
+										<label>Secondary Contact : </label>
+									</div>
+									<div class="w3-threequarter">
+										<label id="ContactNo" th:text="${facultyDetail.secondarycontact}"></label>
+									</div>
+								</div>
+								<div class="w3-row divborderbottom">
+									<div class="w3-quarter">
+										<label>Faculty Id : </label>
+									</div>
+									<div class="w3-threequarter">
+										<label id="facId" th:text="${facultyDetail.facultyid}"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<!-- End of General Tab -->
+	
+			<!-- Begin of Role Tab -->
+				<div id="Roles" class="optTab" style="display: none">
+					<div class="w3-row w3-padding">
+						<button class="w3-button w3-block w3-theme w3-left-align">Students Enrolled</button>
+						<div id="studentDetails" class="w3-show">
+						</div>
+					</div>
+				</div>
+			<!-- End of Role Tab -->
+	
+			<!-- Begin of Audit Tab -->
+				<div id="Audit" class="optTab" style="display: none">
+					<div class="w3-row w3-padding">
+						<button class="w3-button w3-block w3-theme w3-left-align">Faculties Tagged</button>
+						<div id="studentDetails" class="w3-show">
+						</div>
+					</div>
+				</div>
+			<!-- End of Audit Tab -->
+		</div>
+		<script src="/js/facultySearch.js"></script>
+	</div>
+</div>

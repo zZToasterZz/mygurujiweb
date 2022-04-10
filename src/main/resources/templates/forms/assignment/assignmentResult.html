@@ -1,0 +1,136 @@
+<div th:fragment="assignmentResult">
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;">
+			  		<img src="/images/icons/assignment.png" style="width: 35px;">
+			  		&nbsp;&nbsp;Assignment Submission
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-row">
+					<div class="w3-bar">
+						<div class="w3-bar-item"><h3 style="margin-bottom: 0px; font-weight: bold;">Assignment Submission</h3></div>
+					</div>
+					<hr class="hrline">
+					
+					<div class="w3-row-padding">
+						<input type="hidden" id="assignmentId" th:value="${assignmentId}">
+						<input type="hidden" id="batchid" th:value="${batchid}">
+						<input type="hidden" id="crseid" th:value="${crseid}">
+ 						<div class="w3-border w3-round-large w3-white" style="padding-top:10px;padding-left:10px">
+							<div class="w3-rest">
+								<div class="w3-third">
+									<p style="margin-left:8px;">
+										<label style="font-weight: bold;">Course:&nbsp;&nbsp;</label>
+										<span th:text="${courseTitle}"></span>
+									</p>
+								</div>
+								<div class="w3-third">
+									<p style="margin-left:8px;">
+										<label style="font-weight: bold">Assignment Title:&nbsp;&nbsp;</label>
+										<span th:text="${assignmentTitle}"></span>
+									</p>
+								</div>
+								<div class="w3-third">
+									<p style="margin-left:8px;">
+										<label style="font-weight: bold">Batch Code:&nbsp;&nbsp;</label>
+										<span th:text="${batchCode}"></span>
+									</p>
+								</div>							
+							</div>
+						</div>
+					</div>
+					
+					<div class="w3-row-padding" style="margin-top: 8px;">
+						<div class="w3-border w3-round-large w3-white" style="padding-bottom: 16px;">
+							<div class="w3-container">
+								<div class="w3-half w3-left">
+									<h5 style="margin-bottom: 0px; font-weight: bold">Student List</h5>
+								</div>
+							</div>
+							<div class="w3-container">
+								<div id="studentList">
+									<div id="resultSec" class="w3-responsive" style="display: block">
+										<table id="studentSubmitList" class="display compact cell-border w3-table-all" style="width: 100%;">
+											<thead>
+												<tr class="w3-theme-d3">
+													<th>Name</th>
+													<th>Campus ID</th>
+													<th>Marks Obtained</th>
+													<th>Total Marks</th>
+													<th>Submission Status</th>
+													<th>Evaluation Status</th>
+													<th>Timely Submission</th>
+													<th>Open</th>
+												</tr>
+											</thead>										
+										</table>
+									</div>
+									<div id="noData" class="w3-responsive" style="display: none">
+										<div>
+											<p>No record found...</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="answerSheetModal" class="w3-modal" style="display:none">
+		<div class="w3-modal-content w3-theme-l3" style="width:80%">
+			<div id="answerSheet"></div>
+		</div>
+	</div>
+	
+	<!-- <form autocomplete="off" onsubmit="return false;" method="post" id="answersheet" enctype="application/x-www-form-urlencoded">
+		<div id="resultDetailModal" class="w3-modal">
+			<div class="w3-modal-content" style="width:80%">
+				<header class="w3-container w3-theme-d4">
+					<div class="w3-half">
+						<span class="w3-xxlarge">Answer Sheet</span>
+					</div>
+					<div class="w3-half">
+						<div class="w3-right">
+							<p class="w3-xlarge">
+								<span id="stdntName"></span> <br>
+								<span id="stdntCrse"></span> <br>
+								<span id="stdntAssess"></span>
+							</p>
+						</div>
+					</div>
+				</header>
+				<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+					<div id="answerSheet">
+						
+					</div>
+				</div>
+				<footer class="w3-container w3-theme-d4 w3-padding">
+					<div class="w3-row w3-bar">
+						<div class="w3-button w3-red w3-border w3-border-black w3-round-large w3-right" style="float:left; width:100px;" id="cancelMarks">
+							<i class="fa fa-ban" aria-hidden="true"></i><span>&nbsp;Cancel</span>
+						</div>
+						<div class="w3-button w3-green w3-border w3-border-black w3-round-large w3-right w3-margin-right" style="width:100px;" id="submitMarks">
+							<i class="fa fa-save" aria-hidden="true"></i><span>&nbsp;Submit</span>
+						</div>
+						<div onclick="savemarks();" class="w3-button w3-green w3-border w3-border-black w3-round-large w3-right" style="float:left; width:100px;" id="saveMarks">
+							<i class="fa fa-save" aria-hidden="true"></i><span>&nbsp;Save</span>
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+	</form> -->
+	<!-- <script src="/js/result/viewResult.js"></script> -->
+	<script src="/js/assignment/assignmentResult.js"></script>	
+</div>

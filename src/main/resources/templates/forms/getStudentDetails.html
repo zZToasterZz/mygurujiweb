@@ -1,0 +1,163 @@
+<div th:fragment="getStudentDetails">
+	<div class="w3-main w3-animate-zoom" style="margin-left: 300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+					<!-- <button class="w3-button w3-large" style="padding-bottom: 0px;" onclick="w3_open()"><i class="material-icons">reorder</i><h3 style="margin-top: 0px; margin-bottom: 0px;">Programming Fundamentals</h3></button> -->
+					<h3 style="font-weight: 600;">
+						<img class="w3-hide-large"
+							src="/images/icons/hide-grader-panel.png"
+							style="cursor: pointer;" onclick="w3_open()"> <img
+							src="/images/icons/manage-class-enrollment.png" style="width: 35px;">
+						&nbsp;&nbsp;Student Details
+					</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-container" style="margin-top: 16px;">
+		<div class="w3-card w3-theme-l3 w3-padding">
+			<hr class="hrline">
+			<div class="w3-row">
+				<div class="w3-container w3-third">
+					<div class="w3-row">
+						<div class="w3-third">
+							<label>Student ID : </label>
+						</div>
+						<div class="w3-twothird">
+							<label id="studentid" th:text="${studentDetails.studentid}"></label>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-third">
+							<label>Name : </label>
+						</div>
+						<div class="w3-twothird">
+							<label id="fullname" th:text="${studentDetails.fullname}"></label>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container w3-third">
+					<div class="w3-row">
+						<div class="w3-third">
+							<label>DOB : </label>
+						</div>
+						<div class="w3-twothird">
+							<label id="dob" th:text="${studentDetails.dob}"></label>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-third">
+							<label>Email : </label>
+						</div>
+						<div class="w3-twothird">
+							<label id="email" th:text="${studentDetails.emailaddr}"></label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr class="hrline">
+		</div>
+		</div>
+
+		<div class="w3-container w3-margin w3-padding w3-theme-l3" style="margin-top: 16px;">
+			<div class="w3-row">
+				<a href="javascript:void(0)" onclick="openTab(event, 'General');">
+					<div class="w3-col tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-blue-grey w3-theme-l3"	style="width: 33.33%">General Details</div>
+				</a> 
+				<a href="javascript:void(0)" onclick="openTab(event, 'Roles');">
+					<div class="w3-col tablink w3-bottombar w3-hover-light-grey w3-padding"	style="width: 33.33%">Academic Details</div>
+				</a> 
+				<a href="javascript:void(0)" onclick="openTab(event, 'Audit');">
+					<div class="w3-col tablink w3-bottombar w3-hover-light-grey w3-padding"	style="width: 33.33%">Other Details</div>
+				</a>
+			</div>
+		
+
+		<!-- Begin of General Tab -->
+		<div id="General" class="optTab">
+			<div class="w3-row w3-padding">
+				<button onClick="showHodeContent('general_logon')"
+					class="w3-button w3-block w3-theme w3-left-align">General Information</button>
+				<div id="general_logon" class="w3-show">
+					<div class="w3-container">
+						<div class="w3-row w3-padding">
+								<div class="w3-row divborderbottom">
+									<div class="w3-quarter">
+										<label>Student ID : </label>
+									</div>
+									<div class="w3-threequarter">
+										<label id="studentid" th:text="${studentDetails.studentid}"></label>
+									</div>
+								</div>
+								<div class="w3-row divborderbottom">
+									<div class="w3-quarter">
+										<label>Emplid ID : </label>
+									</div>
+									<div class="w3-threequarter">
+										<label id="emplidid" th:text="${studentDetails.emplid}"></label>
+									</div>
+								</div>
+								<div class="w3-row divborderbottom">
+									<div class="w3-quarter">
+										<label>Name : </label>
+									</div>
+									<div class="w3-threequarter">
+										<label id="name" th:text="${studentDetails.fullname}"></label>
+									</div>
+								</div>
+								<div class="w3-row divborderbottom">
+									<div class="w3-quarter">
+										<label>Email : </label>
+									</div>
+									<div class="w3-threequarter">
+										<label id="email" th:text="${studentDetails.emailaddr}"></label>
+									</div>
+								</div>
+								<div class="w3-row divborderbottom">
+									<div class="w3-quarter">
+										<label>Contact : </label>
+									</div>
+									<div class="w3-threequarter">
+										<label id="type" th:text="${studentDetails.primarycontact}"></label>
+									</div>
+								</div>
+								<div class="w3-row divborderbottom">
+									<div class="w3-quarter">
+										<label>Dob : </label>
+									</div>
+									<div class="w3-threequarter">
+										<label id="dob" th:text="${studentDetails.dob}"></label>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- End of General Tab -->
+
+		<!-- Begin of Student Details Tab -->
+		<div id="Roles" class="w3-container optTab" style="display: none">
+			<div class="w3-row w3-padding">
+				<button class="w3-button w3-block w3-theme w3-left-align">Academic Details</button>
+				<div id="studentDetails" class="w3-show">
+				</div>
+			</div>
+		</div>
+		<!-- End of Student Details Tab -->
+
+		<!-- Begin of Faculty Details Tab -->
+		<div id="Audit" class="w3-container optTab" style="display: none">
+		<div class="w3-row w3-padding">
+			<button class="w3-button w3-block w3-theme w3-left-align">Other Details</button>
+			<div id="studentDetails" class="w3-show">
+			</div>
+		</div>
+		</div>
+		<!-- End of Faculty Details Tab -->
+		</div>
+		<script src="/js/getStudentDetails.js"></script>
+	</div>
+</div>

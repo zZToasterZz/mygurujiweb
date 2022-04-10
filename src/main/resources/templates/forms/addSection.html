@@ -1,0 +1,78 @@
+<div th:fragment="addSection">
+	<div id="addSection" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px">
+		
+			<header class="w3-container w3-teal">
+				<span onclick="document.getElementById('addSection').style.display='none'" class="w3-button w3-large w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+				<h4><img src="/images/icons/add-section.svg" style="width: 32px">&nbsp;&nbsp;Add Section</h4>
+			</header><br>
+	
+			<div class="w3-row">
+				<div class="w3-container w3-half">
+					<select id="selectSectionType" class="w3-select" name="addSectionType">
+						<option value="0" disabled selected>Select type of section to be added</option>
+						<option value="courseIntro">Course Introduction</option>
+						<option value="unitSection">Unit Section</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="w3-container w3-section courseIntro box">
+				<div class="w3-row">
+				    <label>Course Introduction</label>
+				    <textarea class="w3-input w3-border" style="resize: none" rows="5"></textarea>
+				</div>
+				<div class="w3-row">
+					<div class="w3-container w3-half">
+						<h5>Add Text Books:</h5>
+						<p><label>Book Title</label>
+				    	<input class="w3-input w3-border" type="text"></input></p>
+				    	<p><label>Author Name</label>
+				    	<input class="w3-input w3-border" type="text"></input></p>
+					</div>
+					<div class="w3-container w3-half">
+						<h4>Add Reference Books:</h4>
+						<p><label>Book Title</label>
+				    	<input class="w3-input w3-border" type="text"></input></p>
+				    	<p><label>Author Name</label>
+				    	<input class="w3-input w3-border" type="text"></input></p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="w3-container w3-section unitSection box">
+				<div class="w3-row">
+					<select id="sectionAfter" class="w3-select" name="sectionAfter">
+						<option value="0" disabled selected>Add Unit After</option>
+						<option value="Unit1">Unit1: Introductory Concept</option>
+						<option value="Unit2">Unit2: C Fundamentals</option>
+					</select>
+				    <p><label>Unit Title</label>
+				    <input class="w3-input w3-border" type="text"></input></p>
+				    <p><label>Unit Introduction</label>
+				    <textarea class="w3-input w3-border" style="resize: none" rows="5"></textarea></p>
+				</div>
+			</div>
+			
+			<div class="w3-container">
+				<button class="w3-button w3-green w3-section w3-padding" type="submit">Save</button>
+				<button class="w3-button w3-red" onclick="document.getElementById('addSection').style.display='none'" type="button">Cancel</button>
+			</div>
+		</div>
+		<script>
+		$(document).ready(function(){
+		    $("#selectSectionType").change(function(){
+		        $(this).find("option:selected").each(function(){
+		            var optionValue = $(this).attr("value");
+		            if(optionValue){
+		                $(".box").not("." + optionValue).hide();
+		                $("." + optionValue).show();
+		            } else{
+		                $(".box").hide();
+		            }
+		        });
+		    }).change();
+		});
+		</script>
+	</div>
+</div>

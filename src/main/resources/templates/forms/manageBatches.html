@@ -1,0 +1,112 @@
+<div th:fragment="manageBatches">
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<!-- <span th:if="${message != null}">
+				<div class="w3-panel w3-green w3-display-container alertBox">
+					<span onClick="this.parentElement.style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+					<h4><i class="fa fa-check">&nbsp;Success!</i></h4>
+					<p><i th:text="${message}"></i></p>
+				</div>
+			</span> -->
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+				<!-- <button class="w3-button w3-large" style="padding-bottom: 0px;" onclick="w3_open()"><i class="material-icons">reorder</i><h3 style="margin-top: 0px; margin-bottom: 0px;">Programming Fundamentals</h3></button> -->
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+			  		<img src="/images/icons/manage_class.svg" style="width: 35px;">
+			  		&nbsp;&nbsp;Manage Batches
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<p style="margin-top: 0px;">Enter any information you have and click search. Leave fields blank for a list of all values.</p>
+				
+				<div class="w3-row">
+					<div>
+						<form>
+							<div class="divTable">
+								<div class="divTr">
+									<div class="d1"><h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Find an existing value</h5></div>
+									<div class="d2">
+										<a class="w3-button w3-circle w3-theme-d5 w3-large" onclick="displayAddBatchesForm()">+</a>
+									</div>
+								</div>
+							</div>
+							<hr class="hrline">
+							<h6 style="font-style: italic;">Search Criteria</h6>
+							
+							<div class="w3-row-padding">
+								<div class="w3-half">
+									<p>
+										<label>Select Course</label>
+										<select class="w3-select w3-border" id="course" name="course">
+											<option value="" disabled selected>- Select Course -</option>
+											<option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.title} +' : '+ ${course.descr}" />
+										</select>
+									</p>
+									
+									<p>
+										<label>Batch ID</label>
+										<input class="w3-input w3-border" name="batchTitle" id="batchId" type="text">
+									</p>
+								</div>
+								<div class="w3-half">
+									<p>
+										<label>Batch Code</label>
+										<input class="w3-input w3-border" name="batchTitle" id="batchCode" type="text">
+									</p>
+									<p>
+										<label>Batch Title</label>
+										<input class="w3-input w3-border" name="batchTitle" id="batchTitle" type="text">
+									</p>
+								</div>
+							</div>
+								
+								<p>
+									<button id="batchSearch" class="w3-btn w3-theme-d5 w3-large" type="button"><img src="/images/icons/xmag.png" style="width: 20px;">&nbsp;&nbsp;Search</button>
+								</p>
+							
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="w3-row">
+					<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Search Results</h5>
+					<hr class="hrline">
+					<div id="resultSec" class="w3-responsive" style="display: none">
+						<table id="batchList" class="display compact cell-border" style="width: 100%;">
+							<thead>
+								<tr class="w3-theme-d3">
+									<th>Batch ID</th>
+									<th>Course ID</th>
+									<th>Batch Code</th>
+									<th>Batch Title</th>
+									<th>Batch Description</th>
+									<th>Batch Type</th>
+									<th>For Year</th>
+									<th>Batch Sequence</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<div  id="noData" class="w3-responsive" style="display: none">
+						<div>
+							<p>No record found...</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Add Course Modal -->
+		<!-- <div th:replace="forms/addCourse :: addCourse"></div> -->
+		<!-- End of Add Section Model -->
+		
+	</div>
+	<script src="/js/searchBatches.js"></script>
+</div>

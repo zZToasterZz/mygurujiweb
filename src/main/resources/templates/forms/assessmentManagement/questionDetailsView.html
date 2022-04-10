@@ -1,0 +1,120 @@
+<div th:fragment="questionDetailsView">
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+					<h3 style="font-weight: 600;">
+				  		<img src="/images/icons/file-manager.png" style="width: 35px;">
+				  		&nbsp;&nbsp;Question Details
+					</h3>
+				</div>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-bar w3-theme-d3">
+					<h4 class="w3-bar-item"><i>Filter Result By</i></h4>
+					<input id="initialFilter" type="hidden" th:crid="${courseid}" th:tpid="${topicid}" th:tyid="${typeid}">
+					
+					<div class="w3-row">
+						<div class="w3-col" style="width:95%">
+							<div class="w3-row-padding">
+								<div class="w3-third">
+									<p>
+										<label>Course</label>
+										<select disabled class="w3-select w3-border" id="courseSelect" name="course">
+											<option value="" disabled selected>- Select Course -</option>
+											<option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.descr}" />
+										</select>
+									</p>
+								</div>
+								<div class="w3-third">
+									<p>
+										<label>Topic&nbsp;&nbsp;<i id="topicLoader" class="fa fa-gear fa-spin fa-fw" style="color: white; font-size: 20px; display: none;"></i></label>
+										<!-- <label>Topic</label> -->
+										<select class="w3-select w3-border" id="topicSelect" name="topic">
+											<option value="" selected>- Select Topic -</option>
+											<option th:each="topic : ${topicList}" th:value="${topic.id}" th:text="${topic.descr}" />
+										</select>
+									</p>
+								</div>
+								<div class="w3-third">
+									<p>
+										<label>Question Type</label>
+										<select class="w3-select w3-border" id="questionTypeSelect" name="qtype">
+											<option value="" selected>- Select Question Type -</option>
+											<option th:each="questionType : ${questionsType}" th:value="${questionType.id}" th:text="${questionType.descr}" />
+										</select>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div onclick="refreshList()" class="w3-col w3-center" style="width:5%; margin-top: 25px; padding-right: 20px; cursor: pointer;">
+							<i id="loader" class="fas fa-sync-alt fa-2x fa-fw"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="w3-row">
+					<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Search Results</h5>
+					<hr class="hrline">
+					<div id="resultSec" class="w3-responsive" style="display: none">
+						<table id="questionDetailList" class="display compact cell-border" style="width: 100%">
+							<thead>
+								<tr class="w3-theme-d3">
+									<th>Id</th>
+									<th>Question Text</th>
+									<th>Answer Options</th>
+							        <th>Correct Option</th>
+							        <th></th>
+								</tr>
+							</thead>
+							<tbody>
+					        </tbody>
+						</table>
+					</div>
+					<div  id="noData" class="w3-responsive" style="display: none">
+						<div>
+							<p>No record found...</p>
+						</div>
+					</div>
+					<div  id="jsonLoader" class="w3-responsive" style="display: none">
+						<div>
+							<div class='w3-container' style='width: 100%; text-align: center'>
+								<i class='fa fa-cog fa-spin' style='font-size: 30px; color: white;'></i>
+								<p style="color: white;">Loading......</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+	<script src="/js/questionBank/questionDetailsView.js"></script>
+	<script type="text/javascript">	
+	
+	
+	
+	/* $(document).ready(function () {
+		$('#imgid').onclick(function(e) {
+			alert("Hi!");
+			x = e.pageX - $(this).offset().left;
+			y = e.pageY - $(this).offset().top;
+			$(this).css('z-index','15')
+			.children("div.tooltip")
+			.css({'top': y + 10,'left': x + 20,'display':'block'});
+		}).mousemove(function(e) {
+			x = e.pageX - $(this).offset().left;
+			y = e.pageY - $(this).offset().top;
+			$(this).children("div.tooltip").css({'top': y + 10,'left': x + 20});
+		}).mouseleave(function() {
+			$(this).css('z-index','1')
+			.children("div.tooltip")
+			.animate({"opacity": "hide"}, "fast");
+		});
+	}); */
+	</script>
+</div>

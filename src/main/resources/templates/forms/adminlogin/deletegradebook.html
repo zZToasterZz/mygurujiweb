@@ -1,0 +1,93 @@
+<div th:fragment="deletegradebook">
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+					<h3 style="font-weight: 600;">
+				  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+				  		<img src="/images/icons/deletedoc.png" style="width: 35px;">
+				  		&nbsp;&nbsp;Delete Gradebook
+					</h3>
+				</div>
+			</div>
+		</div>
+		
+		<div id="jsonLoaderMain" class="w3-modal"  style="display: none">
+			<div class="w3-modal-content w3-transparent w3-center w3-padding">
+				<i class='fa fa-cog fa-spin' style='font-size: 50px; color: white;'></i>
+				<p style="color: white;">&nbsp;Loading....</p>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<p style="margin-top: 0px;">Enter class number and click search to get details of respective class number.<br>Then click on delete to remove all the mapped assignments along with its marks.</p>
+				<hr class="hrline">
+				<h6 style="font-style: italic;">Search Criteria</h6>
+				<div class="w3-row">
+					<div class="w3-third w3-container">
+						<label>Class Number:&nbsp;</label>
+						<input type="text" class="w3-input w3-border" id="classnbr">						
+					</div>
+					<div class="w3-third w3-container">
+						<div class="buttonbarpadding w3-bar-item w3-margin-top">
+							<a class="w3-btn w3-theme-d5 w3-round-large" onclick="searchclass()">
+								<img src="/images/icons/xmag.png" style="width: 20px;">
+								&nbsp;&nbsp;Search
+							</a>
+						</div>
+					</div>
+					<div class="w3-third w3-container">
+						<div class="buttonbarpadding w3-bar-item w3-margin-top">
+							<a class="w3-btn w3-theme-d5 w3-round-large" onclick="pushMarksInPs()">
+								<img src="/images/icons/add.png" style="width: 20px;">
+								&nbsp;&nbsp;Push
+							</a>
+						</div>
+					</div>					
+					<div class="w3-third w3-container" style="padding-top:35px">
+						<strong><span id="errormsg" style="color:red"></span></strong>
+					</div>
+				</div>
+				<div  id="jsonLoader" class="w3-responsive" style="display: none">
+					<div>
+						<div class='w3-container' style='width: 100%; text-align: center'>
+							<i class='fa fa-cog fa-spin' style='font-size: 30px; color: white;'></i>
+							<p style="color: white;">Loading......</p>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container" id="idDetails" style="display:none">
+					<div class="w3-row">
+						<div class="w3-half">
+							<strong><label>Faculty Name:</label></strong>
+							<span id="fullname"></span><br>
+							<strong><label>Course Description:</label></strong>
+							<span id="coursedescr"></span><br>
+							<strong><label>Class type:</label></strong>
+							<span id="classtype"></span>
+						</div>
+						<div class="w3-half">
+							<strong><label>ERP ID:</label></strong>
+							<span id="erpid"></span><br>
+							<strong><label>Catalog number:</label></strong>
+							<span id="catalognbr"></span><br>
+							<strong><label>Marks pushed to PS:</label></strong>
+							<span id="pushsts"></span><br>
+							<span class="w3-hide" id="batchid"></span><br>					
+							<span class="w3-hide" id="term"></span><br>
+						</div>	
+						<div class="w3-bar-item w3-margin-top">
+							<a class="w3-btn w3-theme-d5 w3-round-large" onclick="deletegradebook()">
+								<img src="/images/icons/trash.png" style="width: 20px;">
+								&nbsp;&nbsp;Delete
+							</a>
+						</div>					
+					</div>						
+				</div>
+			</div>			
+		</div>
+				
+	</div>
+	<script src="/js/adminlogin/deletegradebook.js"></script>
+</div>

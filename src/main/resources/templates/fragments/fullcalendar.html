@@ -1,0 +1,23 @@
+<div th:fragment="fullcalendar">
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+				<!-- <button class="w3-button w3-large" style="padding-bottom: 0px;" onclick="w3_open()"><i class="material-icons">reorder</i><h3 style="margin-top: 0px; margin-bottom: 0px;">Programming Fundamentals</h3></button> -->
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+			  		<img src="/images/icons/view-calendar-upcoming-days.png" style="width: 35px;">
+			  		&nbsp;&nbsp;Upcoming Events
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .9">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div id="calendar-container">
+					<div id="calendar"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

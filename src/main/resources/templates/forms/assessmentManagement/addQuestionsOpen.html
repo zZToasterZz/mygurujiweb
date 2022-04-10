@@ -1,0 +1,61 @@
+<div th:fragment="addQuestionsOpen">
+	<div class="w3-main w3-animate-zoom" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+				<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+			  		<img src="/images/icons/addQuestions.svg" style="width: 35px;">
+			  		&nbsp;&nbsp;Add Questions
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<form id="addCourseForm" action="#">
+				<div id="addCourse" class="w3-card w3-theme-l3 w3-padding">
+					<div class="w3-row">
+						<div class="w3-container w3-half">
+							<p>
+								<label>Course</label>
+								<select class="w3-select w3-border" id="courseSelect" name="courseSelect">
+									<option value="" disabled selected>- Select Course -</option>
+									<option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.title}" />
+								</select>
+							</p>
+							<p>
+								<label>Select Question Type</label>
+								<select class="w3-select w3-border" id="questionTypeSelect" name="questionTypeSelect">
+									<option value="" disabled selected>- Select Question Type -</option>
+									<option th:each="questionType : ${questionsType}" th:value="${questionType.id}" th:text="${questionType.descr}" />
+								</select>
+							</p>
+						</div>
+						<div class="w3-container w3-half">
+							<p>
+								<label>Topic</label>
+								<select class="w3-select w3-border" id="topicSelect" name="topicSelect">
+									
+								</select>
+							</p>
+						</div>
+						<em id="dumTag" th:cr="${courseid}" th:tpid="${topicid}" th:tpdsc="${topicdescr}"></em>
+					</div>
+				
+					<div class="w3-container">
+						<button id="addQuestion" class="w3-btn w3-theme-d5" type="button"><i class="fa fa-plus" style="width: 18px;"></i>&nbsp;&nbsp;Add</button>
+						<button id="cancelQuestionAdd" class="w3-btn w3-red" type="button"><i class="fa fa-times" style="width: 18px;"></i>&nbsp;&nbsp;Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<div id="replace_div_inner">
+			
+		</div>
+	</div>
+	<script src="/js/questionBank/addQuestionOpen.js"></script>
+	<script src="/js/ckeditor/ckeditor.js"></script>
+	<script src="/js/ckeditor/adapters/jquery.js"></script>
+</div>

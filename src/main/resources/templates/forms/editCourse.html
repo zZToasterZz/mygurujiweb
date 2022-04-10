@@ -1,0 +1,43 @@
+<div th:fragment="editCourse">
+	<div class="w3-main w3-animate-zoom" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+				<!-- <button class="w3-button w3-large" style="padding-bottom: 0px;" onclick="w3_open()"><i class="material-icons">reorder</i><h3 style="margin-top: 0px; margin-bottom: 0px;">Programming Fundamentals</h3></button> -->
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+			  		<img src="/images/icons/course.png" style="width: 35px;">
+			  		&nbsp;&nbsp;Edit Courses
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<form id="editCourseForm" action="#" th:object="${courseCreate}">
+				<div id="addCourse" class="w3-card w3-theme-l3 w3-padding">
+						<div class="w3-row">
+							<div class="w3-container w3-half">
+								<p><label>Course Code</label>
+						    	<input th:field="*{coursecode}" id="saveCourseCode" class="w3-input w3-border" type="text"></input></p>
+						    	<p><label>Course Title</label>
+						    	<input th:field="*{coursetitle}" id="saveCourseTitle" class="w3-input w3-border" type="text"></input></p>
+							</div>
+							<div class="w3-container w3-half">
+								<p><label>Course Summary</label>
+							    <textarea th:field="*{coursedescr}" id="saveCourseDescr" class="w3-input w3-border" style="resize: none" rows="5"></textarea></p>
+							</div>
+						</div>
+					
+						<div class="w3-container">
+							<button id="editCourses" class="w3-button w3-theme-d5 w3-section w3-padding" type="button"><img src="/images/icons/save.png" style="width: 18px;">&nbsp;&nbsp;Save</button>
+							<button class="w3-button w3-red" onclick="document.getElementById('addCourse').style.display='none'" type="button">Cancel</button>
+						</div>
+					
+					<input id="saveCourseid" type="hidden" th:field="*{courseid}">
+					<input id="saveCreatedBy" type="hidden" th:field="*{createdby}">
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="/js/editCourse.js"></script>
+</div>

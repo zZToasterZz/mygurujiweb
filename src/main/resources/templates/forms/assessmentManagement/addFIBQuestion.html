@@ -1,0 +1,85 @@
+<div th:fragment="addFIBQuestion">
+	<div class="w3-container w3-animate-zoom" style="margin-top: 16px; opacity: .95;">		
+		<div class="w3-card w3-theme-l3 w3-padding">
+			<!-- This portion to be replicated -->
+			<div class="qBody" id="qBody">
+				<div class="questionBlock w3-panel my-border">
+					<div class="w3-black" style="margin-top: 16px;">
+						<h4 style="padding-top:8px; padding-left:8px">Add Question <i>(Fill in the Blank Type)</i></h4>
+						<label id="topicTitle" style="padding-left:8px; color: darkorange;" th:text="'Under Topic:&nbsp;&nbsp;&nbsp' + ${topicname}"></label>
+					</div>
+					
+					
+					<div class="w3-row" style="margin-top: 8px;">
+						<div class="w3-third" style="padding-right:8px;">
+							<p>
+								<label>Select Blooms Taxonomy</label>
+								<select class="w3-select w3-border" id="selectBLeditor1" name="selectBL">
+									<option value="" disabled selected>- Select Blooms Taxonomy -</option>
+									<option value="BL-1">BL - 1</option>
+									<option value="BL-2">BL - 2</option>
+									<option value="BL-3">BL - 3</option>
+									<option value="BL-4">BL - 4</option>
+									<option value="BL-5">BL - 5</option>
+									<option value="BL-5">BL - 6</option>
+								</select>
+							</p>
+						</div>
+						<div class="w3-third" style="padding-right:8px;">
+							<p>
+								<label>Select CLO</label>
+								<select class="w3-select w3-border" id="selectCOeditor1" name="selectCO">
+									<option value="" disabled selected>- Select CLO -</option>
+									<th:block th:each="outcome : ${outcomes}">
+										<option th:value="${outcome.id}" th:text="${outcome.title}"></option>
+									</th:block>
+								</select>
+							</p>
+						</div>
+						<div class="w3-third">
+							<p>
+								<label>Select Reference ID</label>
+								<select class="w3-select w3-border" id="selectRFeditor1" name="selectRF">
+									<option value="" disabled selected>- Select Reference ID -</option>
+									<th:block th:each="book : ${books}">
+										<option th:value="${book.id}" th:text="${book.title}"></option>
+									</th:block>
+								</select>
+							</p>
+						</div>
+					</div>
+					
+					
+					<div class="w3-row">
+						<label>Question:</label>
+						<textarea id="editor1" class="jquery_ckeditor" name="questionTextArea">
+					
+						</textarea>
+					</div>
+					<div class="w3-row" style="margin-top: 16px;">
+						<div class="w3-half" style="padding-right:8px;">
+							<p>
+								<label>Select Question Gravity</label>
+								<select class="w3-select w3-border" id="selecteditor1" name="selectGV">
+									<option value="" disabled selected>- Select Question Gravity -</option>
+									<option th:each="questionGvt : ${questionsGravity}" th:value="${questionGvt.id}" th:text="${questionGvt.title}" />
+								</select>
+							</p>
+						</div>
+						<div class="w3-half" style="padding-left:8px;">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-bar" style="z-index: 1">
+				<div class="buttonbarpadding w3-bar-item" onclick="saveClicked()"><a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-save" style="font-size:15px; color: lime"></i>&nbsp;&nbsp;Save</a></div>
+				<div class="buttonbarpadding w3-bar-item" onClick="newQuestionBlock()"><a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-question" style="font-size:15px;"></i>&nbsp;&nbsp;Add More</a></div>
+				<div class="buttonbarpadding w3-bar-item" onClick="cancilQuestionAdd()"><a class="w3-btn w3-red w3-round-large"><i class="fa fa-times" style="font-size:15px;"></i>&nbsp;&nbsp;Cancel</a></div>
+			</div>
+			<!-- End if one question -->
+		</div>
+		
+	</div>
+	<script src="/js/questionBank/addFIBQuestion.js"></script>
+</div>

@@ -1,0 +1,31 @@
+<div th:fragment="dashboard">
+	<div class="w3-container" style="text-align: center;">
+		<h5 class="w3-text-theme" style="font-weight: bolder;; margin-bottom:2px; text-shadow: 1px 1px 0 #444">Your Enrolled Courses</h5>
+	</div>
+	
+	<div class="w3-row-padding" style="opacity: .95">
+		<div th:each="course, iStat : ${courses}"  class="w3-col l3 m4 my-hover">
+			<gtc th:id="${course.id}">
+				<div class="w3-card-4 w3-theme-d1 w3-margin-bottom">
+					<div class="w3-bar w3-theme-d5">
+						<div class="w3-bar-item w3-tangerine nowrap"><strong th:text="${course.title}">Programming Fundamentals</strong></div>
+					</div>
+					<div class="w3-display-container">
+						<img style="object-fit:cover; width: 100%; height:150px; filter: blur(10px) grayscale(1)" src="/images/courseThumbnails/book-gif01.gif" class="w3-image">
+						<div class="w3-display-topleft w3-container">
+							<label style="color: #b22222">Instructor: Mr. Kunwar Jaishankar</label>
+						</div>
+						<div style="margin-top: 15px;" class="w3-display-middle w3-large">
+							<canvas th:id="|paper${iStat.index}|"><img src="/images/courseThumbnails/background.jpg" width="0px" height="0px" onload="myFun(this.parentNode.id)"></canvas>
+						</div>
+						<div style="margin-bottom: 20px;" class="w3-display-bottommiddle w3-container">
+							<label class="w3-text-white">Your Progress</label>
+						</div>
+					</div>
+				</div>
+			</gtc>
+		</div>
+		<script src="/js/goToCourse.js"></script>
+		<script src="/js/index.js"></script>
+	</div>
+</div>

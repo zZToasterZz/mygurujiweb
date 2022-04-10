@@ -1,0 +1,42 @@
+{"properties": [
+  {
+    "name": "in.co.srdt.myguruji.theme",
+    "type": "java.lang.String",
+    "description": "A description for 'in.co.srdt.myguruji.theme"
+  },
+  {
+    "name": "in.co.srdt.myguruji.zoolserver",
+    "type": "java.lang.String",
+    "description": "A description for 'in.co.srdt.myguruji.zoolserver"
+  },
+  {
+    "name": "in.co.srdt.myguruji.zoolserver",
+    "type": "java.lang.String",
+    "description": "A description for 'in.co.srdt.myguruji.zoolserver"
+  },
+  {
+    "name": "in.co.srdt.myguruji.contentstorage",
+    "type": "java.lang.String",
+    "description": "Base folder location for content storage."
+  },
+  {
+    "name": "in.co.srdt.myguruji.mailid",
+    "type": "java.lang.String",
+    "description": "Default mailing id for muguruji."
+  },
+  {
+    "name": "in.co.srdt.myguruji.mailpass",
+    "type": "java.lang.String",
+    "description": "password for default mailing id."
+  },
+  {
+    "name": "in.co.srdt.myguruji.passresetsecret",
+    "type": "java.lang.String",
+    "description": "encryption key for AES encryptions."
+  },
+  {
+    "name": "in.co.srdt.myguruji.assignmentcontent",
+    "type": "java.lang.String",
+    "description": "Base folder location for assignment content storate."
+  }
+]}

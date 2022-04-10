@@ -1,0 +1,167 @@
+<div th:fragment="feedbackparams">
+<style>
+ul, #myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);  
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+#structure{
+	overflow-x: auto;
+    white-space: nowrap;
+}
+</style>
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+			  		<img src="/images/icons/feedbackparams.png" style="width: 40px;">
+			  		&nbsp;&nbsp;Feedback Parameters
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-border w3-round-large w3-white" style="padding-bottom: 16px;">
+					<div class="w3-row">
+					    <a href="javascript:void(0)" onclick="opentab(event, 'create');">
+					    	<div class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red"><h5>Create Feedback Parameters</h5></div>
+					    </a>
+					    <a href="javascript:void(0)" onclick="opentab(event, 'view');">
+					    	<div class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding"><h5>View Feedback Parameters</h5></div>
+					    </a>
+					</div>
+					<div class="tab" id="create">
+						<div class="w3-row w3-padding">
+							<div class="w3-row">
+								<div class="w3-half">
+									<label style="font-weight: bolder;">Feedback Type</label>
+									<select id="parenttype" onchange="loadchilds()" class="w3-input w3-border" style="width:95%">
+										<option value="0">-Select Feedback Type-</option>
+										<th:block th:each="parent : ${parents}">
+											<option th:value="${parent.feedbackgradeparentid}" th:text="${parent.feedbacktypename}"></option>
+										</th:block>
+									</select>
+									<div id="structure">
+									</div>
+								</div>
+								<div class="w3-half">
+									<label style="font-weight: bolder;">Feedback Sub Type</label>
+									<select id="childtype" class="w3-input w3-border" style="width:95%">
+									</select>
+									<span style="color:red;"><i>(Select a sub type to add parameters to it, select NONE to add parameter to the parent.)</i></span>
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-half w3-right">
+									<div class="w3-button w3-black w3-right" onclick="createparameters();">
+										<i class="fa fa-save"></i>
+										<span>Add Parameters</span>
+									</div>
+								</div>
+							</div>
+							<div class="w3-row">
+								<label style="font-weight: bolder;">Parameters</label>
+								<hr class="hrline">
+								<div id="parameters">
+									<div class="w3-row paramrow">
+										<div class="w3-threequarter">
+											<input type="text" class="w3-input w3-border param">
+										</div>
+										<div class="w3-quarter w3-left">
+											<div class="w3-half">
+												<div class="w3-padding">
+													<div class="w3-col w3-left" style="width: 50%">
+														<i class="fa fa-plus" style="font-size: 18px; padding-top: 0px; cursor: pointer;" onclick="appendRow();"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab" id="view" style="display:none;">
+						<div class="w3-row w3-padding">
+							<div class="w3-row">
+								<div class="w3-half">
+									<label style="font-weight: bolder;">Feedback Type</label>
+									<select id="parentnode" class="w3-input w3-border" style="width:95%">
+										<th:block th:each="parent : ${parents}">
+											<option th:id="${'node_' + parent.feedbackgradeparentid}" th:data-name="${parent.feedbacktypename}" th:value="${parent.feedbackgradeparentid}" th:text="${parent.feedbacktypename}"></option>
+										</th:block>
+									</select>
+								</div>
+								<div class="w3-half">
+									<br>
+									<div class="w3-button w3-black" onclick="viewparameters();">
+										<span>View Parameters</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-row w3-padding">
+							<div class="w3-row">
+								<label style="font-weight: bolder;">Feedback Structure</label>
+								<hr class="hrline">
+								<div id="resultSec" class="w3-responsive" style="display: none">
+									<table id="planList" class="display compact cell-border" style="width: 100%;">
+										<thead>
+											<tr class="w3-theme-d3">
+												<th>Feedback Type</th>
+												<th>Feedback Sub Type</th>
+												<th>Parameter</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								<div  id="noData" class="w3-responsive" style="display: none">
+									<div>
+										<p>No record found...</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/js/feedback/feedbackparams.js"></script>
+</div>

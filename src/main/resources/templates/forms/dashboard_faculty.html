@@ -1,0 +1,52 @@
+<div th:fragment="dashboard">
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+				<!-- <button class="w3-button w3-large" style="padding-bottom: 0px;" onclick="w3_open()"><i class="material-icons">reorder</i><h3 style="margin-top: 0px; margin-bottom: 0px;">Programming Fundamentals</h3></button> -->
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+			  		<!-- th:src="'fetchfile?img='+${emplid}+'.jpg'" -->
+			  		<img th:src="'fetchfile?img='+${facultyDetails.getEmplid()}+'.jpg'" class="w3-circle" style="width: 35px;">
+			  		&nbsp;&nbsp;<label th:text="'Welcome ' +${facultyDetails.Pref} + '. ' + ${facultyDetails.firstname}">Welcome </label>
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		
+		<div class="w3-row-padding" style="opacity: .95;">
+			<div class="w3-half">
+				<div class="my-panel w3-card-4 w3-theme-l5">
+					<div class="w3-bar w3-theme-d4">
+						<h5 class="w3-bar-item"><img src="/images/icons/announcement.svg">&nbsp;&nbsp;&nbsp;Announcement</h5>
+					</div>
+					<div class="w3-bar w3-theme-l5">
+						<p class="w3-bar-item">Currently you can view and validate information regarding "Courses and classes you are tagged in", 
+						"Students enrolled in your class" and "Your personal information".</p>
+						<p class="w3-bar-item">It is to bring to your notice that these informations have been pulled from 
+						peopleSoft system. In case of any inconsistency in these informations 
+						please contact SRDT Team.</p>
+						<p class="w3-bar-item">Currently "Question Bank" module is fully functional and you can feed in 
+						questions in the question bank so that at the time of paper creation these 
+						questions are available to you.</p>
+						<p class="w3-bar-item">Regards<br><i>SRDT Development Team</i></p>
+					</div>
+				</div>
+			</div>
+			<div class="w3-half">
+				<div class="my-panel w3-card-4 w3-theme-l5">
+					<div class="w3-bar w3-theme-d4">
+						<h5 class="w3-bar-item"><img src="/images/icons/announcement.svg">&nbsp;&nbsp;&nbsp;Announcement</h5>
+					</div>
+					<div class="w3-bar w3-theme-l5">
+						<p class="w3-bar-item">This is your personal dashboard. In coming days you will be able to view your daily analytics regarding your curricular activities on this page. Development is under progress and will be delivered soon.</p>
+						<p class="w3-bar-item">Regards<br><i>SRDT Development Team</i></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <script src="/js/charts/Chart.min.js"></script> -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script> -->
+	<!-- <script src="/js/charts/chartJsHelper.js"></script> -->
+</div>

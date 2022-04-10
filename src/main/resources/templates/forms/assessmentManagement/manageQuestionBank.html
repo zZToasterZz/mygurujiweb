@@ -1,0 +1,107 @@
+<div th:fragment="manageQuestionBank">
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+					<h3 style="font-weight: 600;">
+				  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+				  		<img src="/images/icons/file-manager.png" style="width: 35px;">
+				  		&nbsp;&nbsp;Manage Question Bank
+					</h3>
+				</div>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<p style="margin-top: 0px;">Select from list of values to search or add new questions.</p>
+				
+				<div class="w3-row">
+					<div>
+						<form>
+							<div class="divTable">
+								<div class="divTr">
+									<div class="d1"><h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Find an existing value / Add a new Value</h5></div>
+									<!-- <div class="d2">
+										<a class="w3-button w3-circle w3-theme-d5 w3-large" onclick="displayAddQuestionsFormOpen()">+</a>
+									</div> -->
+								</div>
+							</div>
+							<hr class="hrline">
+							<h6 style="font-style: italic;">Search Criteria</h6>
+							
+							<div class="w3-row-padding">
+								<div class="w3-half">
+									<p>
+										<label>**&nbsp;Select Course</label>
+										<select class="w3-select w3-border" id="courseSelect" name="courseSelect">
+											<option value="" disabled selected>- Select Course -</option>
+											<option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.title}" />
+										</select>
+									</p>
+									<p>
+										<label>Select Question Type</label>
+										<select class="w3-select w3-border" id="questionTypeSelect" name="questionTypeSelect">
+											<option value="">- Select Question Type -</option>
+											<option th:each="questionType : ${questionsType}" th:value="${questionType.id}" th:text="${questionType.descr}" />
+										</select>
+									</p>
+								</div>
+								<div class="w3-half">
+									<p>
+										<label>Select Topic&nbsp;&nbsp;<i id="topicLoader" class="fas fa-cog fa-spin fa-fw" style="color: white; font-size: 18px; display: none;"></i></label>&nbsp;&nbsp;
+										<!-- <label>Select Topic&nbsp;&nbsp;<img id="topicLoader" src="/images/icons/ZlXo.gif" style="width: 16px; display: none;"/></label> -->
+										<select class="w3-select w3-border" id="topicSelect" name="topicSelect">
+											<option value="" disabled selected>- Select Topic -</option>
+										</select>
+									</p>
+								</div>
+							</div>
+							
+							<div class="w3-bar" style="z-index: 1">
+								<div class="buttonbarpadding w3-bar-item" id="searchQuestionBank"><a class="w3-btn w3-theme-d5 w3-round-large"><img src="/images/icons/xmag.png" style="width: 20px;">&nbsp;&nbsp;Search</a></div>
+								<div class="buttonbarpadding w3-bar-item" id="addNewQuestion"><a class="w3-btn w3-theme-d5 w3-round-large"><img src="/images/icons/add.png" style="width: 20px;">&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;</a></div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="w3-row">
+					<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Search Results</h5>
+					<hr class="hrline">
+					<div id="resultSec" class="w3-responsive" style="display: none">
+						<table id="questionBankList" class="display compact cell-border" style="width: 100%;">
+							<thead>
+								<tr class="w3-theme-d3">
+									<th>Course</th>
+									<th>Topic</th>
+									<th>Question Type</th>
+							        <th>Questions Count</th>
+							        <th></th>
+							        <!-- <th></th> -->
+								</tr>
+							</thead>
+							<tbody>
+					        </tbody>
+						</table>
+					</div>
+					<div  id="noData" class="w3-responsive" style="display: none">
+						<div>
+							<p>No record found...</p>
+						</div>
+					</div>
+					<div  id="jsonLoader" class="w3-responsive" style="display: none">
+						<div>
+							<div class='w3-container' style='width: 100%; text-align: center'>
+								<i class='fa fa-cog fa-spin' style='font-size: 30px; color: white;'></i>
+								<p style="color: white;">Loading......</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
+		</div>
+	</div>
+	<script src="/js/questionBank/questionBankDetails.js"></script>
+</div>

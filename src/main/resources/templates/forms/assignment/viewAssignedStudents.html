@@ -1,0 +1,35 @@
+<div th:fragment="viewAssignedStudents">
+	<div style="margin-top: 16px; opacity: .95;padding-bottom:16px" class="w3-theme-l3">
+		<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+			<div class="w3-border w3-round-large w3-white" style="margin-top:10px;">
+				<table class="w3-table w3-bordered">
+					<tr>
+						<th>
+							Name
+						</th>
+						<th>
+							Campus ID
+						</th>
+						<th>
+							Status
+						</th>
+					</tr>
+					<th:block th:each="a : ${asgn.studentinfo}">
+						<tr>
+							<td>
+								<span th:text="${a.firstname +' ' + a.lastname}"></span>
+							</td>
+							<td>
+								<span th:text="${a.campusid}"></span>
+							</td>
+							<td>
+								<input class="w3-check" style="width:15px;" onclick="return false;" type="checkbox" th:checked="${a.assignstatus == 'Y'}">
+							</td>
+						</tr>
+					</th:block>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script src="/js/assignment/viewAssignedStudents.js"></script>
+</div>

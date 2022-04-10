@@ -1,0 +1,77 @@
+<div th:fragment="facultyTag">
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+					<h3 style="font-weight: 600;">
+				  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+				  		<img src="/images/icons/faculty.png" style="width: 35px;">
+				  		&nbsp;&nbsp;Faculty Tagging Details
+					</h3>
+				</div>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<p style="margin-top: 0px;">On entering only faculty id, you will get list of all batches faculty is tagged in.<br>
+					Enter only batch code to get all faculty tagged in that batch code.<br>Enter both to get whether or not faculty is tagged in selected batch. </p>
+				<hr class="hrline">
+				<h6 style="font-style: italic;">Search Criteria</h6>
+				<div class="w3-row w3-padding">
+					<div class="w3-third w3-container">
+						<label>Faculty ID:&nbsp;</label>
+						<input type="text" class="w3-input w3-border" id="facid">
+					</div>
+					<div class="w3-third w3-container">
+						<label>Class Number:&nbsp;</label>
+						<input type="text" class="w3-input w3-border" id="batchcode">
+					</div>
+					<div class="w3-third w3-container w3-center w3-margin-top">
+						<div class="buttonbarpadding w3-bar-item">
+							<a class="w3-btn w3-theme-d5 w3-round-large" onclick="getDetails()">
+								<img src="/images/icons/xmag.png" style="width: 20px;">
+								&nbsp;&nbsp;Search Details
+							</a>
+						</div>
+					</div>
+					<strong><span id="response"></span></strong>
+				</div>		
+			</div>
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="w3-row">
+					<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Search Results</h5>
+					<hr class="hrline">
+					<div id="resultSec" class="w3-responsive" style="display: none">
+						<table id="facList" class="display compact cell-border" style="width: 100%;">
+							<thead>
+								<tr class="w3-theme-d3">
+									<th>Faculty ID</th>
+									<th>Faculty Name</th>
+									<th>Batch Code</th>
+									<th>Batch Description</th>
+								</tr>
+							</thead>
+							<tbody>
+					        </tbody>
+						</table>
+					</div>
+					<div  id="noData" class="w3-responsive" style="display: none">
+						<div>
+							<p>No record found...</p>
+						</div>
+					</div>
+					<div  id="jsonLoader" class="w3-responsive" style="display: none">
+						<div>
+							<div class='w3-container' style='width: 100%; text-align: center'>
+								<i class='fa fa-cog fa-spin' style='font-size: 30px; color: white;'></i>
+								<p style="color: white;">Loading......</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>							
+		</div>		
+	</div>
+	<script src="/js/adminlogin/facultyTag.js"></script>
+</div>

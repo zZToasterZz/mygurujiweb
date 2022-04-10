@@ -1,0 +1,158 @@
+<div th:fragment="viewResult">
+<style>
+.w3-light-grey2{
+	background-color:#D3D3D3;
+}
+</style>
+<div class="w3-main" style="margin-left:300px;">
+	<div style="position: relative;">
+		<div class="w3-theme-d2" style="opacity: .8">
+		  <div class="w3-container">
+		  	<h3 style="font-weight: 600;">
+		  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;">
+		  		<img src="/images/icons/result.png" style="width: 35px;">
+		  		&nbsp;&nbsp;Assessment Result
+		  	</h3>
+		  </div>
+		</div>
+	</div>
+	<div class="w3-container" style="margin-top: 16px; opacity: .95">
+		<div class="w3-card w3-theme-l3 w3-padding">
+			<div class="w3-row">
+				<div class="w3-bar">
+					<div class="w3-bar-item"><h3 style="margin-bottom: 0px; font-weight: bold;">Assessment Result</h3></div>
+				</div>
+				<hr class="hrline">
+				
+				<div class="w3-row-padding">
+					<div class="w3-border w3-round-large w3-white">
+						<div class="w3-rest">
+							<div class="w3-quarter">
+								<p style="margin-left:8px;">
+									<label style="font-weight: bold;">Course</label>
+									<select onload="getAssessment();return false;" onchange="getAssessment();return false;" id="courseid" name="courseid" class="w3-input w3-border">
+										<option value="" disabled selected>--Select Course--</option>
+										<th:block th:each="course : ${course}">
+											<option th:value="${course.id}" th:text="${course.title}">
+											</option>
+										</th:block>
+									</select>
+									<input type="hidden" th:value="${emplid}" id="emplid">
+								</p>
+							</div>
+							<div class="w3-quarter">
+								<p style="margin-left:8px;">
+									<label style="font-weight: bold">Assessment</label>
+									<select onload="getBatch();getStrategy();return false;" onchange="getBatch();getStrategy();return false;" id="assessmentid" class="w3-input w3-border">
+										<option value="">
+											<column>--Select Assessment--</column>
+										</option>
+									</select>
+								</p>
+							</div>
+							<div class="w3-quarter">
+								<p style="margin-left:8px;">
+									<label style="font-weight: bold">Select Batch</label>
+									<select id="batchid" name="batchid" class="w3-input w3-border">
+										<option value="">
+											<column>--Select Batch--</column>
+										</option>
+									</select>
+								</p>
+							</div>
+							<div class="w3-quarter">
+								<br>
+								<div onclick="getStudents();" class="w3-btn w3-black" style="margin-left:8px;"> Get Student List </div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="w3-row-padding" style="margin-top: 8px;">
+					<div class="w3-border w3-round-large w3-white" style="padding-bottom: 16px;">
+						<div class="w3-container">
+							<div class="w3-half w3-left">
+								<h5 style="margin-bottom: 0px; font-weight: bold">Student List</h5>
+							</div>
+							<div class="w3-half w3-right">
+								<h5 id="assessmentNote" style="margin-bottom: 0px; color:red;font-size: 15px;"></h5>
+							</div>
+						</div>
+						<!--<div class="w3-container">-->
+							<div id="studentList">
+								<div id="resultSec" class="w3-responsive" style="display: none">
+									<table id="resultList" class="display compact cell-border" style="width: 100%;">
+										<thead>
+											<tr class="w3-theme-d3">
+												<th>Name</th>
+												<th>Campus ID</th>
+												<th>Marks Obtained</th>
+												<th>Total Marks</th>
+												<th>Attendance</th>
+												<th>Status</th>
+												<th>Details</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								<div id="noData" class="w3-responsive" style="display: none">
+									<div>
+										<p>No record found...</p>
+									</div>
+								</div>
+								<div id="loader" style="text-align: center; margin-top: 10px; display: none;">
+									<i class='fa fa-cog fa-spin' style="font-size: 24px; color: black;"></i>
+									<p>Loading ....</p>
+								</div>
+							</div>
+						<!--</div>-->
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<form autocomplete="off" onsubmit="return false;" method="post" id="answersheet" enctype="application/x-www-form-urlencoded">
+	<div id="resultDetailModal" class="w3-modal">
+		<div class="w3-modal-content" style="width:80%">
+			<header class="w3-container w3-theme-d4">
+				<div class="w3-half">
+					<span class="w3-xxlarge">Answer Sheet</span>
+				</div>
+				<div class="w3-half">
+					<div class="w3-right">
+						<p class="w3-xlarge">
+							<span id="stdntName"></span> <br>
+							<span id="stdntCrse"></span> <br>
+							<span id="stdntAssess"></span>
+						</p>
+					</div>
+				</div>
+			</header>
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				<div id="answerSheet">
+					
+				</div>
+			</div>
+			<footer class="w3-container w3-theme-d4 w3-padding">
+				<div class="w3-row w3-bar">
+					<div class="w3-button w3-red w3-border w3-border-black w3-round-large w3-right" style="float:left; width:100px;" id="cancelMarks">
+						<i class="fa fa-ban" aria-hidden="true"></i><span>&nbsp;Cancel</span>
+					</div>
+					<div class="w3-button w3-green w3-border w3-border-black w3-round-large w3-right w3-margin-right" style="width:100px;" id="submitMarks">
+						<i class="fa fa-save" aria-hidden="true"></i><span>&nbsp;Submit</span>
+					</div>
+					<div onclick="savemarks();" class="w3-button w3-green w3-border w3-border-black w3-round-large w3-right" style="float:left; width:100px;" id="saveMarks">
+						<i class="fa fa-save" aria-hidden="true"></i><span>&nbsp;Save</span>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+</form>
+
+	<script src="/js/result/viewResult.js"></script>
+
+</div>

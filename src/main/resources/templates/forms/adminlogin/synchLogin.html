@@ -1,0 +1,88 @@
+<div th:fragment="synchLogin">
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+					<h3 style="font-weight: 600;">
+				  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+				  		<img src="/images/icons/synch.png" style="width: 35px;">
+				  		&nbsp;&nbsp;Sync Login
+					</h3>
+				</div>
+			</div>
+		</div>
+		
+		<div id="jsonLoaderMain" class="w3-modal"  style="display: none">
+			<div class="w3-modal-content w3-transparent w3-center w3-padding">
+				<i class='fa fa-cog fa-spin' style='font-size: 50px; color: white;'></i>
+				<p style="color: white;">&nbsp;Loading....</p>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<p style="margin-top: 0px;">Select role to fetch users with no login.</p>
+				<hr class="hrline">
+				<h6 style="font-style: italic;">Search Criteria</h6>
+				<div class="w3-row w3-padding">
+					<div class="w3-third w3-container">
+						<label>Select Role:&nbsp;</label>
+						<select class="w3-input w3-border" onchange="getData(this.value);">
+							<option value='' selected disabled>--Select--</option>
+							<option value='faculty'>Faculty</option>
+							<option value='student'>Student</option>
+						</select>
+					</div>									
+				</div>
+			</div>
+			
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">	
+				<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Search Results</h5>
+				<hr class="hrline">
+				<div class="w3-row">
+					<div id="resultSec" class="w3-responsive" style="display: none">
+						<div class="buttonbarpadding w3-bar-item">
+							<a class="w3-btn w3-theme-d5 w3-round-large" onclick="syncAll()"
+								id="syncall">
+								<img src="/images/icons/synch.png" style="width: 20px;">
+								&nbsp;&nbsp;Sync All
+							</a>
+							<a class="w3-btn w3-theme-d5 w3-hide w3-round-large" onclick="mapAll()"
+								id="maproles">
+								<img src="/images/icons/mapping.png" style="width: 20px;">
+								&nbsp;&nbsp;Map Role
+							</a>
+						</div>
+						<table id="synchLoginTbl" class="display compact cell-border" style="max-width: 100%;min-width: 100%;">
+							<thead>
+								<tr class="w3-theme-d3">
+									<th>Login ID</th>
+									<th>Emplid</th>
+									<th>Email ID</th>
+							        <th>Created By</th>
+								</tr>
+							</thead>
+							<tbody>
+					        </tbody>
+						</table>
+					</div>
+					<div  id="noData" class="w3-responsive" style="display: none">
+						<div>
+							<p>No record found...</p>
+						</div>
+					</div>
+					<div  id="jsonLoader" class="w3-responsive" style="display: none">
+						<div>
+							<div class='w3-container' style='width: 100%; text-align: center'>
+								<i class='fa fa-cog fa-spin' style='font-size: 30px; color: white;'></i>
+								<p style="color: white;">Loading......</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>									
+		</div>
+				
+	</div>
+	<script src="/js/adminlogin/synchLogin.js"></script>
+</div>

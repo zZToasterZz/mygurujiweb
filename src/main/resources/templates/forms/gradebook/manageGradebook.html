@@ -1,0 +1,122 @@
+<div th:fragment="manageGradebook">
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+					<h3 style="font-weight: 600;">
+				  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+				  		<img src="/images/icons/gradebook.png" style="width: 35px;">
+				  		&nbsp;&nbsp;Gradebook
+					</h3>
+				</div>
+			</div>
+		</div>
+		
+		<div id="jsonLoaderMain" class="w3-modal"  style="display: none">
+			<div class="w3-modal-content w3-transparent w3-center w3-padding">
+				<i class='fa fa-cog fa-spin' style='font-size: 50px; color: white;'></i>
+				<p style="color: white;">&nbsp;Loading....</p>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-row">
+					<div class="w3-bar">
+						<div class="w3-bar-item" style="margin-top: -12px;"><h3 style="margin-bottom: 0px; font-weight: bold;">Select Course and Batch</h3></div>
+					</div>
+					<hr class="hrline">
+					<div class="w3-row w3-border w3-round-large w3-white m8 l9">
+						<div class="w3-col" style="width:47%;margin-left:20px;">							
+							<label style="font-weight: bold;">Course</label>
+							<input th:value="${createdby}" id="createdby" type="hidden"/>
+							<select onchange="getBatch();return false;" id="courseid" name="courseid" class="w3-input w3-border">
+								<option value="" disabled selected>--Select Course--</option>
+								<th:block th:each="course : ${course}">
+									<option th:value="${course.id}" th:text="${course.title}">
+									</option>
+								</th:block>
+							</select>
+						</div>
+						<div class="w3-col" style="width:47%; margin-right:5px;margin-left:20px;margin-bottom:5px;">
+							<label style="font-weight: bold">Batch</label>
+							<select id="batchid" name="batchid" class="w3-input w3-border">
+								<option value="">
+									<column>--Select Batch--</column>
+								</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-container w3-margin-bottom">
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="w3-row">
+					<div class="w3-third">
+						<h5 class="w3-left" style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Search Results</h5>
+					</div>						
+					<!-- <div class="w3-bar-item w3-right w3-margin-left" onclick="scalemarks();">
+						<a class="w3-btn w3-round-large w3-right w3-blue w3-border w3-border-black">
+							<i class="fa fa-calculator" style="font-size:15px; color: lightblue"></i>
+							&nbsp;&nbsp;Calculate Marks
+						</a>
+					</div> -->
+					<div id="savebutton" class="w3-bar-item w3-right" onclick="saveMarks('T');" style="display:none">
+						<a class="w3-btn w3-round-large w3-right w3-green w3-border w3-border-black">
+							<i class="fa fa-save" style="font-size:15px; color: lime"></i>
+							<strong>&nbsp;&nbsp;Save</strong>
+						</a>
+					</div>						
+					<div id="submitbutton" class="w3-bar-item w3-right w3-margin-right" onclick="saveMarks('S');" style="display:none">
+					<!-- <div id="submitbutton" class="w3-bar-item w3-right w3-margin-right" onclick="submitWarning()" style="display:none"> -->
+						<a class="w3-btn w3-round-large w3-right w3-blue w3-border w3-border-black">
+							<i class="fa fa-paper-plane" style="font-size:15px; color: blue"></i>
+							<strong>&nbsp;&nbsp;Submit</strong>
+						</a>
+					</div>
+					<div id="printbutton" class="w3-bar-item w3-right w3-margin-right" onclick="saveMarks('P');" style="display:none">
+						<a class="w3-btn w3-round-large w3-right w3-border w3-border-black" 
+							style='background-color:#5F9EA0'>
+							<i class="fa fa-print" style="font-size:15px; color: #48D1CC"></i>
+							<strong>&nbsp;&nbsp;Print</strong>
+						</a>
+					</div>
+					<!-- <div id="pushtops" class="w3-bar-item w3-right w3-margin-right" onclick="pushMarksToPS();" style="display:none">
+						<a class="w3-btn w3-round-large w3-right w3-blue w3-border w3-border-black">
+							<i class="fa fa-paper-plane" style="font-size:15px; color: blue"></i>
+							<strong>&nbsp;&nbsp;Push Marks to Erp</strong>
+						</a>
+					</div> -->
+					<div class="w3-row">
+						<hr class="hrline">
+					</div>
+					<div id="resultSec" class="w3-border">
+						<div><!--  style="overflow:auto;max-height:500px"> -->
+							<table id="batchStudentList" class="w3-striped w3-table w3-white w3-responsive" 
+								style="max-height:500px;">
+								<thead id="tableHead" class='w3-theme-d3 w3-center'></thead>
+								<tbody id='gradebookgrid' class='w3-center'></tbody>
+							</table>											
+						</div>						
+					</div>
+					<div  id="noData" class="w3-responsive" style="display: none">
+						<div>
+							<p>No record found...</p>
+						</div>
+					</div>
+					<div  id="jsonLoader" class="w3-responsive" style="display: none">
+						<div>
+							<div class='w3-container' style='width: 100%; text-align: center'>
+								<i class='fa fa-cog fa-spin' style='font-size: 30px; color: black;'></i>
+								<p style="color: black;">&nbsp;Loading....</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+	<script src="/js/gradebook/manageGradebook.js"></script>
+</div>

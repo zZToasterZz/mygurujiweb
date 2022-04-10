@@ -1,0 +1,205 @@
+<div th:fragment="assignmentAttempt">
+
+<style>
+	.myMargin{
+		margin-top:5px;
+	}
+</style>
+
+<div class="w3-row w3-border" style="margin-bottom: 16px;">
+	<div class="w3-col progressBarAsgn" style="width: 100%" id="progressBarContainer">
+		<div id="progressBarAsgn" class="progressBarFill">
+			<span id="progressPercentAsgn" class="progressPercent">0%</span>
+		</div>
+	</div>
+</div>
+
+<form id="assignmentForm" method="POST" enctype="multipart/form-data">
+	<div id="baseData"  th:data-assignmentid="${assignment.assignmentID}"
+						th:data-courseid="${assignment.courseID}"
+						th:data-level="${assignment.level}"
+						th:data-maxmarks="${assignment.maxMarks}"
+						>
+	</div>
+	<th:block th:each="question : ${assignment.questionlist}">
+	<div class='w3-container w3-round-large w3-white' style='margin-top: -8px;'>
+			<div class="w3-row w3-bordered">
+				<div class="w3-bar">
+					<h5 class="w3-bar-item" style='color: green; margin-bottom: 0; margin-top:0;'><span th:text="'Question '+${questionStat.index + 1}">Question 1 :&nbsp;</span></h5>
+					<div class="w3-row w3-right">
+						<b><span class="w3-bar-item w3-left" th:text="'Marks : '+${question.marks}"></span></b>
+					</div>
+				</div>
+				<div class="w3-container">
+					<div class="w3-container assignmentParent"
+							th:data-questionid="${question.questionid}"
+							th:data-assignmentquestionid="${question.assessmentquestionid}"
+							th:data-qtype="${question.qtype}"
+							th:data-index="${questionStat.index}"
+							th:data-assignmentresponseid="${question.assignresponse.assignmentResponseID}"
+							th:data-objectiveresponse="${question.assignresponse.objectiveResponse}"
+							th:data-subjectiveresponse="${question.assignresponse.subjectiveResponse}"
+							th:data-hasattachment="${question.assignresponse.hasAttachment}"
+							>
+						<input type="hidden" name="courseid" th:value="${assignment.courseID}">
+						<input type="hidden" name="assignmentresponseid" th:value="${question.assignresponse.assignmentResponseID}">
+						<input type="hidden" name="assignmentquestionid" th:value="${question.assessmentquestionid}">
+						<input type="hidden" name="assignmentid" th:value="${assignment.assignmentID}">
+						<input type="hidden" name="questionid" th:value="${question.questionid}">
+						<input type="hidden" name="qtype" th:value="${question.qtype}">
+						<input type="hidden" name="objectiveresponse" th:value="${question.assignresponse.objectiveResponse}">
+						<input type="hidden" name="subjectiveresponse" th:value="${question.assignresponse.subjectiveResponse}">
+						<input type="hidden" name="hasAttachment" th:value="${question.assignresponse.hasAttachment}">
+						<input type="hidden" name="type" class="savetype" value="T">
+						<input type="hidden" name="filesTotal" value="0">
+						<th:block th:if="${question.assignresponse.hasAttachment == 'Y'}">
+							<th:block th:each="attach : ${question.assignresponse.attachments}">
+								<div th:id="attchContainer_+${attach.questionid}"
+										th:data-location="${attach.filePath}"
+										th:data-originalname="${attach.originalFileName}"
+										th:data-extension="${attach.fileExtension}"
+								>
+								</div>
+							</th:block>
+						</th:block>
+						
+						<div style="background-color: antiquewhite" class="w3-padding">
+							<div class="w3-row">
+								<div class="w3-col" style="width:20%">
+									<div class="w3-col" style="width:40%">
+										<label>Type :</label>
+									</div>
+									<div class="w3-col" style="width:40%">
+										<label class="w3-left" style="margin-bottom: 0; margin-top:0;" th:text="${question.qtype}"></label>
+									</div>
+								</div>
+								<div class="w3-col" style="width:25%">
+									<div class="w3-col" style="width:50%">
+										<label>Bloom's Level :</label>
+									</div>
+									<div class="w3-col" style="width:50%">
+										<label class="w3-bar-item w3-left" th:text="${question.blmtaxonomy}"></label>
+									</div>
+								</div>
+								<div class="w3-col" style="width:25%">
+									<div class="w3-col" style="width:30%">
+										<label>Difficulty :</label>
+									</div>
+									<div class="w3-col w3-left" style="width:70%">
+										<label style='margin-bottom: 0; margin-top:0;' th:text="${question.difficulty}"></label>
+									</div>
+								</div>
+								<div class="w3-col" style="width:30%">
+									<th:block th:if="${question.qtype == 'LAT' || question.qtype == 'SAT'}">
+										<div class="w3-col" style="width:50%">
+											<label class="w3-right">Attachments : </label>
+										</div>
+										<div class="w3-col" style="width:50%">
+											<input onclick="showAttachmentField(this)" type="checkbox" class="w3-check w3-left" th:id="hasAttch_+${question.questionid}" style="width:15px;margin-top:-5px;">
+										</div>
+									</th:block>
+								</div>
+							</div>
+						</div>
+						<p>
+							<label>
+								<span th:utext="${question.questext}"></span>
+							</label>
+						</p>
+						<th:block th:if="${question.qtype == 'SAT'}">
+							<textarea rows="6" cols="90" class="longQues" th:id="SAT_+${question.questionid}"></textarea>
+							<input type="hidden" name="subjectiveresponse" th:id="hidSAT_+${question.questionid}">
+							<th:block th:if="${question.assignresponse.hasAttachment == 'Y'}">
+								<div th:id="previousAttachment_+${question.questionid}">
+									
+								</div>
+							</th:block>
+							<div class="attchDiv" th:id="attchDiv_+${question.questionid}" style="margin-top:5px;display:none">
+								
+							</div>
+						</th:block>
+						<th:block th:if="${question.qtype == 'LAT'}">
+							<textarea rows="6" cols="90" class="longQues" th:id="LAT_+${question.questionid}"></textarea>
+							<input type="hidden" name="subjectiveresponse" th:id="hidLAT_+${question.questionid}">
+							<th:block th:if="${question.assignresponse.hasAttachment == 'Y'}">
+								<div th:id="previousAttachment_+${question.questionid}">
+									
+								</div>
+							</th:block>
+							<div class="attchDiv" th:id="attchDiv_+${question.questionid}" style="margin-top:5px;display:none">
+								
+							</div>
+						</th:block>
+						<th:block th:if="${question.qtype == 'FNB'}">
+							<div class="FNBblanks" th:data-fnbtxt="${question.questext}" th:data-fnbqid="${question.questionid}">
+								
+							</div>
+						</th:block>
+						<th:block th:if="${question.qtype == 'MCQ'}">
+							<div style="background-color: white" class="w3-padding">
+								<div class="w3-row">
+									<div class="w3-row">
+										<input th:id="MCQcheck_+${question.questionid}" data-value="opt1" type="checkbox" class="w3-check MCQcheck" style="width:15px; float:left;margin-right:5px;">
+										<label th:utext="${question.opt1}" class="myMargin"></label>
+									</div>
+									<div class="w3-row">
+										<input th:id="MCQcheck_+${question.questionid}" data-value="opt2" type="checkbox" class="w3-check MCQcheck" style="width:15px; float:left;margin-right:5px;">
+										<label th:utext="${question.opt2}" class="myMargin" style="margin-top:6px;"></label>
+									</div>
+									<div class="w3-row">
+										<input th:id="MCQcheck_+${question.questionid}" data-value="opt3" type="checkbox" class="w3-check MCQcheck" style="width:15px; float:left;margin-right:5px;">
+										<label th:utext="${question.opt3}" class="myMargin"></label>
+									</div>
+									<div class="w3-row">
+										<input th:id="MCQcheck_+${question.questionid}" data-value="opt4" type="checkbox" class="w3-check MCQcheck" style="width:15px; float:left;margin-right:5px;">
+										<label th:utext="${question.opt4}" class="myMargin"></label>
+									</div>
+								</div>
+							</div>
+						</th:block>
+						<th:block th:if="${question.qtype == 'SCQ'}">
+							<div style="background-color: white" class="w3-padding">
+								<div class="w3-row">
+									<div class="w3-row">
+										<input th:id="SCQradio_+${question.questionid}" th:name="sc_+${question.questionid}" data-value="opt1" type="radio" class="w3-check SCQradio" style="width:15px; float:left;margin-right:5px;">
+										<label th:utext="${question.opt1}" class="myMargin"></label>
+									</div>
+									<div class="w3-row">
+										<input th:id="SCQradio_+${question.questionid}" th:name="sc_+${question.questionid}" data-value="opt2" type="radio" class="w3-check SCQradio" style="width:15px; float:left;margin-right:5px;">
+										<label th:utext="${question.opt2}" class="myMargin"></label>
+									</div>
+									<div class="w3-row">
+										<input th:id="SCQradio_+${question.questionid}" th:name="sc_+${question.questionid}" data-value="opt3" type="radio" class="w3-check SCQradio" style="width:15px; float:left;margin-right:5px;">
+										<label th:utext="${question.opt3}" class="myMargin"></label>
+									</div>
+									<div class="w3-row">
+										<input th:id="SCQradio_+${question.questionid}" th:name="sc_+${question.questionid}" data-value="opt4" type="radio" class="w3-check SCQradio" style="width:15px; float:left;margin-right:5px;">
+										<label th:utext="${question.opt4}" class="myMargin"></label>
+									</div>
+								</div>
+							</div>
+						</th:block>
+						<th:block th:if="${question.qtype == 'TNF'}">
+							<div style="background-color: white" class="w3-padding">
+								<div class="w3-row">
+									<div class="w3-row">
+										<input th:id="TNFradio_+${question.questionid}" th:name="tn_+${question.questionid}" data-value="opt1" type="radio" class="w3-check TNFradio" style="width:15px; float:left;margin-right:5px;">
+										<label th:utext="${question.opt1}" class="myMargin"></label>
+									</div>
+									<div class="w3-row">
+										<input th:id="TNFradio_+${question.questionid}" th:name="tn_+${question.questionid}" data-value="opt2" type="radio" class="w3-check TNFradio" style="width:15px; float:left;margin-right:5px;">
+										<label th:utext="${question.opt2}" class="myMargin"></label>
+									</div>
+								</div>
+							</div>
+						</th:block>
+					</div>
+				</div>
+				<hr class="hrqline">
+			</div>
+		</div>
+	</th:block>
+</form>
+	<script src="/js/ckeditor/ckeditor.js"></script>
+	<script src="/js/assignment/assignmentAttempt.js"></script>
+</div>

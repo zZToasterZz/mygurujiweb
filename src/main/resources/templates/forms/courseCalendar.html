@@ -1,0 +1,17 @@
+<div th:fragment="courseCalendar">
+	<div id="courseCal" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-left" style="max-width:800px">
+		
+			<header class="w3-container w3-teal">
+				<span onclick="document.getElementById('courseCal').style.display='none'" class="w3-button w3-large w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+				<h4><img src="/images/icons/calendar.png">&nbsp;&nbsp;Events Calendar</h4>
+			</header>
+			
+			<div class="w3-container">
+	
+				<button class="w3-button w3-red" onclick="document.getElementById('courseCal').style.display='none'" type="button">OK</button>
+			</div>
+			
+		</div>
+	</div>
+</div>

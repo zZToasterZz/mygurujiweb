@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlnx:th="www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Profile Locked</title>
+<link rel="stylesheet" type="text/css" href="/css/w3.css"/>
+</head>
+<body>
+	<div class="w3-container w3-content">
+		<p class="w3-opacity"><b><span class="w3-text-red">Profile Locked </span> </b></p>
+		<div class="w3-panel w3-white w3-card w3-display-container w3-animate-zoom">
+			<p class="w3-text-blue"><b>Reason</b></p>
+			<p th:text="${message1}"></p>
+			<p th:text="${message2}" class="w3-text-blue"></p>
+		</div>
+	</div>
+</body>
+</html>

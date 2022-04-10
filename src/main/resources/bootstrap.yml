@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: mygurujiui
+    zoolserver: http://10.8.20.35:5051
+    assignmentcontent:

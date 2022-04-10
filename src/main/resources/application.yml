@@ -1,0 +1,36 @@
+server:
+  port: 9222
+  servlet:
+    session:
+      cookie:
+        name: MGSESSION
+in:
+  co:
+    srdt:
+      myguruji:
+        theme: blue-grey
+        zoolserver: http://10.8.20.35:5055
+        oauthurl: http://10.8.20.35:9193
+        contentstorage: COURSE_CONTENT
+        assignmentcontent: ASSIGNMENTS
+        mailid: myguruji@srdt.co.in
+        mailpass: Myguruji@SRD
+        passresetsecret: tHiSk3yw11lreSE7p@55
+security:
+  oauth2:
+    client:
+      client-id: myguruji_sv
+      client-secret: pin
+      user-authorization-uri: http://10.8.20.35:9193/oauth/authorize
+      access-token-uri: http://10.8.20.35:9193/oauth/token
+    resource:
+      token-info-uri: http://10.8.20.35:9193/oauth/check_token
+
+spring:
+  mail:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

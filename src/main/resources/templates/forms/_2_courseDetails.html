@@ -1,0 +1,562 @@
+<div th:fragment="courseDetails">
+	<!-- Sidebar -->
+	
+	<!-- Page Content -->
+	<div class="w3-main w3-animate-zoom" style="margin-left:300px;">
+		<div class="w3-theme-d2" style="opacity: .8">
+		  <div class="w3-container">
+			<!-- <button class="w3-button w3-large" style="padding-bottom: 0px;" onclick="w3_open()"><i class="material-icons">reorder</i><h3 style="margin-top: 0px; margin-bottom: 0px;">Programming Fundamentals</h3></button> -->
+		  	<h3 style="font-weight: 600;">
+		  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+		  		<img src="/images/icons/course.png" style="width: 35px;">
+		  		&nbsp;&nbsp;Programming Fundamentals
+		  	</h3>
+		  </div>
+		</div>
+		
+		<div class="w3-row">
+			<div class="w3-container w3-padding-16">
+				<div class="w3-card w3-theme-l3" style="opacity: .95">
+					<div class="w3-row">
+						<div class="w3-bar">
+							<div class="w3-bar-item"><h4>About Course</h4></div>
+						</div>
+						<div class="w3-container">
+							<p>C is a powerful general-purpose programming language. It can be used to develop software like operating systems, databases, compilers, and so on. C programming is an excellent language to learn to program for beginners.</p>
+							<p>This course of C will guide you to learn C programming one step at a time.</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-container">
+							<div class="w3-half" style="border-right: 2px solid black">
+								<div class="w3-container">
+									<h5 style="text-decoration: underline;">Text Books:</h5>
+									<div class="w3-half">
+										<p>Programming with C : </p>
+										<p>Let us C : </p>
+										<p>&nbsp;</p>
+										<p>&nbsp;</p>
+									</div>
+									<div class="w3-half">
+										<p>Bryon Gottfried</p>
+										<p>Yashwant Kanetkar</p>
+									</div>
+								</div>
+							</div>
+							<div class="w3-half">
+								<div class="w3-container">
+									<h5 style="text-decoration: underline;">Reference Books:</h5>
+									<div class="w3-half">
+										<p>C Programming :</p>
+										<p>Programming in ANCI C :</p>
+										<p>Graphics under C :</p>
+										<p>Pointers in C :</p>
+									</div>
+									<div class="w3-half">
+										<p>Dennis Ritche</p>
+										<p>Balgurusamy</p>
+										<p>Yashwant Kanetkar</p>
+										<p>Yashwant Kanetkar</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="w3-row">
+						<div class="w3-container">
+							<div class="w3-theme-d5 w3-section">
+								<button onClick="myFunction('courseContent')" class="w3-button w3-block">Content</button>
+								<div id="courseContent" class="w3-hide w3-border w3-white w3-animate-zoom">
+									<div class="w3-row" style="font-size: 12px;">
+										<div class="w3-container w3-padding">
+											<div class="w3-row">
+												<div class="w3-container w3-third w3-border">
+													<p class="w3-bar-item"><img src="/images/icons/class-notes.png">&nbsp;&nbsp;&nbsp;Class Notes&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">3</a></p>
+												
+												</div>
+												<div class="w3-container w3-third w3-border">
+													<p class="w3-bar-item"><img src="/images/icons/recorded-video.png">&nbsp;&nbsp;&nbsp;Recorded Class Videos&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+												</div>
+												<div class="w3-container w3-third w3-border">
+													<p class="w3-bar-item"><img src="/images/icons/youtube-video.svg" style="width: 32px;">&nbsp;&nbsp;&nbsp;Youtube Videos Links&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+												
+												</div>
+											</div>
+											<div class="w3-row">
+												<div class="w3-container w3-third w3-border">
+													<p class="w3-bar-item"><img src="/images/icons/class-assignment.png">&nbsp;&nbsp;&nbsp;Class Assignments&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">2</a></p>
+													
+												</div>
+												<div class="w3-container w3-third w3-border">
+													<p class="w3-bar-item"><img src="/images/icons/attend-assessment.png">&nbsp;&nbsp;&nbsp;Attend Assessment&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+													
+												</div>
+												<div class="w3-container w3-third w3-border">
+													<p class="w3-bar-item"><img src="/images/icons/attend-scheduled-class.png">&nbsp;&nbsp;&nbsp;Attend Scheduled Class&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+					
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+			
+			<div class="w3-row">
+				<div class="w3-container">
+					<div class="w3-card-4 w3-theme-l3">
+						<div class="w3-bar w3-black">
+							<a class="w3-bar-item">Unit 1: Introductory Concepts</a>
+						</div>
+						<div class="w3-container">
+							<p>In this chapter, you will learn about keywords; reserved words in C programming that are part of the syntax. Also, you will learn about identifiers and how to name them. A character set is a set of alphabets, letters and some special characters that are valid in C language.</p>
+						</div>
+						
+						<div class="w3-row">
+					
+							<div class="w3-quarter">
+							<div class="w3-container">
+								<p>&nbsp;</p>
+								<p>&nbsp;</p>
+							</div>
+								
+							</div>
+							<div class="w3-quarter">
+								<div class="w3-container">
+									<ul class="menu" id="menu2">
+										<li><a href="#"><img alt="" src="/images/icons/add-content32.png" style="margin-top: -5px">&nbsp;10</a></li>
+										<li><a href="#" alt="Item 1" title="Item 1">1</a></li>
+										<li><a href="#" alt="Item 2" title="Item 2">2</a></li>
+										<li><a href="#" alt="Item 3" title="Item 3">3</a></li>
+										<li><a href="#" alt="Item 4" title="Item 4">4</a></li>
+										<li><a href="#" alt="Item 5" title="Item 5">5</a></li>
+										<li><a href="#" alt="Item 6" title="Item 6">6</a></li>
+										
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						<div class="w3-container">
+							<div class="w3-row">
+								<div class="w3-bar w3-grey">
+									<a class="w3-bar-item">Unit 1.1: Overview of programming and programming languages</a>
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-container w3-threequarter">
+									<p>Programming Language is one kind of language. It is intermediate between human and system. Programming is one type of Language. There are different typs of   programming Languages we are using. Each programming language has some different syntax. Syntax is a some set of rules and regulations.</p>
+								</div>
+								<div class="w3-container w3-quarter">
+									<h3 style="text-align: center;">2</h3>
+									<h4 style="text-align: center;">Number of Lectures</h4>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row" style="font-size: 12px;">
+								<div class="w3-container w3-padding">
+									<div class="w3-row">
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/class-notes.png">&nbsp;&nbsp;&nbsp;Class Notes&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">3</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/recorded-video.png">&nbsp;&nbsp;&nbsp;Recorded Class Videos&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/youtube-video.svg" style="width: 32px;">&nbsp;&nbsp;&nbsp;Youtube Videos Links&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+											
+										</div>
+									</div>
+									<div class="w3-row">
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/class-assignment.png">&nbsp;&nbsp;&nbsp;Class Assignments&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">2</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/attend-assessment.png">&nbsp;&nbsp;&nbsp;Attend Assessment&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/attend-scheduled-class.png">&nbsp;&nbsp;&nbsp;Attend Scheduled Class&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr class="hrline">
+						</div>
+						
+						
+						<div class="w3-container">
+							<div class="w3-row">
+								<div class="w3-bar w3-grey">
+									<a class="w3-bar-item">Unit 1.2: Types of programming languages</a>
+
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-container w3-threequarter">
+									<p>Programming Language is one kind of language. It is intermediate between human and system. Programming is one type of Language. There are different typs of   programming Languages we are using. Each programming language has some different syntax. Syntax is a some set of rules and regulations.</p>
+								</div>
+								<div class="w3-container w3-quarter">
+									<h3 style="text-align: center;">3</h3>
+									<h4 style="text-align: center;">Number of Lectures</h4>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row" style="font-size: 12px;">
+								<div class="w3-container w3-padding">
+									<div class="w3-row">
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/class-notes.png">&nbsp;&nbsp;&nbsp;Class Notes&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">3</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/recorded-video.png">&nbsp;&nbsp;&nbsp;Recorded Class Videos&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/youtube-video.svg" style="width: 32px;">&nbsp;&nbsp;&nbsp;Youtube Videos Links&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+											
+										</div>
+									</div>
+									<div class="w3-row">
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/class-assignment.png">&nbsp;&nbsp;&nbsp;Class Assignments&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">2</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/attend-assessment.png">&nbsp;&nbsp;&nbsp;Attend Assessment&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/attend-scheduled-class.png">&nbsp;&nbsp;&nbsp;Attend Scheduled Class&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr class="hrline">
+						</div>
+						
+						
+						
+						<div class="w3-container">
+							<div class="w3-row">
+								<div class="w3-bar w3-grey">
+									<a class="w3-bar-item">Unit 1.3: Introduction to C</a>
+
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-container w3-threequarter">
+									<p>Programming Language is one kind of language. It is intermediate between human and system. Programming is one type of Language. There are different typs of   programming Languages we are using. Each programming language has some different syntax. Syntax is a some set of rules and regulations.</p>
+								</div>
+								<div class="w3-container w3-quarter">
+									<h3 style="text-align: center;">2</h3>
+									<h4 style="text-align: center;">Number of Lectures</h4>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row" style="font-size: 12px;">
+								<div class="w3-container w3-padding">
+									<div class="w3-row">
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/class-notes.png">&nbsp;&nbsp;&nbsp;Class Notes&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">3</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/recorded-video.png">&nbsp;&nbsp;&nbsp;Recorded Class Videos&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/youtube-video.svg" style="width: 32px;">&nbsp;&nbsp;&nbsp;Youtube Videos Links&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+											
+										</div>
+									</div>
+									<div class="w3-row">
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/class-assignment.png">&nbsp;&nbsp;&nbsp;Class Assignments&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">2</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/attend-assessment.png">&nbsp;&nbsp;&nbsp;Attend Assessment&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/attend-scheduled-class.png">&nbsp;&nbsp;&nbsp;Attend Scheduled Class&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr class="hrline">
+						</div>
+					</div>
+				</div>
+			</div>
+		
+	
+			<div class="w3-row">
+				<div class="w3-container w3-padding-16">
+					<div class="w3-card-4 w3-theme-l3">
+						<div class="w3-bar w3-black">
+							<a class="w3-bar-item">Unit 2: C Fundamentals</a>
+
+						</div>
+						<div class="w3-container">
+							<p>In this chapter, you will learn about keywords; reserved words in C programming that are part of the syntax. Also, you will learn about identifiers and how to name them. A character set is a set of alphabets, letters and some special characters that are valid in C language.</p>
+						</div>
+						
+						<div class="w3-row" style="font-size: 12px;">
+							<div class="w3-container w3-padding">
+								<div class="w3-row">
+									<div class="w3-container w3-third w3-border">
+										<p class="w3-bar-item"><img src="/images/icons/class-notes.png">&nbsp;&nbsp;&nbsp;Class Notes&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">3</a></p>
+										
+									</div>
+									<div class="w3-container w3-third w3-border">
+										<p class="w3-bar-item"><img src="/images/icons/recorded-video.png">&nbsp;&nbsp;&nbsp;Recorded Class Videos&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+										
+									</div>
+									<div class="w3-container w3-third w3-border">
+										<p class="w3-bar-item"><img src="/images/icons/youtube-video.svg" style="width: 32px;">&nbsp;&nbsp;&nbsp;Youtube Videos Links&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+										
+									</div>
+								</div>
+								<div class="w3-row">
+									<div class="w3-container w3-third w3-border">
+										<p class="w3-bar-item"><img src="/images/icons/class-assignment.png">&nbsp;&nbsp;&nbsp;Class Assignments&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">2</a></p>
+										
+									</div>
+									<div class="w3-container w3-third w3-border">
+										<p class="w3-bar-item"><img src="/images/icons/attend-assessment.png">&nbsp;&nbsp;&nbsp;Attend Assessment&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+										
+									</div>
+									<div class="w3-container w3-third w3-border">
+										<p class="w3-bar-item"><img src="/images/icons/attend-scheduled-class.png">&nbsp;&nbsp;&nbsp;Attend Scheduled Class&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="w3-container">
+							<div class="w3-row">
+								<div class="w3-bar w3-grey">
+									<a class="w3-bar-item">Unit 2.1: C Keywords and Identifiers</a>
+								
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-container w3-threequarter">
+									<p>Programming Language is one kind of language. It is intermediate between human and system. Programming is one type of Language. There are different typs of   programming Languages we are using. Each programming language has some different syntax. Syntax is a some set of rules and regulations.</p>
+								</div>
+								<div class="w3-container w3-quarter">
+									<h3 style="text-align: center;">4</h3>
+									<h4 style="text-align: center;">Number of Lectures</h4>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row" style="font-size: 12px;">
+								<div class="w3-container w3-padding">
+									<div class="w3-row">
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/class-notes.png">&nbsp;&nbsp;&nbsp;Class Notes&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">3</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/recorded-video.png">&nbsp;&nbsp;&nbsp;Recorded Class Videos&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/youtube-video.svg" style="width: 32px;">&nbsp;&nbsp;&nbsp;Youtube Videos Links&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+											
+										</div>
+									</div>
+									<div class="w3-row">
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/class-assignment.png">&nbsp;&nbsp;&nbsp;Class Assignments&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">2</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/attend-assessment.png">&nbsp;&nbsp;&nbsp;Attend Assessment&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/attend-scheduled-class.png">&nbsp;&nbsp;&nbsp;Attend Scheduled Class&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr class="hrline">
+						</div>
+						
+						
+						<div class="w3-container">
+							<div class="w3-row">
+								<div class="w3-bar w3-grey">
+									<a class="w3-bar-item">Unit 2.2: Variables, Constants and Literals</a>
+
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-container w3-threequarter">
+									<p>Programming Language is one kind of language. It is intermediate between human and system. Programming is one type of Language. There are different typs of   programming Languages we are using. Each programming language has some different syntax. Syntax is a some set of rules and regulations.</p>
+								</div>
+								<div class="w3-container w3-quarter">
+									<h3 style="text-align: center;">3</h3>
+									<h4 style="text-align: center;">Number of Lectures</h4>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row" style="font-size: 12px;">
+								<div class="w3-container w3-padding">
+									<div class="w3-row">
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/class-notes.png">&nbsp;&nbsp;&nbsp;Class Notes&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">3</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/recorded-video.png">&nbsp;&nbsp;&nbsp;Recorded Class Videos&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/youtube-video.svg" style="width: 32px;">&nbsp;&nbsp;&nbsp;Youtube Videos Links&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+											
+										</div>
+									</div>
+									<div class="w3-row">
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/class-assignment.png">&nbsp;&nbsp;&nbsp;Class Assignments&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">2</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/attend-assessment.png">&nbsp;&nbsp;&nbsp;Attend Assessment&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/attend-scheduled-class.png">&nbsp;&nbsp;&nbsp;Attend Scheduled Class&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr class="hrline">
+						</div>
+						
+						
+						
+						<div class="w3-container">
+							<div class="w3-row">
+								<div class="w3-bar w3-grey">
+									<a class="w3-bar-item">Unit 2.3: C Data Types</a>
+	
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-container w3-threequarter">
+									<p>Programming Language is one kind of language. It is intermediate between human and system. Programming is one type of Language. There are different typs of   programming Languages we are using. Each programming language has some different syntax. Syntax is a some set of rules and regulations.</p>
+								</div>
+								<div class="w3-container w3-quarter">
+									<h3 style="text-align: center;">2</h3>
+									<h4 style="text-align: center;">Number of Lectures</h4>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row" style="font-size: 12px;">
+								<div class="w3-container w3-padding">
+									<div class="w3-row">
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/class-notes.png">&nbsp;&nbsp;&nbsp;Class Notes&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">3</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/recorded-video.png">&nbsp;&nbsp;&nbsp;Recorded Class Videos&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/youtube-video.svg" style="width: 32px;">&nbsp;&nbsp;&nbsp;Youtube Videos Links&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+											
+										</div>
+									</div>
+									<div class="w3-row">
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/class-assignment.png">&nbsp;&nbsp;&nbsp;Class Assignments&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">2</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/attend-assessment.png">&nbsp;&nbsp;&nbsp;Attend Assessment&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">1</a></p>
+											
+										</div>
+										<div class="w3-container w3-third w3-border">
+											<p class="w3-bar-item"><img src="/images/icons/attend-scheduled-class.png">&nbsp;&nbsp;&nbsp;Attend Scheduled Class&nbsp;&nbsp;&nbsp;<a class="w3-bar-item w3-button w3-blue w3-round-xxlarge" style="padding-top:0; padding-bottom:0">0</a></p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr class="hrline">
+						</div>
+					</div>
+				</div>
+				<script src="/js/jQuery.circleMenu.js"></script>
+				<script type="text/javascript">
+					$(function(){
+						$('#menu').circleMenu({direction:'bottom-right',
+							open: function(){console.log('menu opened');},
+							close: function(){console.log('menu close');},
+							init: function(){console.log('menu initialized');}});
+						$('#menu1').circleMenu({
+							direction:'full',
+							step_in:0,
+							step_out:0
+						});
+						$('#menu2').circleMenu({
+							direction:'full',
+							step_in:0,
+							step_out:0
+						});
+					});
+					
+					function myFunction(id){
+						var x = document.getElementById(id);
+						if(x.className.indexOf("w3-show") == -1){
+							x.className += " w3-show";
+						} else {
+							x.className = x.className.replace(" w3-show", "");
+						}
+					}
+				</script>
+			</div>
+	
+	
+	
+<!-- Add Section Modal -->
+	<div th:replace="forms/addSection :: addSection"></div>
+<!-- End of Add Section Model -->
+
+<!-- Add Sub-Section Modal -->
+	<div th:replace="forms/addSubSection :: addSubSection"></div>
+<!-- End of Add Sub-Section Model -->
+
+
+<!-- Add Content Modal -->
+	<div th:replace="forms/addContent :: addContent"></div>
+<!-- End of Add Content Model -->
+
+<!-- Add Content Modal -->
+	<div th:replace="forms/courseCalendar :: courseCalendar"></div>
+<!-- End of Add Content Model -->
+	
+	</div>
+</div>

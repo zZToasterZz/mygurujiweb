@@ -1,0 +1,58 @@
+<div th:fragment="changePwd">
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+				<!-- <button class="w3-button w3-large" style="padding-bottom: 0px;" onclick="w3_open()"><i class="material-icons">reorder</i><h3 style="margin-top: 0px; margin-bottom: 0px;">Programming Fundamentals</h3></button> -->
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+			  		<img src="/images/icons/shield.png" style="width: 40px;">
+			  		&nbsp;&nbsp;Change Password
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-row">
+					<div>
+						<form id="pwdForm" enctype="application/x-www-form-urlencoded">
+							<div class="divTable">
+								<div class="divTr">
+									<div class="d1"><h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Reset Password</h5></div>
+								</div>
+							</div>
+							<hr class="hrline">
+							<h6 style="font-style: italic;">Enter the old password and create a new one to reset it.</h6>
+							
+							<div class="w3-row-padding">
+								<div class="w3-half">
+									<p>
+										<label>Old Password</label>
+										<input class="w3-input w3-border" name="oldpwd" id="oldpwd" type="password" autocomplete="false">
+									</p>
+									<p>
+										<label>New Password</label>
+										<input class="w3-input w3-border" name="newpwd" id="newpwd" type="password" onkeyup="matchPwd()" autocomplete="false">
+									</p>
+									<p>
+										<label>Confirm Password</label>
+										<input class="w3-input w3-border" id="confpwd" type="password" onkeyup="matchPwd()" autocomplete="false">
+										<span style="color:red; display:none;" id="matchtext">confirm password does not match!</span>
+									</p>
+								</div>
+							</div>
+							<div class="w3-bar" style="z-index: 1">
+								<div class="buttonbarpadding w3-bar-item" onclick="resetPassword()"><a class="w3-btn w3-theme-d5 w3-round-large"><img src="/images/icons/shield.png" style="width: 20px;">&nbsp;&nbsp;Reset&nbsp;&nbsp;&nbsp;</a></div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+				
+		<script src="/js/login/changePwd.js"></script>
+</div>

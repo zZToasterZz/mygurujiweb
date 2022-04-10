@@ -1,0 +1,100 @@
+<div th:fragment="batchAnnounce">
+
+<style>
+	.scroll::-webkit-scrollbar{
+		width:10px;
+	}
+</style>
+
+<form autocomplete="off" onsubmit="return false;" method="post" id="announceform" enctype="application/x-www-form-urlencoded">
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;">
+			  		<img src="/images/icons/announcement.svg" style="width: 35px;">
+			  		&nbsp;&nbsp;Announcement
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding ">
+				<div class="w3-row">
+					<div class="w3-bar">
+						<div class="w3-bar-item"><h3 style="margin-bottom: 0px; font-weight: bold;">Make an announcement</h3></div>
+						<div class="buttonbarpadding w3-bar-item w3-right" onclick="announce();"><a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-bullhorn" style="font-size:15px; color: white"></i>&nbsp;&nbsp;Announce</a></div>
+						<!--<div class="buttonbarpadding w3-bar-item w3-right" onClick="cancle()"><a class="w3-btn w3-red w3-round-large"><i class="fa fa-times" style="font-size:18px;"></i>&nbsp;&nbsp;Cancel</a></div>-->
+					</div>
+					<hr class="hrline">
+				</div>
+				<div class="w3-row w3-round-large w3-white">
+				
+					<div class="w3-third" style="margin-left:20px;">
+						<label style="font-weight: bold;">Course</label>
+						<input th:value="${createdby}" name="createdby" type="hidden"/>
+						<select onload="getBatch();return false;" onchange="getBatch();return false;" id="courseid" name="courseid" class="w3-input w3-border" style="margin-bottom:8px;">
+							<option value="" disabled selected>--Select Course--</option>
+							<th:block th:each="course : ${course}">
+								<option th:value="${course.id}" th:text="${course.title}">
+								</option>
+							</th:block>
+						</select>
+					</div>
+					<div class="w3-third" style="margin-right:5px;margin-left:20px;margin-bottom:5px;">
+						<label style="font-weight: bold">Batch</label><br>
+						<div class="w3-dropdown-click" style="width:100%">
+							<div onclick="dropdown()" class="w3-btn w3-black" style="width:100%">
+								<span class="w3-left">Select batches by clicking the checkbox</span>
+								<i id="angle-drop-arrow" class="fa fa-angle-double-down w3-right" aria-hidden="true" style="color:white;padding-top:3px;"></i>
+							</div>
+							<div id="batchdropdown" class="w3-dropdown-content w3-bar-block w3-border-black w3-topbar w3-bottombar w3-leftbar w3-rightbar scroll" style="width:100%;overflow-x:auto; overflow-y:auto; white-space:nowrap; height:400%;">
+								
+							</div>
+					    </div>
+					</div>
+					<div class="w3-third" style="margin-left:20px;width:25%">
+						<div class="w3-half">
+							<label style="font-weight: bold">&zwnj;</label>
+							<div class="w3-btn w3-black w3-hover-green" onclick="getStudentList()" style="width:100%"><label>Generate List</label></div>
+						</div>
+						<div class="w3-half">
+							&zwnj;
+						</div>
+					</div>
+					
+				</div>
+					<div class="w3-row w3-round-large w3-white" style="margin-top:10px;">
+						<div class="w3-half">
+							<!-- <p style="padding-left:10px;">
+								<b>To</b>
+								<input readonly type="text" class="w3-input w3-border" id="batches" style="background-color:#d1d1d1;">
+								<input type="hidden" name="batchid" id="batchids">
+							</p> -->
+							<p style="padding-left:10px;">
+								<b>Subject</b>
+								<input type="text" class="w3-input w3-border" name="subject" id="subject">
+							</p>
+							<p style="padding-left:10px;">
+								<b>Body</b>
+							</p>
+							<p style="padding-left:10px;margin-top:-12px;">
+								<textarea rows="9" style="width:100%" name="body" id="body"></textarea>
+							</p>
+						</div>
+						<div class="w3-half">
+							<div>
+								<label style="padding-left:12px;"><b>Recepients</b></label>
+								<div id="batchlist" class="w3-border-left w3-container" style="margin-left:8px;overflow-x:auto; overflow-y:auto; white-space:nowrap; max-height:300px;">
+								
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<script src="/js/announcement/batchAnnounce.js"></script>
+</div>

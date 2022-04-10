@@ -1,0 +1,218 @@
+<div th:fragment="createQuestionPaper">
+<form autocomplete="off" onsubmit="return false;" method="post" id="createquestionpaper" enctype="application/x-www-form-urlencoded">
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;" onclick="w3_open()">
+			  		<img src="/images/icons/mapQuestions.svg" style="width: 35px;">
+			  		&nbsp;&nbsp;Create Question Paper
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-row">
+					<div>
+						<div class="w3-bar" style="z-index: 1">
+							<div class="w3-bar-item">
+								<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Question Paper Details</h5>
+							</div>
+							<div id="postQuestionPaper" class="buttonbarpadding w3-bar-item w3-right" onclick="ajaxPost();return false;">
+								<a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-save" style="font-size:18px; color: lime"></i>&nbsp;&nbsp;Save Question Paper</a>
+							</div>
+						</div>
+						<!-- <div class="divTable">
+							<div class="divTr">
+								<div class="d1"></div>
+								<div class="d2">
+									<button class="w3-button w3-square w3-theme-d5 w3-large" type="submit">Create</button>
+									<button class="w3-btn w3-theme-d5" >Create Question Paper</button>
+								</div>
+							</div>
+						</div> -->
+						<hr class="hrline">
+						<div class="w3-row-padding">
+							<div class="w3-half">
+								<div class="w3-panel w3-container" style="background: white;">
+									<p>
+										<label style="font-weight: bold; padding-top: 12px;">Course Code :</label><br>
+										<label th:text="${course.coursecode}"></label>
+										<input type="hidden" id="courseid" name="courseid" th:value="${course.courseid}">
+										<input type="hidden" name="assessmentid" th:value="${assessmentid}">
+										<input type="hidden" name="strategy" id="evaluationStrategy">
+									</p>
+									<hr style="margin-top: -12px; margin-bottom: 0px; border-color: #daa93a;">
+									<p>
+										<label style="font-weight: bold;">Course Title :</label><br>
+										<label th:text="${course.coursetitle}"></label>
+									</p>
+									<hr style="margin-top: -12px; margin-bottom: 0px; border-color: #daa93a;">
+									<p>
+										<label style="font-weight: bold;">Assessment Title :</label><br>
+										<label name="assessmenttitle" th:text="${assessmenttitle}"></label>
+										<input style="display:none;" th:value="${createdby}" name="createdby" type="text"/>
+									</p>
+									
+								</div>
+							</div>
+							<div class="w3-half">
+								<div class="w3-panel w3-container" style="background: white;">
+									<p>
+										<label style="font-weight: bold; padding-top: 12px;">Select Template :</label>&nbsp;&nbsp;&nbsp;<i id="selectTemplatePointer" style="color: red; display: none;" class="fa fa-hand-o-left" aria-hidden="true"></i>
+										<select id="selectedTemplate" style="padding: 0px;" class="w3-select w3-border" onchange="templateChange()">
+											<option value="">--Select a template--</option>
+										</select>
+									</p>
+									<hr style="margin-top: -12px; margin-bottom: 0px; border-color: #daa93a;">
+									<p>
+										<label style="font-weight: bold;">Template ID :</label><br>
+										<label id="templateid">&zwnj;</label>
+										<input type="hidden" id="templateid" name="templateid"/>
+									</p>
+									<hr style="margin-top: -12px; margin-bottom: 0px; border-color: #daa93a;">
+									<p style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+										<label style="font-weight: bold;">Template Description :</label><br>
+										<label name="templatetitle" id="templatetitle">&zwnj;</label>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="w3-bar" style="z-index: 1">
+							<div class="buttonbarpadding w3-bar-item" onclick="generateStructure();return false;"><a class="w3-btn bg-success w3-round-large" style="color: white;"><img src="/images/icons/19_icon.svg" style="width:20px;">&nbsp;&nbsp;Generate Structure&nbsp;<i id="genSecLoader" class="fa fa-gear fa-spin fa-fw" style="display: none"></i></a></div>
+							<div class="buttonbarpadding w3-bar-item" onClick="cancilQuestionPaperCreation()"><a class="w3-btn w3-red w3-round-large"><i class="fa fa-times" style="font-size:18px;"></i>&nbsp;&nbsp;Cancel</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- SECTIONS ARE APPENDED TO THIS DIV -->
+		<div id="sectionRow">
+			
+		</div>
+		
+	</div>
+	</form>
+	
+	<div id="quesSrchModal" class="w3-modal">
+		<div class="w3-modal-content" style="width:90%">
+			<header class="w3-container w3-theme-d4">
+				<h4>Select Question(s)</h4>
+			</header>
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				<div class="w3-row">
+					<div class="w3-third">
+						<select id="topics" class="w3-input w3-border" style="width:95%; padding: 0px;">
+							<option value="">--Select Topic--</option>
+							<th:block th:each="topic : ${topics}">
+								<option th:value="${topic.id}" th:text="${topic.descr}"></option>
+							</th:block>
+						</select>
+					</div>
+					<div class="w3-third">
+						<select id="types" class="w3-input w3-border" style="width:95%; padding: 0px;">
+							<option value="">--Select Question Type--</option>
+							<th:block th:each="type : ${questiontype}">
+								<option th:value="${type.id}" th:text="${type.descr}"></option>
+							</th:block>
+						</select>
+					</div>
+					<div class="w3-third">
+						<select id="questionDifficulty" class="w3-input w3-border" style="width:95%; padding: 0px;">
+							<option value="">--Select Gravity--</option>
+							<th:block th:each="diff : ${difficulty}">
+								<option th:value="${diff.id}" th:text="${diff.title}"></option>
+							</th:block>
+						</select>
+					</div>
+				</div>
+				<div class="w3-bar">
+					<div class="w3-bar-item buttonbarpadding" onclick="getquestions();return false;">
+						<a class="w3-btn w3-theme-d5 w3-round-large">
+							<img src="/images/icons/xmag.png" style="width: 20px;">&nbsp;&nbsp;Get Questions
+						</a>
+					</div>
+				</div>
+				<hr class="hrline">
+				<div class="w3-row" style="margin-top:20px;">
+					<div class="w3-row">
+						<div id="resultSec" class="w3-responsive" style="display: none">
+							<!--<table id="questionList" class="display compact" style="width: 100%;">-->
+							<table id="questionList" style="width: 100%;">
+								<thead style="width: 100%;">
+									<tr>
+										<th>Topic</th>
+										<th>ID</th>
+										<th>Question</th>
+										<th>Difficulty</th>
+										<th>Type</th>
+										<th>Select</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<div  id="noData" class="w3-responsive" style="display: none">
+							<div>
+								<p>No record found...</p>
+							</div>
+						</div>
+						<div  id="jsonLoader" class="w3-responsive" style="display: none">
+							<div>
+								<div class='w3-container' style='width: 100%; text-align: center'>
+									<i class='fa fa-cog fa-spin' style='font-size: 30px; color: black;'></i>
+									<p style="color: black;">Loading......</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr class="hrline">
+					
+					<div class="w3-bar">
+						<div class="w3-bar-item buttonbarpadding w3-right" onClick="questionClose()">
+							<a class="w3-btn w3-red w3-round-large">
+								<i class="fa fa-times" style="font-size: 19px;"></i>&nbsp;&nbsp;Cancel
+							</a>
+						</div>
+						<div class="w3-bar-item buttonbarpadding w3-right" onclick="fillQuestions();return false;">
+							<a class="w3-btn w3-theme-d5 w3-round-large">
+								<img src="/images/icons/fill1.png" style="width: 23px;">&nbsp;&nbsp;Fill Questions
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="myModal" class="w3-modal">
+		<div class="w3-modal-content">
+			<header class="w3-container w3-theme-d4">
+				<h4>Description</h4>
+			</header>
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				<textarea id="modalText" rows="5" style="width: 100%; background-color:#e8e9f9;"></textarea>
+			</div>
+			<footer class="w3-container w3-theme-d4">
+				<div class="w3-row">
+					<div class="w3-col" style="width: 50%">
+						<input class="w3-button w3-theme-d5" type="button" id="check" value="&checkmark;" style="width:100%;"/>
+					</div>
+					<div class="w3-col" style="width: 50%">
+						<input class="w3-button w3-theme-d5" type="button" id="cross" value="&times;" style="width:100%;"/>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	
+	<select id="questionTypes" class="w3-input" style="display:none;">
+		<th:block th:each="type : ${questiontype}">
+			<option th:value="${type.id}" th:text="${type.title+'^'+type.descr}"></option>
+		</th:block>
+	</select>
+	
+	<script src="/js/questionPaper/createQuestionPaper.js"></script>
+</div>

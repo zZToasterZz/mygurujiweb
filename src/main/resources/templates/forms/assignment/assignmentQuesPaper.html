@@ -1,0 +1,288 @@
+<div th:fragment="assignmentQuesPaper">
+	<div th:include="forms/assignment/assignmentQuesPaper :: assignmentQuesPaperHeader"></div>
+	<div style="margin-top: 6px; opacity: .95">
+		<div class="w3-white w3-padding">
+			<div class="buttonbarpadding w3-bar-item w3-right" onclick="newQuestionBlock()">
+				<a class="w3-btn w3-theme-d5 w3-border w3-border-black w3-round-large">
+					<i class="fa fa-plus" >
+				</i>&nbsp;&nbsp;Add Questions</a>
+				<input type="hidden" th:value="${assignmentid}" id="assignmentID">
+				<input type="hidden" th:value="${courseid}" id="courseid">
+				<input type="hidden" th:value="${level}" id="level">
+				<input type="hidden" th:value="${unitid}" id="unitid">
+			</div>
+			<div id="allQuestions" class="w3-container">
+				<div class="w3-row quesRow">
+					<h4 style='color: green; margin-bottom: 0;'>Question&nbsp;
+						<a style='cursor: pointer;' id='quesSrchBtn' onclick='questionSearch(this)'>
+							<img src='/images/icons/xmag.png' style='width: 20px;'>
+						</a><a style='cursor: pointer;' onclick="removeQuestion(this)">
+							<img src='/images/icons/trash.png' style='width: 25px;'>
+						</a>
+					</h4>
+					<div class='w3-bar' style='margin-bottom: 4px;'>  
+						<input class='w3-bar-item' type='hidden'value='N'>  						
+						<label class='w3-bar-item' style='padding: 0px 8px;'>&zwnj;</label>
+						<input class='w3-bar-item secMarks' style='font-weight: bold; width:100px;float: right; 
+							padding:0px 4px; border: 1px solid black;' type='number' value='1' min='1' max='100'>  
+						<input type='hidden' id='marksRow' name='marks'>  
+						<label class='w3-bar-item' style='font-weight: bold; float: right; padding:0px 4px;'>Question Marks :</label>
+					</div>
+					<div class='quesData' style='display: block'>
+						<div class='w3-row' style='background-color: antiquewhite'>
+							<div class='w3-third w3-border'>
+								<p style='margin: auto; padding: 4px;'>  
+									<label style='font-weight: bold'>Topic :</label><br>  
+									<span class="questopic"></span> 
+								</p>
+							</div>
+							<div class='w3-third w3-border'>
+								<p style='margin: auto; padding: 4px;'>  
+									<label style='font-weight: bold'>Question Type :</label><br>  
+									<span class="questype"></span>  
+								</p>
+							</div>
+							<div class='w3-third w3-border'>
+								<p style='margin: auto; padding: 4px;'>  
+									<label style='font-weight: bold'>Difficulty Level :</label><br>  
+									<span class="difficulty"></span>
+								</p>
+							</div>
+						</div>
+						<div class='w3-row' style='background-color: azure;'>
+							<div class='w3-border'>
+								<div class='w3-container quesTextDiv'>
+									<div class='w3-panel quesTxt'></div>
+									<input type="hidden" class='quesID'>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr class='hrline'>
+				</div>		
+			</div>					
+			<input id="createdby" name="createdby" type="hidden" th:value="${createdby}"/>				
+		</div>
+		<footer class="w3-container w3-theme-d4 w3-padding">
+			<div class="w3-row w3-bar">
+				<div class="w3-button w3-red w3-border w3-border-black w3-round-large w3-right" 
+					style="float:left; width:100px;" onClick="closeQuesPaper()">
+					<i class="fa fa-ban" aria-hidden="true"></i><span>&nbsp;Cancel</span>
+				</div>
+				<div onclick="ajaxPost();" class="w3-button w3-green w3-border w3-border-black w3-round-large w3-right" 
+					style="float: left; width: 100px; display: block;margin-right:5px" id="saveMarks">
+					<i class="fa fa-save" aria-hidden="true"></i><span>&nbsp;Save</span>
+				</div>
+			</div>
+		</footer>		
+	</div>
+	<div id="quesSrchModal" class="w3-modal">
+		<div class="w3-modal-content" style="width:90%">
+			<header class="w3-container w3-theme-d4">
+				<h4>Select Question(s)</h4>
+			</header>
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				<div class="w3-row">
+					<div class="w3-third">
+						<select id="topics" class="w3-input w3-border" style="width:95%; padding: 0px;">
+							<th:block th:each="topic : ${topics}">
+								<option th:value="${topic.id}" th:text="${topic.descr}"></option>
+							</th:block>
+						</select>
+					</div>
+					<div class="w3-third">
+						<select id="types" class="w3-input w3-border" style="width:95%; padding: 0px;">
+							<option value="">--Select Question Type--</option>
+							<th:block th:each="type : ${questiontype}">
+								<option th:value="${type.id}" th:text="${type.descr}"></option>
+							</th:block>
+						</select>
+					</div>
+					<div class="w3-third">
+						<select id="questionDifficulty" class="w3-input w3-border" style="width:95%; padding: 0px;">
+							<option value="">--Select Gravity--</option>
+							<th:block th:each="diff : ${difficulty}">
+								<option th:value="${diff.id}" th:text="${diff.title}"></option>
+							</th:block>
+						</select>
+					</div>
+				</div>
+				<div class="w3-bar">
+					<div class="w3-bar-item buttonbarpadding" onclick="getquestions();return false;">
+						<a class="w3-btn w3-theme-d5 w3-round-large w3-border w3-border-black">
+							<img src="/images/icons/xmag.png" style="width: 20px;">
+							&nbsp;&nbsp;Get Questions
+						</a>
+					</div>
+				</div>
+				<hr class="hrline">
+				<div class="w3-row" style="margin-top:20px;">
+					<div class="w3-row">
+						<div id="quesResultSec" class="w3-responsive" style="display: none">
+							<!--<table id="questionList" class="display compact" style="width: 100%;">-->
+							<table id="questionsList" style="width: 100%;">
+								<thead style="width: 100%;">
+									<tr>
+										<th>Topic</th>
+										<th>ID</th>
+										<th>Question</th>
+										<th>Difficulty</th>
+										<th>Type</th>
+										<th>Select</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<div  id="quesNoData" class="w3-responsive" style="display: none">
+							<div>
+								<p>No record found...</p>
+							</div>
+						</div>
+						<div  id="jsonLoader" class="w3-responsive" style="display: none">
+							<div>
+								<div class='w3-container' style='width: 100%; text-align: center'>
+									<i class='fa fa-cog fa-spin' style='font-size: 30px; color: black;'></i>
+									<p style="color: black;">Loading......</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr class="hrline">
+					
+					<div class="w3-bar">
+						<div class="w3-bar-item buttonbarpadding w3-right" onClick="questionClose()">
+							<a class="w3-btn w3-red w3-round-large w3-border w3-border-black">
+								<i class="fa fa-times" style="font-size: 19px;"></i>
+								&nbsp;&nbsp;Cancel
+							</a>
+						</div>
+						<div class="w3-bar-item buttonbarpadding w3-right" onclick="fillQuestions();return false;">
+							<a class="w3-btn w3-theme-d5 w3-round-large w3-border w3-border-black">
+								<img src="/images/icons/fill1.png" style="width: 23px;">
+								&nbsp;&nbsp;Fill Questions
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+	<div id="myModal" class="w3-modal">
+		<div class="w3-modal-content">
+			<header class="w3-container w3-theme-d4">
+				<h4>Description</h4>
+			</header>
+			<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+				<textarea id="modalText" rows="5" style="width: 100%; background-color:#e8e9f9;"></textarea>
+			</div>
+			<footer class="w3-container w3-theme-d4">
+				<div class="w3-row">
+					<div class="w3-col" style="width: 50%">
+						<input class="w3-button w3-theme-d5" type="button" id="check" value="&checkmark;" style="width:100%;"/>
+					</div>
+					<div class="w3-col" style="width: 50%">
+						<input class="w3-button w3-theme-d5" type="button" id="cross" value="&times;" style="width:100%;"/>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>	
+	<select id="questionTypes" class="w3-input" style="display:none;">
+		<th:block th:each="type : ${questiontype}">
+			<option th:value="${type.id}" th:text="${type.title+'^'+type.descr}"></option>
+		</th:block>
+	</select>
+<script src="/js/assignment/assignmentQuesPaper.js"></script>
+</div>
+
+<div th:fragment="viewAssignmentQuesPaper">
+	<div th:include="forms/assignment/assignmentQuesPaper :: assignmentQuesPaperHeader"></div>	
+	<div style="margin-top: 16px; opacity: .95;padding-bottom:16px">
+		<!-- <div class="buttonbarpadding w3-bar-item w3-right" onClick="closeViewQuesPaper()" style="margin-right:5px"><a class="w3-btn w3-red w3-round-large"><i class="fa fa-times" style="font-size:15px;"></i>&nbsp;&nbsp;Cancel</a></div> -->
+		<input type="hidden" th:value="${level}" id="level">
+		<input type="hidden" th:value="${unitid}" id="unitid">
+		<input type="hidden" th:value="${assignmentid}" id="assignmentID">
+		<input type="hidden" th:value="${courseid}" id="courseid">
+		<th:block th:each="ques,stats : ${questions}">
+			<div id="allQuestions" class="w3-container" >
+				<div class="w3-row quesRow">
+					<h4 style='color: green; margin-bottom: 0;'>Question&nbsp;&nbsp;&nbsp;
+						<span th:text="${stats.index+1}"></span>
+					</h4>
+					<div class='w3-bar' style='margin-bottom: 4px;'>  
+						<label class='w3-bar-item' style='font-weight: bold; float: right; padding:0px 4px;'>Question Marks :&nbsp;&nbsp;&nbsp;
+							<span th:text="${ques.marks}"></span>
+						</label>					
+					</div>
+					<div class='quesData' style='display: block'>
+						<div class='w3-row' style='background-color: antiquewhite'>
+							<div class='w3-third w3-border'>
+								<p style='margin: auto; padding: 4px;'>  
+									<label style='font-weight: bold'>Topic :</label><br>  
+									<span th:text="${ques.topic}"></span>
+								</p>
+							</div>
+							<div class='w3-third w3-border'>
+								<p style='margin: auto; padding: 4px;'>  
+									<label style='font-weight: bold'>Question Type :</label><br>  
+									<span th:text="${ques.qtype}"></span>  
+								</p>
+							</div>
+							<div class='w3-third w3-border'>
+								<p style='margin: auto; padding: 4px;'>  
+									<label style='font-weight: bold'>Difficulty Level :</label><br>  
+									<span th:text="${ques.difficulty}"></span>
+								</p>
+							</div>
+						</div>
+						<div class='w3-row' style='background-color: azure;'>
+							<div class='w3-border'>
+								<div class='w3-container quesTextDiv'>
+									<div class='w3-panel' th:utext="${ques.questext}" ></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr class='hrline'>
+				</div>		
+			</div>
+		</th:block>
+	</div>
+	<footer class="w3-container w3-theme-d4 w3-padding">
+		<div class="w3-row w3-bar">
+			<div class="w3-button w3-red w3-border w3-border-black w3-round-large w3-right" 
+				style="float:left; width:100px;" onClick="closeViewQuesPaper()">
+				<i class="fa fa-times" aria-hidden="true"></i><span>&nbsp;Cancel</span>
+			</div>
+			<!-- <div onclick="ajaxPost();" class="w3-button w3-green w3-border w3-border-black w3-round-large w3-right" 
+				style="float: left; width: 100px; display: block;margin-right:5px" id="saveMarks">
+				<i class="fa fa-save" aria-hidden="true"></i><span>&nbsp;Save</span>
+			</div> -->
+		</div>
+	</footer>
+<script src="/js/assignment/assignmentQuesPaper.js"></script>
+</div>
+
+<div th:fragment="assignmentQuesPaperHeader">
+	<header class="w3-container w3-theme-d4">
+		<div class="w3-half">
+			<span class="w3-xlarge">Assignment Question Paper</span>		
+		</div>
+		<div class="w3-half">
+			<div class="w3-container w3-right">
+				<p>
+					<label style="font-size:20px">Assignment ID:&nbsp;&nbsp;</label>
+					<span style="font-size:20px;" th:text="${assignmentid}"></span>
+				</p>
+				<p>
+					<label style="font-size:20px">Assignment Title:&nbsp;&nbsp;</label>
+					<span style="font-size:20px;word-wrap:break-word;" th:text="${title}"></span>
+				</p>
+				<p>
+					<label style="font-size:20px">DueDate:&nbsp;&nbsp;</label>
+					<span style="font-size:20px" th:text="${duedate}"></span>
+				</p>				
+			</div>
+		</div>
+	</header>
+</div>

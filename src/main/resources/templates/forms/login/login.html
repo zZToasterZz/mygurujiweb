@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>myGuruji</title>
+	<link rel="icon" type="image/ico" href="/images/icons/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="/css/w3.css" />
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body style="background-attachment: fixed; background-repeat: no-repeat; background-size: cover; background-position: center center;">
+<div class="w3-container">
+	<div id="id01" class="w3-modal">
+	  	<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+	
+			<div class="w3-center"><br>
+				<!-- <span class="w3-button w3-xlarge w3-hover-red w3-display-topleft"><img src="/images/myGurujiLogo.png" height="45px"></img></span> -->
+				<!-- <img src="images/icons/img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> -->
+				<img src="/images/myGurujiLogo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+			</div>
+		
+			<form id="loginForm" class="w3-container" th:object="${userCredential}" th:action="@{/login}" method="post">
+		  		<div class="w3-section">
+		    		<label><b>Username</b></label>
+		    		<input th:field="*{loginid}" id="uname" class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
+		    		<label><b>Password</b></label>
+		    		<input th:field="*{pwd}" id="pwd" class="w3-input w3-border" type="password" placeholder="Enter Password" name="pwd" required>
+		    		<label th:if="${isInvalid == 'Y'}"><span id="wrongPassMsg" style="color:red;">Invalid username or password!</span></label>
+		    		<label th:if="${hasRole == 'N'}"><span id="noRoleMsg" style="color:red;">No Role assigned. Contact the administrator.</span></label>
+		    		<button id="btnlogin" class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
+		    		<div class="w3-row">
+		    			<div class="w3-col" style="width:50%">
+		    				<input class="w3-check w3-margin-top" id="remember" type="checkbox" checked="checked"><label>&nbsp;&nbsp;Remember Me</label>
+		    			</div>
+		    			<div class="w3-col" style="width:50%;margin-top: 18px!important;">
+		    				<span id="forgotPwd" style="cursor:pointer; float: right;"><u style="color: blue;">Forgot Password ?</u></span>
+		    			</div>
+		    		</div>
+		  		</div>
+			</form>
+		
+			<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+		  		<!-- <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button> -->
+		   		<img class="w3-right" src="/images/icons/srmuLogo1.png" alt="SRMU LOGO" style="width:200px">
+		    </div>
+	    </div>
+  	</div>
+</div>
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script src="/js/jquery.cookie.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootbox.min.js"></script>
+
+<script type="text/javascript">
+	document.getElementById('id01').style.display='block'
+</script>
+<script type="text/javascript">
+	var background = new Array();
+	background[0] = "/images/courseThumbnails/background.jpg";
+	background[1] = "/images/courseThumbnails/background1.jpg";
+	background[2] = "/images/courseThumbnails/background2.jpg";
+	background[3] = "/images/courseThumbnails/background3.jpg";
+	background[4] = "/images/courseThumbnails/background4.jpg";
+	background[5] = "/images/courseThumbnails/background5.jpg";
+	background[6] = "/images/courseThumbnails/background6.jpg";
+	background[7] = "/images/courseThumbnails/background7.jpg";
+	background[8] = "/images/courseThumbnails/background8.jpg";
+	
+	var numberGen = Math.floor(Math.random() * 9);
+	document.body.style.backgroundImage='url('+background[numberGen]+')';
+</script>
+<script>
+$(document).on('click', '#forgotPwd', function(){
+	
+	var role = "faculty";
+	
+	bootbox.confirm({
+	    message: "Are you a faculty or a student ?",
+	    buttons: {
+	        confirm: {
+	            label: 'Faculty',
+	            className: 'btn-success'
+	        },
+	        cancel: {
+	            label: 'Student',
+	            className: 'btn-danger'
+	        }
+	    },
+	    callback: function (result) {
+	        if(result == true){
+	        	role = "faculty";
+	        	var uname = document.getElementById("uname").value;
+	        	if(uname == undefined || uname == "")
+	        	{
+	        		bootbox.alert("Please enter the username before clicking the 'forgot password' link.");
+	        	}
+	        	else
+	        	{
+	        		$.ajax({
+	        			url: "/forgotpass/"+uname+"/"+role,
+	        		    type: "GET",
+	        			success : function(result){
+	        				if(result.message == "MAIL_FAIL")
+	        				{
+	        					bootbox.alert("Error sending mail.");
+	        				}
+	        				else
+	        				{
+	        					var t = result.message.split("^");
+	        					bootbox.alert("A mail has been sent to "+t[1]+" which contains the instructions for recovering your password..");
+	        				}
+	        			},
+	        			error: function(result){
+	        				bootbox.alert("Some error occcured.");
+	        				console.log(result);
+	        			}
+	        		});
+	        	}
+	        }
+	        else{
+	        	role = "student";
+	        	var uname = document.getElementById("uname").value;
+	        	if(uname == undefined || uname == "")
+	        	{
+	        		bootbox.alert("Please enter the username before clicking the 'forgot password' link.");
+	        	}
+	        	else
+	        	{
+	        		$.ajax({
+	        			url: "/forgotpass/"+uname+"/"+role,
+	        		    type: "GET",
+	        			success : function(result){
+	        				if(result.message == "MAIL_FAIL")
+	        				{
+	        					bootbox.alert("Error sending mail.");
+	        				}
+	        				else
+	        				{
+	        					var t = result.message.split("^");
+	        					bootbox.alert("A mail has been sent to "+t[1]+" which contains the instructions for recovering your password..");
+	        				}
+	        			},
+	        			error: function(result){
+	        				bootbox.alert("Some error occcured.");
+	        				console.log(result);
+	        			}
+	        		});
+	        	}
+	        }
+	    }
+	});
+});
+</script>
+<script>
+	$(document).on('click', '#btnlogin', function(){
+		var remcondition = $('#remember').prop('checked');
+		if(remcondition == true){
+			var username = $('#uname').val();
+			var password = $('#pwd').val();
+			$.cookie('username', username, {expires: 14});
+			$.cookie('password', password, {expires: 14});
+			$.cookie('remember', true, {expires: 14});
+		} else {
+			$.cookie('username', null);
+			$.cookie('password', null);
+			$.cookie('remember', null);
+		}
+	});
+	var remember = $.cookie('remember');
+	if(remember == 'true'){
+		var username = $.cookie('username');
+		var password = $.cookie('password');
+		$('#uname').attr('value', username);
+		$('#pwd').attr('value', password);
+	}
+	$(document).on('input', '#uname', function(){
+		var remember = $.cookie('remember');
+		if(remember == 'true'){
+			var username = $.cookie('username');
+			var uname = $('#uname').val();
+			if(username == uname){
+				var password = $.cookie('password');
+				$('#pwd').val(password);
+			}
+		}
+	});
+</script>
+</body>
+</html>

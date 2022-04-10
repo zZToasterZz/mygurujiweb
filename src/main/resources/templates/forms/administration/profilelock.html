@@ -1,0 +1,165 @@
+<div th:fragment="profilelock">
+<div class="w3-main" style="margin-left:300px;">
+	<div style="position: relative;">
+		<div class="w3-theme-d2" style="opacity: .8">
+		  <div class="w3-container">
+		  	<h3 style="font-weight: 600;">
+		  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;">
+		  		<img src="/images/icons/profilelock.png" style="width: 40px;">
+		  		&nbsp;&nbsp;Lock Users
+		  	</h3>
+		  </div>
+		</div>
+	</div>
+	<div class="w3-container" style="margin-top: 16px; opacity: .95">
+		<div class="w3-card w3-theme-l3 w3-padding">
+			<div class="w3-row">
+				<div class="w3-bar">
+					<div class="w3-bar-item"><h3 style="margin-bottom: 0px; font-weight: bold;">Lock Users</h3></div>
+					<!--<div class="buttonbarpadding w3-bar-item w3-right" onclick="ajaxPost();"><a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-save" style="font-size:15px; color: lime"></i>&nbsp;&nbsp;Save Course Plan</a></div>
+					<div class="buttonbarpadding w3-bar-item w3-right" onClick="cancilCoursePlanAdd()"><a class="w3-btn w3-red w3-round-large"><i class="fa fa-times" style="font-size:15px;"></i>&nbsp;&nbsp;Cancel</a></div>-->
+				</div>
+				<hr class="hrline">
+				<div class="w3-row-padding">
+					
+				</div>
+				
+				<div class="w3-row-padding" style="margin-top: 8px;">
+					<div class="w3-border w3-round-large w3-white" style="padding-bottom: 16px;">
+						<div class="w3-row">
+						    <a href="javascript:void(0)" onclick="opentab(event, 'selectusers');">
+						    	<div class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red"><h5>Lock Users</h5></div>
+						    </a>
+						    <a href="javascript:void(0)" onclick="opentab(event, 'unlockuser');">
+						    	<div class="w3-half tablink w3-bottombar w3-hover-light-grey w3-padding"><h5>Unlock Users</h5></div>
+						    </a>
+						</div>
+						<div id="selectusers" class="w3-container tab" style="display:block;">
+							<div class="w3-row">
+								<div class="w3-half">
+									<h5 style="margin-bottom: 0px; font-weight: bold">Manually bar users from entering myGuruji.</h5>
+								</div>
+								<div class="w3-half">
+									<div class="w3-button w3-red w3-right" onclick="lockusers();">Lock Users</div>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-row">
+								<div class="w3-third">
+									<label>Course</label>
+									<select onload="getBatch();return false;" onchange="getBatch();return false;" id="courseid" name="courseid" class="w3-input w3-border" style="width:95%">
+										<option value="" disabled selected>--Select Course--</option>
+										<th:block th:each="course : ${courses}">
+											<option th:value="${course.courseid}" th:text="${course.coursetitle}">
+											</option>
+										</th:block>
+									</select>
+								</div>
+								<div class="w3-third">
+									<label>Batch</label>
+									<select id="batchid" class="w3-input w3-border" style="width:95%">
+										<option value="">
+											<column>--Select Batch--</column>
+										</option>
+									</select>
+								</div>
+								<div class="w3-third">
+									<label>&zwnj;</label>
+									<div class="w3-button w3-input w3-black" style="width:95%" onclick="getusers();"><span class="w3-text-white">Get user list</span></div>
+								</div>
+							</div>
+							<hr class="hrline">
+							<div class="w3-responsive">
+								<div id="resultSec" class="w3-responsive" style="display: none">
+									<table id="batchStudentList" class="display compact cell-border" style="width: 100%;">
+										<thead>
+										<tr class="w3-theme-d3">
+											<th></th>
+											<th>Campus ID</th>
+											<th>Name</th>
+											<th>Reason</th>
+											<th>Resolution</th>
+										</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+								<div  id="noData" class="w3-responsive" style="display: none">
+									<div>
+										<p>No record found...</p>
+									</div>
+								</div>
+								<div  id="jsonLoader" class="w3-responsive" style="display: none">
+									<div>
+										<div class='w3-container' style='width: 100%; text-align: center'>
+											<i class='fa fa-cog fa-spin' style='font-size: 30px; color: white;'></i>
+											<p style="color: white;">Loading......</p>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+						
+						<div id="unlockuser" class="w3-container tab" style="display:none;">							
+							<div class="w3-row">
+								<div class="w3-half">
+									<h5 style="margin-bottom: 0px; font-weight: bold">Unlock Users</h5>
+								</div>
+								<div class="w3-half">
+									<div class="w3-button w3-red w3-right" onclick="unlockusers();">Unlock Users</div>
+								</div>
+							</div>
+							<hr class="hrline">
+							<!-- <p class="w3-xxlarge">Coming Soon..</p> -->
+							<!-- <div class="w3-container">
+								<div class="w3-third">
+									<label>&zwnj;</label>
+									<div class="w3-button w3-input w3-black" style="width:95%" onclick="getusersLocked();"><span class="w3-text-white">Get locked user list</span></div>
+								</div>								
+							</div> -->
+							<div class="w3-responsive">
+								<div id="resultSecL" class="w3-responsive" style="display: none">
+									<table id="lockedStudentList" class="display compact cell-border" style="width: 100%;">
+										<thead>
+										<tr class="w3-theme-d3">
+											<th></th>
+											<th>Campus ID</th>
+											<th>Name</th>
+											<th>Reason</th>
+											<th>Resolution</th>
+										</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+								<div  id="noDataL" class="w3-responsive" style="display: none">
+									<div>
+										<p>No record found...</p>
+									</div>
+								</div>
+								<div  id="jsonLoaderL" class="w3-responsive" style="display: none">
+									<div>
+										<div class='w3-container' style='width: 100%; text-align: center'>
+											<i class='fa fa-cog fa-spin' style='font-size: 30px; color: white;'></i>
+											<p style="color: white;">Loading......</p>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+						
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>	
+</div>
+
+<input type="hidden" th:value="${createdby}" id="createdby">
+
+	<script src="/js/administration/profilelock.js"></script>
+</div>

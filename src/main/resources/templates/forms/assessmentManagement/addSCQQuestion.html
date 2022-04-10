@@ -1,0 +1,127 @@
+<div th:fragment="addSCQQuestion">
+	<div class="w3-container w3-animate-zoom" style="margin-top: 16px; opacity: .95;">
+		
+		<div class="w3-card w3-theme-l3 w3-padding">
+			<!-- This portion to be replicated -->
+			<div class="qBody" id="qBody">
+				<div class="questionBlock w3-panel my-border">
+					<div class="w3-black" style="margin-top: 16px;">
+						<h4 style="padding-top:8px; padding-left:8px">Add Question <i>(Single Choice Question)</i></h4>
+						<label id="topicTitle" style="padding-left:8px; color: darkorange;" th:text="'Under Topic:&nbsp;&nbsp;&nbsp' + ${topicname}"></label>
+					</div>
+					
+					
+					<div class="w3-row" style="margin-top: 8px;">
+						<div class="w3-third" style="padding-right:8px;">
+							<p>
+								<label>Select Blooms Taxonomy</label>
+								<select class="w3-select w3-border" id="selectBLeditor1" name="course">
+									<option value="" disabled selected>- Select Blooms Taxonomy -</option>
+									<option value="BL-1">BL - 1</option>
+									<option value="BL-2">BL - 2</option>
+									<option value="BL-3">BL - 3</option>
+									<option value="BL-4">BL - 4</option>
+									<option value="BL-5">BL - 5</option>
+									<option value="BL-5">BL - 6</option>
+								</select>
+							</p>
+						</div>
+						<div class="w3-third" style="padding-right:8px;">
+							<p>
+								<label>Select CLO</label>
+								<select class="w3-select w3-border" id="selectCOeditor1" name="course">
+									<option value="" disabled selected>- Select CLO -</option>
+									<th:block th:each="outcome : ${outcomes}">
+										<option th:value="${outcome.id}" th:text="${outcome.title}"></option>
+									</th:block>
+								</select>
+							</p>
+						</div>
+						<div class="w3-third">
+							<p>
+								<label>Select Reference ID</label>
+								<select class="w3-select w3-border" id="selectRFeditor1" name="course">
+									<option value="" disabled selected>- Select Reference ID -</option>
+									<th:block th:each="book : ${books}">
+										<option th:value="${book.id}" th:text="${book.title}"></option>
+									</th:block>
+								</select>
+							</p>
+						</div>
+					</div>
+					
+					<div class="w3-row" style="margin-top: 8px;">
+						<label>Question:</label>
+						<textarea id="editor1" class="jquery_ckeditor" name="editor1">
+					
+						</textarea>
+					</div>
+					
+					<div class="w3-row" style="margin-top: 8px;">
+						<div class="w3-half" style="padding-right:8px;">
+							<label>Answer: Option 1</label>
+							<textarea id="editor2" name="editor2">
+						
+							</textarea>
+						</div>
+						<div class="w3-half" style="padding-right:8px;">
+							<label>Answer: Option 2</label>
+							<textarea id="editor3" name="editor3">
+						
+							</textarea>
+						</div>
+					</div>
+					
+					<div class="w3-row" style="margin-top: 8px;">
+						<div class="w3-half" style="padding-right:8px;">
+							<label>Answer: Option 3</label>
+							<textarea id="editor4" name="editor4">
+							
+							</textarea>
+						</div>
+						<div class="w3-half" style="padding-right:8px;">
+							<label>Answer: Option 4</label>
+							<textarea id="editor5" name="editor5">
+							
+							</textarea>
+						</div>
+					</div>
+					
+					<div class="w3-row">
+						<div class="w3-half" style="padding-right: 8px;">
+							<p style="margin-top: 16px;">
+								<label>Select Correct Answer</label>
+								<select class="w3-select w3-border" id="selectecrtans" name="course">
+									<option value="" disabled selected>- Correct Answer -</option>
+									<option value="opt1">Option 1</option>
+									<option value="opt2">Option 2</option>
+									<option value="opt3">Option 3</option>
+									<option value="opt4">Option 4</option>
+								</select>
+							</p>
+						</div>
+						<div class="w3-half">
+							<p style="margin-top: 16px;">
+								<label>Select Question Gravity</label>
+								<select class="w3-select w3-border" id="selectquegrvt" name="course">
+									<option value="" disabled selected>- Select Question Gravity -</option>
+									<option th:each="questionGvt : ${questionsGravity}" th:value="${questionGvt.id}" th:text="${questionGvt.title}" />
+								</select>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- End if one question -->
+			<div class="w3-bar" style="z-index: 1">
+				<div class="buttonbarpadding w3-bar-item" onclick="saveClicked()"><a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-save" style="font-size:15px; color: lime"></i>&nbsp;&nbsp;Save</a></div>
+				<div class="buttonbarpadding w3-bar-item" onClick="cancilQuestionAdd()"><a class="w3-btn w3-red w3-round-large"><i class="fa fa-times" style="font-size:15px;"></i>&nbsp;&nbsp;Cancel</a></div>
+				<!-- <div class="buttonbarpadding w3-bar-item" onClick="newQuestionBlock()"><a class="w3-btn w3-theme-d5"><i class="fa fa-question" style="font-size:18px;"></i>&nbsp;&nbsp;Add More</a></div> -->
+			</div>
+		</div>
+		
+	</div>
+	
+	<script src="/js/questionBank/addSCQQuestion.js"></script>
+</div>

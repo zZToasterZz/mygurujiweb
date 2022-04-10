@@ -1,0 +1,154 @@
+<div th:fragment="batchDetails">
+	<div class="w3-main w3-animate-zoom" style="margin-left: 300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+					<!-- <button class="w3-button w3-large" style="padding-bottom: 0px;" onclick="w3_open()"><i class="material-icons">reorder</i><h3 style="margin-top: 0px; margin-bottom: 0px;">Programming Fundamentals</h3></button> -->
+					<h3 style="font-weight: 600;">
+						<img class="w3-hide-large"
+							src="/images/icons/hide-grader-panel.png"
+							style="cursor: pointer;" onclick="w3_open()"> <img
+							src="/images/icons/manage_class.svg" style="width: 35px;">
+						&nbsp;&nbsp;Batch Details
+					</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-container" style="margin-top: 16px;">
+		<div class="w3-card w3-theme-l3 w3-padding">
+			<hr class="hrline">
+			<div class="w3-row">
+				<div class="w3-container w3-half">
+					<div class="w3-row">
+						<div class="w3-third">
+							<label>Batch ID : </label>
+						</div>
+						<div class="w3-twothird">
+							<label id="batchid" th:text="${batchDetail.batchid}"></label>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-third">
+							<label>Batch Code : </label>
+						</div>
+						<div class="w3-twothird">
+							<label id="batchcode" th:text="${batchDetail.batchcode}"></label>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container w3-half">
+					<div class="w3-row">
+						<div class="w3-third">
+							<label>Title : </label>
+						</div>
+						<div class="w3-twothird">
+							<label id="batchtitle" th:text="${batchDetail.title}"></label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr class="hrline">
+		</div>
+		</div>
+
+		<div class="w3-container w3-margin w3-padding w3-theme-l3" style="margin-top: 16px;">
+			<div class="w3-row">
+				<a href="javascript:void(0)" onclick="openTab(event, 'General');">
+					<div class="w3-col tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-blue-grey w3-theme-l3"	style="width: 33.33%">General Information</div>
+				</a> 
+				<a href="javascript:void(0)" onclick="openTab(event, 'Roles');">
+					<div class="w3-col tablink w3-bottombar w3-hover-light-grey w3-padding"	style="width: 33.33%">Students Enrolled</div>
+				</a> 
+				<a href="javascript:void(0)" onclick="openTab(event, 'Audit');">
+					<div class="w3-col tablink w3-bottombar w3-hover-light-grey w3-padding"	style="width: 33.33%">Faculties Tagged</div>
+				</a>
+			</div>
+		
+
+			<!-- Begin of General Tab -->
+			<div id="General" class="optTab">
+				<div class="w3-row w3-padding">
+					<button onClick="showHodeContent('general_logon')"
+						class="w3-button w3-block w3-theme w3-left-align">General Information</button>
+					<div id="general_logon" class="w3-show">
+						<div class="w3-container">
+							<div class="w3-row w3-padding">
+									<div class="w3-row divborderbottom">
+										<div class="w3-quarter">
+											<label>Course ID : </label>
+										</div>
+										<div class="w3-threequarter">
+											<label id="courseid" th:text="${batchDetail.courseid}"></label>
+										</div>
+									</div>
+									<div class="w3-row divborderbottom">
+										<div class="w3-quarter">
+											<label>Batch ID : </label>
+										</div>
+										<div class="w3-threequarter">
+											<label id="batchid" th:text="${batchDetail.batchid}"></label>
+										</div>
+									</div>
+									<div class="w3-row divborderbottom">
+										<div class="w3-quarter">
+											<label>Title : </label>
+										</div>
+										<div class="w3-threequarter">
+											<label id="title" th:text="${batchDetail.title}"></label>
+										</div>
+									</div>
+									<div class="w3-row divborderbottom">
+										<div class="w3-quarter">
+											<label>Description : </label>
+										</div>
+										<div class="w3-threequarter">
+											<label id="batchdescr" th:text="${batchDetail.descr}"></label>
+										</div>
+									</div>
+									<div class="w3-row divborderbottom">
+										<div class="w3-quarter">
+											<label>Type : </label>
+										</div>
+										<div class="w3-threequarter">
+											<label id="type" th:text="${batchDetail.type}"></label>
+										</div>
+									</div>
+									<div class="w3-row divborderbottom">
+										<div class="w3-quarter">
+											<label>Year : </label>
+										</div>
+										<div class="w3-threequarter">
+											<label id="year" th:text="${batchDetail.year}"></label>
+										</div>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End of General Tab -->
+
+			<!-- Begin of Student Details Tab -->
+			<div id="Roles" class="optTab" style="display: none">
+				<div class="w3-row w3-padding">
+					<button class="w3-button w3-block w3-theme w3-left-align">Students Enrolled</button>
+					<div id="studentDetails" class="w3-show">
+					</div>
+				</div>
+			</div>
+			<!-- End of Student Details Tab -->
+
+			<!-- Begin of Faculty Details Tab -->
+			<div id="Audit" class="optTab" style="display: none">
+				<div class="w3-row w3-padding">
+					<button class="w3-button w3-block w3-theme w3-left-align">Faculties Tagged</button>
+					<div id="studentDetails" class="w3-show">
+					</div>
+				</div>
+			</div>
+			<!-- End of Faculty Details Tab -->
+		</div>
+		<script src="/js/batchDetails.js"></script>
+	</div>
+</div>

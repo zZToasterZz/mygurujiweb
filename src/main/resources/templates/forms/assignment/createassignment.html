@@ -1,0 +1,184 @@
+<div th:fragment="createassignment">
+	<div>
+		<div style="opacity: .95">
+			<div class="w3-card w3-padding">
+				<div class="w3-row">
+					<form id="saveassign" onsubmit="return false;" enctype="application/x-www-form-urlencoded">
+						<div class="w3-row-padding">
+							<div class="w3-third">
+								<label>Select Course</label>
+								<select class="w3-select w3-border" id="courseSelect" name="CourseID">
+									<!-- <option value="" disabled selected>- Select Course -</option>
+									<option th:each="course : ${courses}" th:value="${course.id}"
+										th:text="${course.title}" th:selected="${course.id == crseid}"/> -->
+									<option th:if="${course.id == crseid}" 
+										th:each="course : ${courses}" th:value="${course.id}"
+										th:text="${course.title}" th:selected="${course.id == crseid}"/>	
+								</select>
+							</div>
+							<div class="w3-third">
+							    <label>Assignment Type</label>
+						    	<select class="w3-select w3-border" id="asignmenType" name="assignmentType">
+						    		<option value="" selected disabled>--Select--</option>
+						    		<option value="TA1">Teacher's Assessment 1(For all courses except IER)</option>
+						    		<option value="TA2">Teacher's Assessment 2(For all courses except IER)</option>
+						    		<option value="TA3">Teacher's Assessment 3(For all courses except IER)</option>
+						    		<option value="CP">Class Participation(For all courses except IER)</option>
+						    		<option value="AS1">Activity Set 1(Non Experimental Lab)</option>
+						    		<option value="AS2">Activity Set 2(Non Experimental Lab)</option>
+						    		<option value="VV1">Viva Voce 1(Experimental Lab)</option>
+						    		<option value="VV2">Viva Voce 2(Experimental Lab)</option>
+						    	</select>							    
+							</div>
+							<div class="w3-third">
+								<div class="w3-half">
+									<label>Due Date and time</label>
+									<input class="w3-input w3-border" id="dudate" type="date" 
+										onchange="setdatetime()" th:min="${mindate}">
+								</div>
+								<div class="w3-half">
+									<label style="font-weight: bolder">&nbsp;</label>
+									<input class="w3-input w3-border" id="dutime" type="time" 
+										onchange="setdatetime()">
+								</div>
+								<input type="hidden" id="dueDate" name="dueDate">
+							</div>														 						
+						</div>
+						<div class="w3-row-padding">
+							<div class="w3-third">
+								<p>
+									<label>Assignment Title</label>
+							    	<input class="w3-input w3-border" id="assiTitle" name="assignmentTitle" type="text">
+							    </p>
+							</div>
+							<div class="w3-rest" style="padding-right:8px;padding-left:8px">
+								<p>
+									<label>Assignment Description</label>
+							    	<input class="w3-input w3-border" id="assiDescr" name="assignmentDescr">
+							    </p>
+							</div>
+						</div>
+					</form>					
+				</div>
+				
+				<div class="w3-row-padding">
+					<div class="w3-round-large" style="background-color:white;padding:20px;">
+						<table class="w3-table">
+							<thead>
+								<tr>
+									<th>Unit Description</th>
+									<th>Course Topics</th>
+								</tr>
+								<tr>
+									<td colspan="2"><hr class="hrline"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="unit,stats : ${units}">									
+									<tr><!-- th:rowspan="${#strings.arraySplit( unit.topics , ',#' ).length+1}" -->
+										<td style="max-width:300px"
+											th:text="' '+${stats.index+1}+'. '+${unit.unitdescr}"
+											th:value="${unit.unitid}"
+											name="unitid"></td>
+										<td>
+											<div class="topicDropdownParent" style="padding-top: 2px;">
+												<div class="w3-dropdown-click" style="width: 100%; border-top: 4px solid chocolate;">
+													<div style="width: 100%; text-align: left;"
+														th:data-topics="${unit.topics}" th:data-topicsid="${unit.topicsid}" 
+														th:onclick="populateTopics(this)"										 
+														class="w3-btn w3-theme-d5">Select Topics
+														<div class="w3-right"><i class="fa fa-angle-double-down" aria-hidden="true" style="color:white;"></i></div>
+													</div>
+													<div class="w3-dropdown-content w3-bar-block w3-border topicDD" style="height:200px; width: 100%; overflow-y: scroll;"></div>
+												</div>											
+												<input class="topicString" th:data-unitid="${unit.unitid}" type="hidden">
+												<textarea readonly="" rows="3" class="topicStringShow" th:data-unitid="${unit.unitid}" style="width: 100%; resize: none;"></textarea>
+												<input class="topicIdString" th:data-unitid="${unit.unitid}" type="hidden">
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2"><hr class="hrline"></td>
+									</tr>					
+								</th:block>
+							</tbody>
+						</table>											
+					</div>
+				</div>
+				<input id="assignmentid" name="assignmentId" type="hidden" value="0"/>
+				<input id="createdBy" name="createdby" type="hidden" th:value="${createdby}"/>
+			</div>
+		</div>
+		
+	</div>
+	
+	<script src="/js/assignment/createassignment.js"></script>
+</div>
+
+<!-- DISABLED AS ON 15-DEC-2020::DONT REMOVE -->
+<div th:fragment="createassignmentsearch">
+	<div class="w3-main w3-animate-left" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+				<div class="w3-container">
+					<h3 style="font-weight: 600;">
+				  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;"  onclick="w3_open()">
+				  		<img src="/images/icons/assignment.png" style="width: 35px;">
+				  		&nbsp;&nbsp;Create/Manage Assignment
+					</h3>
+				</div>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top: 16px; opacity: .95;height:500px">
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="divTable">
+					<div class="divTr">
+						<div class="d1"><h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Find an existing value</h5></div>						
+					</div>
+				</div>
+				<hr class="hrline">
+				<h6 style="font-style: italic;">Search Criteria</h6>
+				<div class="w3-row-padding">
+				<div class="w3-half w3-container">
+					<label style="font-weight: bolder">Course</label>
+					<select id="courseid" name="courseid" class="w3-input w3-border">
+						<option value="" disabled selected style="display:none;"></option>
+						<th:block th:each="course : ${course}">
+							<option th:value="${course.id}">
+								<column th:text="${course.id}+'&nbsp;'"></column>:<column th:text="'&nbsp;'+${course.descr}"></column>
+							</option>
+						</th:block>
+					</select>						
+				</div>
+				</div><br>
+				<div class="w3-row-padding">
+					<p>
+						<button id="getAssignment" onclick="searchassign()" class="w3-btn w3-theme-d5 w3-round-large" type="button"><img src="/images/icons/xmag.png" style="width: 20px;">&nbsp;&nbsp;Search</button>
+						<button id="addAssignment" onclick="createassign()" class="w3-btn w3-theme-d5 w3-round-large" type="button"><img src="/images/icons/add.png" style="width: 23px;">&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;</button>
+					</p>
+				</div>				
+				<input type="hidden" th:value="${createdby}" id="createdby"/>				
+			</div>
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="w3-row">
+					<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Search Results</h5>
+					<hr class="hrline">
+				</div>
+				<div id="resultSec" class="w3-responsive" style="display:none">
+				<table id="searchTable" class="display compact cell-border" style="width: 100%;">
+					<thead>						
+					</thead>
+				</table>
+			</div>
+			<div  id="noData" class="w3-responsive" style="display: none">
+				<div>
+					<p>No record found...</p>
+				</div>
+			</div>
+			</div>
+		</div>
+		
+	</div>
+	<script src="/js/assignment/createassignment.js"></script>
+</div>

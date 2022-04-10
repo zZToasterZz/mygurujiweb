@@ -1,0 +1,230 @@
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Calibri", sans-serif;}
+html{height: 100%;}
+body{
+	min-height: 100%;
+}
+
+a{text-decoration: none;}
+label{margin-bottom: 0;}
+.w3-top{overflow: visible;}
+.w3-sidebar {
+	z-index: 3;
+	width: 350px;
+	top: 52px;
+	bottom: 0;
+	height: inherit;
+}
+._sidebar {
+	scrollbar-color: #0A4C95  #C2D2E4;
+	scrollbar-width: thin;
+}
+* {
+	scrollbar-color: #0A4C95  #C2D2E4;
+	scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+	width: 2px;
+}
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+div.sticky {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 63px;
+}
+b.icon-change:hover .fa-folder:before{
+	content:"\f07c";
+}
+ed.editCourse:hover .fa-pencil-square-o:before{
+	content:"\f14b";
+}
+.disabled {
+	pointer-events: none;
+}
+.footer {
+/* 	position: fixed; */
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+.hrline{
+	border: 1px solid black;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.hrqline{
+	border-top: 1px solid #bdcad1 !important;
+}
+
+.divTable {
+	display:table;
+	width:100%
+}
+.divTr {
+	display:table-row;
+}
+.d1 {
+	display:table-cell;
+	width:60%
+}
+.d2 {
+	display:table-cell;
+	text-align:right;
+	width:40%
+}
+ .dataTables_length {
+	margin-top: 6px;
+}
+.dataTables_filter {
+	margin-top: 4px;
+}
+.rowMarTop{
+	margin-top: 6px;
+}
+
+.w3-tangerine{
+	font-family: sans-serif;
+	font-size: 15px;
+}
+
+.liHover:hover{
+	cursor: pointer;
+	background-color: #a99b16;
+	color: white;
+}
+.nowrap{
+	white-space: nowrap;
+}
+
+.my-hover:hover{
+	cursor: pointer;
+}
+
+.alertBox{
+	position: absolute; 
+	right:10px; 
+	z-index: 3; 
+	opacity: .9;
+}
+.help-block{
+	color: red;
+}
+.divborderbottom{
+	border-bottom: 1px double white;
+	padding-top: 8px;
+}
+#fltnavbar{
+	overflow: hidden;
+}
+.content{
+	padding: 16px;
+}
+/* .sticky{
+	position: fixed;
+	top:63px;
+	width:100%;
+} */
+.sticky + .content {
+	padding-top: 100px;
+}
+.my-border{
+	border: 2px solid black;
+}
+.buttonbarpadding{
+	padding: 8px 2px !important
+}
+.my-panel{
+	margin-top: 16px;
+	padding: 0.01em 16px;
+}
+pre{
+	background-color: lightgoldenrodyellow;
+}
+.overlayContent{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 18px;
+	color: white;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+#tooltip{
+	background-color: #333;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 13px;
+}
+.center{
+	display: flex;
+	justify-content: center;
+	align-items: end;
+	height: 27px;
+	padding-bottom: 10px;
+}
+.center1{
+	display: flex;
+	justify-content: center;
+	align-items: end;
+	height: 155px;
+}
+.qimg{
+	width: 150px;
+	border:1px solid #ccc;
+	/*noinspection CssInvalidPropertyValue*/
+	cursor: -moz-zoom-in;
+}
+.qimglg{
+	width: 500px;
+	border:3px solid #ccc;
+}
+
+.progressBarContainer{
+	border: 2px solid darkblue;
+}
+
+.progressBarFill{
+	height: 100%;
+	width: 0%;
+	background: lightblue;
+	display: flex;
+	align-items: center;
+	transition: width 0.25s;
+}
+
+.progressPercent{
+	margin-left: 10px;
+	font-weight: bold;
+}
+
+.dataTables_filter{
+	padding-bottom: 5px;
+}
+/****************************************************************************/
+.thumbnail-item {
+ /* position relative so that we can use position absolute for the tooltip */
+ position: relative;
+ float: left; 
+ margin: 0px 5px;
+}
+ 
+.thumbnail-item a {
+ display: block;
+}
+ .pickedColor{
+ 	background-color: #f7e49d !important;
+ }
+/****************************************************************************/
+/* th, td {white-space: nowrap;}
+div.dataTables_wrapper{margin: 0 auto;}
+div.container{width: 80%;} */

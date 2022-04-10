@@ -1,0 +1,148 @@
+<div th:fragment="stdntAnnounce">
+<style>
+.stdntRow:hover{
+	background: #32CD32;
+}
+</style>
+<form autocomplete="off" onsubmit="return false;" method="post" id="createplan" enctype="application/x-www-form-urlencoded">
+	<div class="w3-main" style="margin-left:300px;">
+		<div style="position: relative;">
+			<div class="w3-theme-d2" style="opacity: .8">
+			  <div class="w3-container">
+			  	<h3 style="font-weight: 600;">
+			  		<img class="w3-hide-large" src="/images/icons/hide-grader-panel.png" style="cursor: pointer;">
+			  		<img src="/images/icons/people.png" style="width: 35px;">
+			  		&nbsp;&nbsp;Student Details
+			  	</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="w3-container" style="margin-top: 16px; opacity: .95">
+			<div class="w3-card w3-theme-l3 w3-padding">
+				<div class="w3-row">
+					<div class="w3-bar">
+						<div class="w3-bar-item" style="margin-top: -12px;"><h3 style="margin-bottom: 0px; font-weight: bold;">Select Course and Batch</h3></div>
+						<!--<div class="buttonbarpadding w3-bar-item w3-right" onclick="announce();"><a class="w3-btn w3-theme-d5 w3-round-large"><i class="fa fa-floppy-o" style="font-size:18px; color: lime"></i>&nbsp;&nbsp;Announce</a></div>-->
+						<!--<div class="buttonbarpadding w3-bar-item w3-right" onClick="cancle()"><a class="w3-btn w3-red w3-round-large"><i class="fa fa-times" style="font-size:18px;"></i>&nbsp;&nbsp;Cancel</a></div>-->
+					</div>
+					<hr class="hrline">
+						<div class="w3-row w3-border w3-round-large w3-white m8 l9">
+							<div class="w3-col" style="width:47%;margin-left:20px;">
+								<label style="font-weight: bold;">Course</label>
+								<input th:value="${createdby}" name="createdby" type="hidden"/>
+								<select onload="getBatch();return false;" onchange="getBatch();return false;" id="courseid" name="courseid" class="w3-input w3-border">
+									<option value="" disabled selected>--Select Course--</option>
+									<th:block th:each="course : ${course}">
+										<option th:value="${course.id}" th:text="${course.title}">
+										</option>
+									</th:block>
+								</select>
+							</div>
+							<div class="w3-col" style="width:47%; margin-right:5px;margin-left:20px;margin-bottom:5px;">
+								<label style="font-weight: bold">Batch</label>
+								<select id="batchid" name="batchid" class="w3-input w3-border">
+									<option value="">
+										<column>--Select Batch--</column>
+									</option>
+								</select>
+							</div>
+						</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-container">
+			<div class="w3-card w3-theme-l3 w3-padding" style="margin-top: 16px;">
+				<div class="w3-row">
+					<h5 style="margin-bottom: 0px; margin-bottom: 0px; font-weight: bold;">Search Results</h5>
+					<hr class="hrline">
+					<div id="resultSec" class="w3-responsive" style="display: none">
+						<table id="batchStudentList" class="display compact cell-border" style="width: 100%;">
+							<thead>
+							<tr class="w3-theme-d3">
+								<th>Campus ID</th>
+								<th>Name</th>
+								<th>Date of Birth</th>
+								<th>Email ID</th>
+								<th>Phone Number</th>
+								<th></th>
+							</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+					<div  id="noData" class="w3-responsive" style="display: none">
+						<div>
+							<p>No record found...</p>
+						</div>
+					</div>
+					<div  id="jsonLoader" class="w3-responsive" style="display: none">
+						<div>
+							<div class='w3-container' style='width: 100%; text-align: center'>
+								<i class='fa fa-cog fa-spin' style='font-size: 30px; color: white;'></i>
+								<p style="color: white;">Loading......</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<div id="myModal" class="w3-modal">
+	<div class="w3-modal-content">
+		<header class="w3-container w3-theme-d4">
+			<h4>Send Mail</h4>
+		</header>
+		<div class="w3-container" style="margin-top:16px;margin-bottom:8px;">
+			<div class="w3-row w3-border w3-round-large w3-white m8 l9">
+				<div class="w3-row" style="margin-top:10px;">
+					<div class="w3-col" style="width:50%; margin-left:10px;">
+						<p style="padding-left:10px;">
+							<b>To</b>
+						</p>
+						<p>
+							<input readonly type="text" class="w3-input w3-border" id="batches">
+							<input type="hidden" name="batchids" id="batchids">
+						</p>
+					</div>
+				</div>
+				<div class="w3-row">
+					<div class="w3-col" style="width:50%; margin-left:10px;">
+						<p style="padding-left:10px;">
+							<b>Subject</b>
+						</p>
+						<p>
+							<input type="text" class="w3-input w3-border" name="subject">
+						</p>
+					</div>
+				</div>
+				<div class="w3-row">
+					<div class="w3-col" style="width:50%; margin-left:10px;">
+						<p style="padding-left:10px;">
+							<b>Body</b>
+						</p>
+						<p>
+							<textarea rows="10" cols="130" name="mailbody"></textarea>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="w3-container w3-theme-d4">
+			<div class="w3-row">
+				<div class="w3-col" style="width: 50%">
+					<input class="w3-button w3-theme-d5" type="button" id="check" value="Send &checkmark;" style="width:100%;"/>
+				</div>
+				<div class="w3-col" style="width: 50%">
+					<input class="w3-button w3-theme-d5" type="button" id="cross" value="Cancel &times;" style="width:100%;"/>
+				</div>
+			</div>
+		</footer>
+	</div>
+</div>
+<script src="/js/announcement/stdntAnnounce.js"></script>
+</div>

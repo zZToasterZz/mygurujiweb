@@ -1,0 +1,40 @@
+<div th:fragment="profilePic">
+	<div class="w3-bar-item w3-right w3-padding-medium w3-dropdown-hover" style="padding-left:0px; padding-right:15px;">
+		<!-- <a><img th:src="'/images/employee/'+${emplid}+'.jpg'" class="w3-circle" style="width:38px; padding-top: 5px;"></a> -->
+		<!--<span th:if="${#strings.equals role == 'Faculty'}">
+			<a><img th:src="'fetchfile?img='+${emplid}+'.jpg'" class="w3-circle" style="width:35px; padding-top: 5px;"></a>
+		</span>
+		<span th:unless="${role} == 'Student'">
+			<a><img th:src="'fetchfile?img=E0000000001'+'.jpg'" class="w3-circle" style="width:35px; padding-top: 5px;"></a>
+		</span>-->
+
+		<!-- <span th:switch="${role}"> -->
+		<a sec:authorize="hasRole('ROLE_Faculty')"><img th:src="'fetchfile?img='+${emplid}+'.jpg'" class="w3-circle" style="width:35px; padding-top: 8px;"></a>
+		<a sec:authorize="!hasRole('ROLE_Faculty')"><img th:src="'fetchfile?img=img_avatar2'+'.png'" class="w3-circle" style="width:35px; padding-top: 8px;"></a>
+		<!-- </span> -->
+
+		<div class="w3-dropdown-content w3-bar-block w3-border w3-animate-zoom" style="right:0; max-height: 400px;">
+			<a onclick="viewProfile();" class="w3-bar-item w3-button" style="border-bottom: 1px solid #d6e2ef; text-decoration: none;">
+				<i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;My Profile</a>
+				
+			<a onclick="changePwd();" class="w3-bar-item w3-button" style="border-bottom: 1px solid #d6e2ef; text-decoration: none;">
+				<i class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Change Password</a>
+				
+			<a href="/logout" class="w3-bar-item w3-button" style="border-bottom: 1px solid #d6e2ef; text-decoration: none;">
+				<i class="fa fa-sign-out-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Sign Out</a>
+				
+			<input id="logedinuser" type="hidden" th:empid="${emplid}" th:role="${role}">
+		</div>
+	</div>
+
+<script>
+function changePwd(){
+	$("#replace_div").load("/changepwd");
+};
+
+function viewProfile(){
+	$("#replace_div").load("/profile/viewprofile");
+};
+</script>
+
+</div>
